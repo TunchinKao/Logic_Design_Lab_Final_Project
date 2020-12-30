@@ -28,6 +28,7 @@ module top(
     input rtBt,     // right button
     input ltBt,     // left button
     input ctBt,     // center button
+    input hp,       //hp_test_flip
     output [3:0] vgaRed,
     output [3:0] vgaGreen,
     output [3:0] vgaBlue,
@@ -105,6 +106,7 @@ module top(
         .vga_data(choose_RGB)
     );
     fight_scene fs(
+        .hp(hp),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(fight_RGB)
