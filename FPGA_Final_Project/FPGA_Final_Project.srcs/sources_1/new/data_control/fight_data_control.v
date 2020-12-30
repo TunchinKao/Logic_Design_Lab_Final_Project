@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2020/12/30 16:58:49
+// Create Date: 2020/12/31 00:03:32
 // Design Name: 
-// Module Name: fight_scene
+// Module Name: figh_data_control
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module fight_scene(
-        input [9:0]v_cnt,
-        input [9:0]h_cnt,
-        output reg [11:0] vga_data
+module fight_data_control(
+
     );
-    always @(*) begin
-        vga_data = 12'h0d0;
-    end
 endmodule
