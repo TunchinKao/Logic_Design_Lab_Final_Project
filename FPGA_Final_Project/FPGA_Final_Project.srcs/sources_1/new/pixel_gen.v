@@ -38,8 +38,7 @@ module pixel_gen(
    
    reg [11:0] vga_data;
    reg [11:0] area_A;
-   reg [11:0] area_A_buf;
-      reg[31:0] cnt,cnt_2;
+      reg[31:0] cnt;
 
     assign  {vgaRed, vgaGreen, vgaBlue} = vga_data;
 
@@ -52,17 +51,6 @@ module pixel_gen(
             vga_data <= 12'h0;
       end
    end
-//    always @(posedge clk) begin
-//       if(reset == 1'b1)begin
-//           area_A_buf <= 12'hf0f;
-//       end else begin
-//             if(!valid)
-//                 area_A_buf <= area_A;
-//             else begin
-//                 area_A_buf <= area_A_buf;
-//             end
-//       end
-//    end
    always @(posedge clk)begin
         if(cnt != 32'd0 && cnt < 32'd100000000)begin
             area_A <= area_A;

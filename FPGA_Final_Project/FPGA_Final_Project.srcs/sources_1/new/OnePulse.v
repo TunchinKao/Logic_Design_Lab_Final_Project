@@ -83,12 +83,12 @@ module Debounce
 	input 	button,
 	output	button_db
 );
-reg [3:0] cnt;
+reg [9:0] cnt;
 
 always @(posedge clk_in) begin
-	 cnt[3:1] <= cnt[2:0];
+	 cnt[9:1] <= cnt[8:0];
 	 cnt[0] <= button;
 end
-assign  button_db = (cnt == 4'b1111) ? 1'b1 : 1'b0;
+assign  button_db = (cnt == 10'b1111111111) ? 1'b1 : 1'b0;
 
 endmodule  //Debounce
