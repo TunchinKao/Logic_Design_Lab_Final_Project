@@ -64,6 +64,7 @@ module pixel_gen(
       end
    end
    always @(posedge clk)begin
+       if(!valid)begin
             if(key_C || (cnt !=32'd0 && cnt < 32'd100000000))begin
                   area_A <= 12'h5f0;
                   cnt <= cnt + 1'd1;
@@ -72,5 +73,8 @@ module pixel_gen(
                   area_A <= 12'hf0f;
                   cnt <= 32'd0;
             end
+       end else begin
+           area_A <= 12'hf0f;
+       end
    end
 endmodule

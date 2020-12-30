@@ -41,11 +41,11 @@ module top(
     wire [9:0] v_cnt;  //480
     wire up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal;
 
-    Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op(up_Signal));
-    Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op(dw_Signal));
-    Db_and_OP rt_proc(.clk(clk), .button(rtBt), .button_db_op(rt_Signal));
-    Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op(lt_Signal));
-    Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op(ct_Signal));
+    Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
+    Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
+    Db_and_OP rt_proc(.clk(clk), .button(rtBt), .button_db_op_ex(rt_Signal));
+    Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op_ex(lt_Signal));
+    Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
     
 
      clock_divisor clk_wiz_0_inst(
