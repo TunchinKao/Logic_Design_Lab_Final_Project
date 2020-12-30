@@ -27,8 +27,8 @@ module Db_and_OP(
 	wire button_db;
 	wire button_db_op;
 	Debounce db(.clk_in(clk), .button(button), .button_db(button_db));
-	OnePulse op(.clock(clk), .signal(button_db), .signal_single_pulse(button_db_op));
-	extend ex(.clk_in(clk), .data_in(button_db_op), .data_out(button_db_op_ex));
+	OnePulse op(.clock(clk), .signal(button_db), .signal_single_pulse(button_db_op_ex));
+	// extend ex(.clk_in(clk), .data_in(button_db_op), .data_out(button_db_op_ex));
 endmodule
 
 module extend #
@@ -44,13 +44,18 @@ module extend #
 );
 	reg [31:0] cnt;
 	always @(posedge clk_in) begin
-		if(data_in || (cnt !=32'd0 && cnt < 32'd384005))begin // 800 * 480
+		if(data_in)begin // 800 * 525
             data_out <= 1'b1;
-			cnt <= cnt + 1'd1;
+			cnt <= 1'd1;
 		end
 		else begin
-			data_out <= 1'b0;
-			cnt  <= 32'b0;
+			if(cnt !=32'd0 && cnt < 32'd430000)begin  //800*525
+				data_out <= 1'b1;
+				cnt <= cnt + 1'b1;
+			end else begin
+				data_out <= 1'b0;
+				cnt  <= 32'b0;
+			end
 		end
 	end
 endmodule  //extend

@@ -31,18 +31,18 @@ module pixel_gen(
    input key_D,
    input key_L,
    input key_R,
-   output reg [3:0] vgaRed,
-   output reg [3:0] vgaGreen,
-   output reg [3:0] vgaBlue
+   output wire [3:0] vgaRed,
+   output wire [3:0] vgaGreen,
+   output wire [3:0] vgaBlue
    );
    
    reg [11:0] vga_data;
    reg [11:0] area_A;
    reg [11:0] area_A_buf;
-      reg[31:0] cnt;
-   always @(*) begin
-      {vgaRed, vgaGreen, vgaBlue} = vga_data;
-   end
+      reg[31:0] cnt,cnt_2;
+
+    assign  {vgaRed, vgaGreen, vgaBlue} = vga_data;
+
    always @(posedge clk) begin
       if(!valid)
             vga_data <= 12'h0;
@@ -52,29 +52,32 @@ module pixel_gen(
             vga_data <= 12'h0;
       end
    end
-   always @(posedge clk) begin
-      if(reset == 1'b0)begin
-          area_A_buf <= 12'hf0f;
-      end else begin
-            if(!valid)
-                area_A_buf <= area_A;
-            else begin
-                area_A_buf <= area_A_buf;
-            end
-      end
-   end
+//    always @(posedge clk) begin
+//       if(reset == 1'b1)begin
+//           area_A_buf <= 12'hf0f;
+//       end else begin
+//             if(!valid)
+//                 area_A_buf <= area_A;
+//             else begin
+//                 area_A_buf <= area_A_buf;
+//             end
+//       end
+//    end
    always @(posedge clk)begin
-       if(!valid)begin
-            if(key_C || (cnt !=32'd0 && cnt < 32'd100000000))begin
-                  area_A <= 12'h5f0;
-                  cnt <= cnt + 1'd1;
-            end
-            else begin
-                  area_A <= 12'hf0f;
-                  cnt <= 32'd0;
-            end
-       end else begin
-           area_A <= 12'hf0f;
-       end
+        if(cnt != 32'd0 && cnt < 32'd100000000)begin
+            area_A <= area_A;
+            cnt <= cnt + 1'd1;
+        end 
+        else if(key_C)begin
+                area_A <= 12'hf55; 
+                cnt <= 1'd1;
+        end
+        else if(key_U) begin
+                area_A <= 12'h5f5;
+                cnt <= 1'd1;
+        end else begin
+            area_A <= 12'h55f;
+            cnt <= 32'd0;
+        end
    end
 endmodule

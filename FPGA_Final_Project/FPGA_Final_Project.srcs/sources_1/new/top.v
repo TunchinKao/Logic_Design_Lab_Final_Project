@@ -32,7 +32,8 @@ module top(
     output [3:0] vgaGreen,
     output [3:0] vgaBlue,
     output hsync,
-    output vsync
+    output vsync,
+    output [15:0] lights
     );
 
     wire clk_25MHz;
@@ -46,9 +47,12 @@ module top(
     Db_and_OP rt_proc(.clk(clk), .button(rtBt), .button_db_op_ex(rt_Signal));
     Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op_ex(lt_Signal));
     Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
-    
+    assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
+    assign lights[15] = ct_Signal & (!valid);
 
-     clock_divisor clk_wiz_0_inst(
+
+
+    clock_divisor clk_wiz_0_inst(
       .clk(clk),
       .clk1(clk_25MHz)
     );
