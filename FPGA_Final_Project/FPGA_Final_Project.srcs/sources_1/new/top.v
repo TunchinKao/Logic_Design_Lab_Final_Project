@@ -28,7 +28,7 @@ module top(
     input rtBt,     // right button
     input ltBt,     // left button
     input ctBt,     // center button
-    output [3:0] vagRed,
+    output [3:0] vgaRed,
     output [3:0] vgaGreen,
     output [3:0] vgaBlue,
     output hsync,
@@ -42,7 +42,7 @@ module top(
     wire [9:0] v_cnt;  //480
     wire up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal;
     wire [3:0] scene_state;
-    wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB;
+    wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;
     // button process
     Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
     Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
@@ -121,8 +121,9 @@ module top(
         .choose_scene_RGB(choose_RGB),
         .fight_scene_RGB(fight_RGB),
         .win_scene_RGB(win_RGB),
-        .RGB_out({vgaRed, vgaGreen, vgaBlue})
+        .RGB_out(output_RGB)
     );
+    assign {vgaRed, vgaGreen, vgaBlue} = output_RGB;
 endmodule
 
 
