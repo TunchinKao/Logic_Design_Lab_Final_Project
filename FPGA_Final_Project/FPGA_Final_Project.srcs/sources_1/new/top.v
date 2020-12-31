@@ -44,6 +44,8 @@ module top(
     wire up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal;
     wire [3:0] scene_state;
     wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;
+    // for pokemon data
+    wire [8-1:0] pokemon_id;
     // button process
     Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
     Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
@@ -53,7 +55,7 @@ module top(
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
     // assign lights[15] = ct_Signal & (!valid);
     assign lights[3:0] = scene_state;
-
+    assign lights[15:8] = pokemon_id;
     /// generate clock
     clock_divisor clk_wiz_0_inst(
       .clk(clk),
@@ -93,6 +95,17 @@ module top(
       .valid(valid),
       .h_cnt(h_cnt),
       .v_cnt(v_cnt)
+    );
+    choose_data_control cdc(
+        .clk(clk),
+        .reset(rst),
+        .scene_state(scene_state),
+        .key_C(ct_Signal),
+        .key_U(up_Signal),
+        .key_D(dw_Signal),
+        .key_L(lt_Signal),
+        .key_R(rt_Signal),
+        .pokemon_id(pokemon_id)
     );
     start_scene ss(
         .v_cnt(v_cnt),
