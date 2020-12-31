@@ -114,6 +114,7 @@ module top(
     );
     
     choose_scene cs(
+        .pokemon_id(pokemon_id),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(choose_RGB)
