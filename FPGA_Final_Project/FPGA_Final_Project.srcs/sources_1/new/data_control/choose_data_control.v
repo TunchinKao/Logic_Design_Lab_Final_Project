@@ -58,11 +58,18 @@ parameter press_C = 5'b10001;
     always @(posedge clk) begin
         if(reset)begin
             pokemon_id <= poke_1;
-        end else if (scene_state != choose_scene)begin
-            pokemon_id <= pokemon_id;
         end else begin
-            pokemon_id <= next_id;
-        end
+            case (scene_state)
+                start_scene:begin
+                    pokemon_id <= poke_1;
+                end 
+                choose_scene:begin
+                    pokemon_id <= next_id;
+                end
+                default:
+                    pokemon_id <= pokemon_id; 
+            endcase
+        end 
     end
     /*
         screen:
