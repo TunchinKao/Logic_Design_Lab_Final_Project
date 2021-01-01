@@ -45,7 +45,17 @@ module top(
     wire [3:0] scene_state;
     wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;
     // for pokemon data
-    wire [8-1:0] pokemon_id;
+        // ----- p1
+    wire [8-1:0] p1_pokemon_id;
+    wire [8-1:0] p1_pokemon_hp;
+    wire [8-1:0] p1_pokemon_cur_hp;
+    wire [8-1:0] p1_skill_1_damage, p1_skill_2_damage, p1_skill_3_damage;
+        // ----- p2
+    wire [8-1:0] p2_pokemon_id;
+    wire [8-1:0] p2_pokemon_hp;
+    wire [8-1:0] p2_pokemon_cur_hp;
+    wire [8-1:0] p2_skill_1_damage, p2_skill_2_damage, p2_skill_3_damage;
+    
     // button process
     Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
     Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
@@ -54,8 +64,8 @@ module top(
     Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
     // assign lights[15] = ct_Signal & (!valid);
-    assign lights[3:0] = scene_state;
-    assign lights[15:8] = pokemon_id;
+    assign lights[7:0] = p1_pokemon_cur_hp;
+    assign lights[15:8] = p1_pokemon_id;
     /// generate clock
     clock_divisor clk_wiz_0_inst(
       .clk(clk),
@@ -105,7 +115,38 @@ module top(
         .key_D(dw_Signal),
         .key_L(lt_Signal),
         .key_R(rt_Signal),
-        .pokemon_id(pokemon_id)
+        .p1_pokemon_id(p1_pokemon_id),
+        .p1_pokemon_hp(p1_pokemon_hp),
+        .p1_skill_1_damage(p1_skill_1_damage),
+        .p1_skill_2_damage(p1_skill_2_damage),
+        .p1_skill_3_damage(p1_skill_3_damage),
+        .p2_pokemon_id(p2_pokemon_id),
+        .p2_pokemon_hp(p2_pokemon_hp),
+        .p2_skill_1_damage(p2_skill_1_damage),
+        .p2_skill_2_damage(p2_skill_2_damage),
+        .p2_skill_3_damage(p2_skill_3_damage)
+    );
+    fight_data_control fdc(
+        
+        .clk(clk),
+        .reset(rst),
+        .scene_state(scene_state),
+        .key_C(ct_Signal),
+        .key_U(up_Signal),
+        .key_D(dw_Signal),
+        .key_L(lt_Signal),
+        .key_R(rt_Signal),
+        .p1_pokemon_id(p1_pokemon_id),
+        .p1_pokemon_hp(p1_pokemon_hp),
+        .p1_skill_1_damage(p1_skill_1_damage),
+        .p1_skill_2_damage(p1_skill_2_damage),
+        .p1_skill_3_damage(p1_skill_3_damage),
+        .p2_pokemon_id(p2_pokemon_id),
+        .p2_pokemon_hp(p2_pokemon_hp),
+        .p2_skill_1_damage(p2_skill_1_damage),
+        .p2_skill_2_damage(p2_skill_2_damage),
+        .p2_skill_3_damage(p2_skill_3_damage),
+        .p1_pokemon_cur_hp(p1_pokemon_cur_hp)
     );
     start_scene ss(
         .v_cnt(v_cnt),
@@ -114,7 +155,7 @@ module top(
     );
     
     choose_scene cs(
-        .pokemon_id(pokemon_id),
+        .pokemon_id(p1_pokemon_id),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(choose_RGB)
