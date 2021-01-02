@@ -62,7 +62,7 @@ parameter press_U = 5'b10000;
 parameter press_D = 5'b01000;
 parameter press_L = 5'b00100;
 parameter press_R = 5'b00010;
-parameter press_C = 5'b10001;
+parameter press_C = 5'b00001;
 
 reg [8-1:0] pokemon_hp    [0:8-1];
 reg [8-1:0] skill_1_damage[0:8-1];

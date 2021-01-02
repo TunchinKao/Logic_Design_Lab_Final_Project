@@ -38,7 +38,7 @@ module top(
     output vsync,
     output [15:0] lights
     );
-
+    wire testSignal;
     wire clk_25MHz;
     wire valid;
     wire [9:0] h_cnt; //640
@@ -57,7 +57,9 @@ module top(
     wire [8-1:0] p2_pokemon_hp;
     wire [8-1:0] p2_pokemon_cur_hp;
     wire [8-1:0] p2_skill_1_damage, p2_skill_2_damage, p2_skill_3_damage;
-    
+    // fight scene control
+    wire [6-1:0] fight_state;
+    wire [4-1:0] option_state;
     // button process
     
     wire upBt;     // up button
@@ -75,8 +77,8 @@ module top(
 
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
     // assign lights[15] = ct_Signal & (!valid);
-    assign lights[7:0] = p1_pokemon_cur_hp;
-    assign lights[15:8] = p1_pokemon_id;
+    assign lights[5:0] = fight_state;
+    assign lights[10:6] = option_state;
 
     /// generate clock
     clock_divisor clk_wiz_0_inst(
@@ -132,6 +134,12 @@ module top(
       .h_cnt(h_cnt),
       .v_cnt(v_cnt)
     );
+    start_scene ss(
+        .v_cnt(v_cnt),
+        .h_cnt(h_cnt),
+        .vga_data(start_RGB)
+    );
+    
     choose_data_control cdc(
         .clk(clk),
         .reset(rst),
@@ -152,6 +160,14 @@ module top(
         .p2_skill_2_damage(p2_skill_2_damage),
         .p2_skill_3_damage(p2_skill_3_damage)
     );
+    choose_scene cs(
+        .pokemon_id(p1_pokemon_id),
+        .v_cnt(v_cnt),
+        .h_cnt(h_cnt),
+        .vga_data(choose_RGB)
+    );
+    // fight_part
+    
     fight_data_control fdc(
         
         .clk(clk),
@@ -172,25 +188,19 @@ module top(
         .p2_skill_1_damage(p2_skill_1_damage),
         .p2_skill_2_damage(p2_skill_2_damage),
         .p2_skill_3_damage(p2_skill_3_damage),
-        .p1_pokemon_cur_hp(p1_pokemon_cur_hp)
+        .p1_pokemon_cur_hp(p1_pokemon_cur_hp),
+        .fight_state(fight_state),
+        .option_state(option_state),
+        .testSignal(testSignal)
     );
-    start_scene ss(
-        .v_cnt(v_cnt),
-        .h_cnt(h_cnt),
-        .vga_data(start_RGB)
-    );
-    
-    choose_scene cs(
-        .pokemon_id(p1_pokemon_id),
-        .v_cnt(v_cnt),
-        .h_cnt(h_cnt),
-        .vga_data(choose_RGB)
-    );
+    extend extestSignal(.clk_in(clk), .rst_n(rst), .data_in(testSignal), .data_out(lights[15]));
     fight_scene fs(
         .hp(p1_pokemon_cur_hp),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
-        .vga_data(fight_RGB)
+        .vga_data(fight_RGB),
+        .fight_state(fight_state),
+        .option_state(option_state)
     );
     win_scene ws(
         .v_cnt(v_cnt),
