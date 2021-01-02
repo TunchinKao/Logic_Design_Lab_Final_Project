@@ -43,8 +43,7 @@ module fight_data_control(
         output [8-1:0] p1_pokemon_cur_hp,
         // output [8-1:0] p2_pokemon_cur_hp,
         output [6-1:0] fight_state,
-        output [4-1:0] option_state,
-        output testSignal
+        output [4-1:0] option_state
     );
 parameter start_scene = 4'b0001;
 parameter choose_scene = 4'b0010;
@@ -68,7 +67,6 @@ parameter press_C = 5'b00001;
     wire[4:0] buttons;
     assign p1_pokemon_cur_hp = p1_pokemon_hp;
     assign buttons[4:0] = {key_U, key_D, key_L, key_R, key_C};
-    assign testSignal = (buttons == press_C) ? 1'b1 : 1'b0;
 parameter [6-1:0] fight_state_menu = 6'd1;
 parameter [6-1:0] fight_state_choosing_skill = 6'd2;
 parameter [6-1:0] fight_state_animation_p1 = 6'd3; // p1 attack

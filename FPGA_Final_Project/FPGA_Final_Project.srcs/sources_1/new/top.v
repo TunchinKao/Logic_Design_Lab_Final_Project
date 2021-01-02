@@ -190,10 +190,8 @@ module top(
         .p2_skill_3_damage(p2_skill_3_damage),
         .p1_pokemon_cur_hp(p1_pokemon_cur_hp),
         .fight_state(fight_state),
-        .option_state(option_state),
-        .testSignal(testSignal)
+        .option_state(option_state)
     );
-    extend extestSignal(.clk_in(clk), .rst_n(rst), .data_in(testSignal), .data_out(lights[15]));
     fight_scene fs(
         .hp(p1_pokemon_cur_hp),
         .v_cnt(v_cnt),

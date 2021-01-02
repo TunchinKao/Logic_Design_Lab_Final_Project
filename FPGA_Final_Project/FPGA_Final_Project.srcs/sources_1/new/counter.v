@@ -15,15 +15,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-
-module counter(clk, rst_n, start, done);
-    input clk;
-    input rst_n;
-    input start;
-    output reg done;
-    reg [27-1:0] count, next_count;
+module counter
+(       input clk,  
+        input rst,
+        input start,
+        output reg done);
+    parameter SECOND = 300000000;
+    reg [40-1:0] count, next_count;
     always@(posedge clk) begin
-        if (rst_n == 0) begin
+        if (rst == 1) begin
             count = 0;
         end
         else begin
@@ -33,8 +33,8 @@ module counter(clk, rst_n, start, done);
 
     always@(*) begin
         next_count = count;
-        if (start) begin
-            if (count == 27'd100000000) begin
+        if (start || count != 0) begin
+            if (count == SECOND) begin
                 done = 1;
                 next_count = 0;
             end
