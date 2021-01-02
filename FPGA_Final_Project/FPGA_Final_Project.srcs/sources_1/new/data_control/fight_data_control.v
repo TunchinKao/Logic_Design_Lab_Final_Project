@@ -177,7 +177,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                 next_fight_state = (counter_animate_done == 1'b1) ? fight_state_hpReducing_p2 : fight_state_animation_p1;
             end
             fight_state_hpReducing_p2 : begin
-                next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp) ? fight_state_menu : fight_state_hpReducing_p2;
+                next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp|| p2_pokemon_cur_hp == 0) ? fight_state_menu : fight_state_hpReducing_p2;
             end
             default: 
                 next_fight_state = cur_fight_state;
@@ -264,85 +264,90 @@ parameter [4-1:0] option_state_4 = 4'd4;
     end
     // option_state --------------------------------------------------------------------------
     always @(*) begin
-        if(cur_fight_state == fight_state_menu)begin
-            case (cur_option_state)
-                option_state_1 :begin
-                    case (buttons)
-                        press_R:begin
-                            next_option_state = option_state_2;
-                        end
-                        default: 
-                            next_option_state = cur_option_state;
-                    endcase
-                end 
-                option_state_2:begin
-                    case(buttons)
-                        press_L:begin
-                            next_option_state = option_state_1;
-                        end
-                        default:
-                            next_option_state = cur_option_state;
-                    endcase
-                end
-                default: 
-                    next_option_state = cur_option_state;
-            endcase
-        end
-        else if (cur_fight_state == fight_state_choosing_skill) begin
-            case (cur_option_state)
-                option_state_1 :begin
-                    case (buttons)
-                        press_D:begin
-                            next_option_state = option_state_3;
-                        end
-                        press_R:begin
-                            next_option_state = option_state_2;
-                        end
-                        default: 
-                            next_option_state = cur_option_state;
-                    endcase
-                end 
-                option_state_2:begin
-                    case(buttons)
-                        press_D:begin
-                            next_option_state = option_state_4;
-                        end
-                        press_L:begin
-                            next_option_state = option_state_1;
-                        end
-                        default:
-                            next_option_state = cur_option_state;
-                    endcase
-                end
-                option_state_3:begin
-                    case(buttons)
-                        press_U:begin
-                            next_option_state = option_state_1;
-                        end
-                        press_R:begin
-                            next_option_state = option_state_4;
-                        end
-                        default:
-                            next_option_state = cur_option_state;
-                    endcase
-                end
-                option_state_4:begin
-                    case(buttons)
-                        press_U:begin
-                            next_option_state = option_state_2;
-                        end
-                        press_L:begin
-                            next_option_state = option_state_3;
-                        end
-                        default:
-                            next_option_state = cur_option_state;
-                    endcase
-                end
-                default: 
-                    next_option_state = cur_option_state;
-            endcase
-        end else begin
-            next_option_state <= cur_option_state;
+        if(cur_fight_state != next_fight_state)
+            next_option_state = option_state_1;
+        else begin
+            
+            if(cur_fight_state == fight_state_menu)begin
+                case (cur_option_state)
+                    option_state_1 :begin
+                        case (buttons)
+                            press_R:begin
+                                next_option_state = option_state_2;
+                            end
+                            default: 
+                                next_option_state = cur_option_state;
+                        endcase
+                    end 
+                    option_state_2:begin
+                        case(buttons)
+                            press_L:begin
+                                next_option_state = option_state_1;
+                            end
+                            default:
+                                next_option_state = cur_option_state;
+                        endcase
+                    end
+                    default: 
+                        next_option_state = cur_option_state;
+                endcase
+            end
+            else if (cur_fight_state == fight_state_choosing_skill) begin
+                case (cur_option_state)
+                    option_state_1 :begin
+                        case (buttons)
+                            press_D:begin
+                                next_option_state = option_state_3;
+                            end
+                            press_R:begin
+                                next_option_state = option_state_2;
+                            end
+                            default: 
+                                next_option_state = cur_option_state;
+                        endcase
+                    end 
+                    option_state_2:begin
+                        case(buttons)
+                            press_D:begin
+                                next_option_state = option_state_4;
+                            end
+                            press_L:begin
+                                next_option_state = option_state_1;
+                            end
+                            default:
+                                next_option_state = cur_option_state;
+                        endcase
+                    end
+                    option_state_3:begin
+                        case(buttons)
+                            press_U:begin
+                                next_option_state = option_state_1;
+                            end
+                            press_R:begin
+                                next_option_state = option_state_4;
+                            end
+                            default:
+                                next_option_state = cur_option_state;
+                        endcase
+                    end
+                    option_state_4:begin
+                        case(buttons)
+                            press_U:begin
+                                next_option_state = option_state_2;
+                            end
+                            press_L:begin
+                                next_option_state = option_state_3;
+                            end
+                            default:
+                                next_option_state = cur_option_state;
+                        endcase
+                    end
+                    default: 
+                        next_option_state = cur_option_state;
+                endcase
+            end else begin
+                next_option_state <= cur_option_state;
+            end
         end
     end
 endmodule
