@@ -23,12 +23,13 @@
 module top(
     input clk,
     input rst,
-    
-    input upBt,     // up button
-    input dwBt,     // down button
-    input rtBt,     // right button
-    input ltBt,     // left button
-    input ctBt,     // center button
+    inout PS2_CLK,
+    inout PS2_DATA,
+    // input upBt,     // up button
+    // input dwBt,     // down button
+    // input rtBt,     // right button
+    // input ltBt,     // left button
+    // input ctBt,     // center button
     input hp,       //hp_test_flip
     output [3:0] vgaRed,
     output [3:0] vgaGreen,
@@ -58,36 +59,60 @@ module top(
     wire [8-1:0] p2_skill_1_damage, p2_skill_2_damage, p2_skill_3_damage;
     
     // button process
-    Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
-    Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
-    Db_and_OP rt_proc(.clk(clk), .button(rtBt), .button_db_op_ex(rt_Signal));
-    Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op_ex(lt_Signal));
-    Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
+    
+    wire upBt;     // up button
+    wire dwBt;     // down button
+    wire rtBt;     // right button
+    wire ltBt;     // left button
+    wire ctBt;     // center button
+    // Db_and_OP up_proc(.clk(clk), .button(upBt), .button_db_op_ex(up_Signal));
+    // Db_and_OP dw_proc(.clk(clk), .button(dwBt), .button_db_op_ex(dw_Signal));
+    // Db_and_OP rt_proc(.clk(clk), .button(rtBt), .button_db_op_ex(rt_Signal));
+    // Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op_ex(lt_Signal));
+    // Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
+    
+    // LIGHT TESTING---------------------------
+
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
     // assign lights[15] = ct_Signal & (!valid);
     assign lights[7:0] = p1_pokemon_cur_hp;
     assign lights[15:8] = p1_pokemon_id;
+
     /// generate clock
     clock_divisor clk_wiz_0_inst(
       .clk(clk),
       .clk1(clk_25MHz)
     );
-
-    // pixel_gen pixel_gen_inst(
-    //     .reset(rst),
-    //     .clk(clk),
-    //     .key_C(ct_Signal),
-    //     .key_U(up_Signal),
-    //     .key_D(dw_Signal),
-    //     .key_L(lt_Signal),
-    //     .key_R(rt_Signal),
-    //    .v_cnt(v_cnt),
-    //    .h_cnt(h_cnt),
-    //    .valid(valid),
-    //    .vgaRed(vgaRed),
-    //    .vgaGreen(vgaGreen),
-    //    .vgaBlue(vgaBlue)
-    // );
+    // keyboard to button part
+    parameter [8:0] ENTER_CODES  = 9'b0_0101_1010;
+	parameter [8:0] LEFT_SHIFT_CODES  = 9'b0_0001_0010;
+	parameter [8:0] RIGHT_SHIFT_CODES = 9'b0_0101_1001;
+	parameter [8:0] KEY_CODES [0:3] = {
+		9'b0_0001_1101, // W => 1D
+        9'b0_0001_1100, // A => 1C
+        9'b0_0001_1011, // S => 1B
+        9'b0_0010_0011  // D => 23
+	};
+    wire shift_down;
+	wire [511:0] key_down;
+	wire [8:0] last_change;
+	wire been_ready;
+	Keyboard_Decoder key_de (
+		.key_down(key_down),
+		.last_change(last_change),
+		.key_valid(been_ready),
+		.PS2_DATA(PS2_DATA),
+		.PS2_CLK(PS2_CLK),
+		.rst(rst),
+		.clk(clk)
+	);
+    assign upBt = (been_ready && key_down[KEY_CODES[0]]) ? 1'b1 : 1'b0;
+    assign ltBt = (been_ready && key_down[KEY_CODES[1]]) ? 1'b1 : 1'b0;
+    assign dwBt = (been_ready && key_down[KEY_CODES[2]]) ? 1'b1 : 1'b0;
+    assign rtBt = (been_ready && key_down[KEY_CODES[3]]) ? 1'b1 : 1'b0;
+    assign ctBt = (been_ready && key_down[ENTER_CODES]) ? 1'b1 : 1'b0;
+    assign {up_Signal, dw_Signal, lt_Signal, rt_Signal, ct_Signal} = {upBt, dwBt, ltBt, rtBt, ctBt};
+    // game part
     state_control sc(
         .key_C(ct_Signal),
         .key_U(up_Signal),
