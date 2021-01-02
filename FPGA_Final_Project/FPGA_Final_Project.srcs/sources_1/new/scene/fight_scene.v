@@ -21,13 +21,14 @@
 
 
 module fight_scene(
-        input hp,
+        input [7:0]hp,
         input [9:0]v_cnt,
         input [9:0]h_cnt,
         output reg [11:0] vga_data
     );
     wire [7:0] hp_bar;
-    assign hp_bar = 80 * (hp + 1'b1);
+    // assign hp_bar = 80 * (hp + 1'b1);
+    assign hp_bar = hp;
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb;

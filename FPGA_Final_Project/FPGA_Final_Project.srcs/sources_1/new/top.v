@@ -23,6 +23,7 @@
 module top(
     input clk,
     input rst,
+    
     input upBt,     // up button
     input dwBt,     // down button
     input rtBt,     // right button
@@ -161,7 +162,7 @@ module top(
         .vga_data(choose_RGB)
     );
     fight_scene fs(
-        .hp(hp),
+        .hp(p1_pokemon_cur_hp),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(fight_RGB)
