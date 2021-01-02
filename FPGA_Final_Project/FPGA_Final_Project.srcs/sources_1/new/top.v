@@ -79,9 +79,10 @@ module top(
     // assign lights[15] = ct_Signal & (!valid);
     // assign lights[5:0] = fight_state;
     // assign lights[10:6] = option_state;
-    assign lights[7:0] = p1_pokemon_cur_hp;
+    // assign lights[7:0] = p1_pokemon_cur_hp;
+    // assign lights[15:8] = p2_pokemon。_cur_hp;
+    assign lights[5:0] = fight_state;
     assign lights[15:8] = p2_pokemon_cur_hp;
-
     /// generate clock
     clock_divisor clk_wiz_0_inst(
       .clk(clk),
@@ -192,7 +193,7 @@ module top(
         .p2_skill_3_damage(p2_skill_3_damage),
         .p1_pokemon_cur_hp(p1_pokemon_cur_hp),
         .p2_pokemon_cur_hp(p2_pokemon_cur_hp),
-        
+        .testSignal(lights[6]),
         .fight_state(fight_state),
         .option_state(option_state)
     );

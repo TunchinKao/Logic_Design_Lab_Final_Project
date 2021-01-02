@@ -22,6 +22,7 @@ module counter
         output reg done);
     parameter SECOND = 300000000;
     reg [40-1:0] count, next_count;
+    // reg next_done;
     always@(posedge clk) begin
         if (rst == 1) begin
             count = 0;
