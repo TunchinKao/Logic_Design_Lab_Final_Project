@@ -30,7 +30,7 @@ module fight_data_control(
         input key_L,
         input key_R,
         input [8-1:0] p1_pokemon_id,
-        input [8-1:0] p1_pokemon_hp,
+        input [8-1:0] p1_pokemon_hp,            // initial hp
         input [8-1:0] p1_skill_1_damage,
         input [8-1:0] p1_skill_2_damage,
         input [8-1:0] p1_skill_3_damage,
@@ -40,8 +40,10 @@ module fight_data_control(
         input [8-1:0] p2_skill_2_damage,
         input [8-1:0] p2_skill_3_damage,
         
-        output [8-1:0] p1_pokemon_cur_hp,
-        // output [8-1:0] p2_pokemon_cur_hp,
+        output reg [8-1:0] p1_pokemon_cur_hp,
+        output reg [8-1:0] p2_pokemon_cur_hp,
+        // output []
+        
         output [6-1:0] fight_state,
         output [4-1:0] option_state
     );
@@ -65,7 +67,7 @@ parameter press_L = 5'b00100;
 parameter press_R = 5'b00010;
 parameter press_C = 5'b00001;
     wire[4:0] buttons;
-    assign p1_pokemon_cur_hp = p1_pokemon_hp;
+    // assign p1_pokemon_cur_hp = p1_pokemon_hp;
     assign buttons[4:0] = {key_U, key_D, key_L, key_R, key_C};
 parameter [6-1:0] fight_state_menu = 6'd1;
 parameter [6-1:0] fight_state_choosing_skill = 6'd2;
@@ -83,7 +85,9 @@ parameter [4-1:0] option_state_4 = 4'd4;
     reg [6-1:0] next_fight_state;
     reg [4-1:0] cur_option_state;
     reg [4-1:0] next_option_state;
-
+    reg [8-1:0] next_p1_pokemon_cur_hp;
+    reg [8-1:0] next_p2_pokemon_cur_hp;
+    
     assign fight_state = cur_fight_state;
     assign option_state = cur_option_state;
 
@@ -91,12 +95,20 @@ parameter [4-1:0] option_state_4 = 4'd4;
         if(reset)begin
             cur_fight_state <= fight_state_menu;
             cur_option_state <= option_state_1;
+            p1_pokemon_cur_hp <= p1_pokemon_hp;
+            p2_pokemon_cur_hp <= p2_pokemon_hp;
         end else if(scene_state == fight_scene) begin
             cur_fight_state <= next_fight_state;
             cur_option_state <= next_option_state;
+        end else if(scene_state == choose_scene) begin
+           
+            p1_pokemon_cur_hp <= p1_pokemon_hp;
+            p2_pokemon_cur_hp <= p2_pokemon_hp;
         end else begin
             cur_fight_state <= fight_state_menu;
             cur_option_state <= cur_option_state;
+            p1_pokemon_cur_hp <= p1_pokemon_cur_hp;
+            p2_pokemon_cur_hp <= p2_pokemon_cur_hp;
         end
     end
     //fight_state
@@ -122,12 +134,15 @@ parameter [4-1:0] option_state_4 = 4'd4;
                     case (cur_option_state)
                         option_state_1 :begin
                             next_fight_state = fight_state_animation_p1;
+                            next_p2_pokemon_cur_hp = p2_pokemon_cur_hp - p1_skill_1_damage;
                         end 
                         option_state_2 :begin
                             next_fight_state = fight_state_animation_p1;
+                            next_p2_pokemon_cur_hp = p2_pokemon_cur_hp - p1_skill_2_damage;
                         end 
                         option_state_3 :begin
                             next_fight_state = fight_state_animation_p1;
+                            next_p2_pokemon_cur_hp = p2_pokemon_cur_hp - p1_skill_3_damage;;
                         end 
                         option_state_4 :begin
                             next_fight_state = fight_state_animation_p1;

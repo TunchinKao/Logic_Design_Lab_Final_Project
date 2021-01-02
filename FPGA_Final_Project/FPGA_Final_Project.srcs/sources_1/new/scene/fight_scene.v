@@ -21,7 +21,8 @@
 
 
 module fight_scene(
-        input [7:0]hp,
+        input [7:0]p1_cur_hp,
+        input [7:0]p2_cur_hp,
         input [9:0]v_cnt,
         input [9:0]h_cnt,
         input [6-1:0] fight_state,
@@ -41,7 +42,6 @@ parameter [4-1:0] option_state_2 = 4'd2;
 parameter [4-1:0] option_state_3 = 4'd3;
 parameter [4-1:0] option_state_4 = 4'd4;
 
-    wire [7:0] hp_bar;
     // assign hp_bar = 80 * (hp + 1'b1);\
     // real option choose
     // reg [10-1:0] option_h_len[0:4];
@@ -49,7 +49,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
     // just for testing option 
         reg[10-1:0] option_h_index, option_v_index;
         reg[10-1:0] option_h_len, option_v_len;
-    assign hp_bar = hp;
+
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb;
@@ -62,7 +62,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                     else if(v_cnt < 10'd50 && v_cnt > 10'd39) begin
                         if(h_cnt < 10'd82) vga_data = 12'h000;
                         else if (h_cnt > 10'd317) vga_data = 12'h000;
-                        else if(h_cnt > 10'd119 && h_cnt < (10'd120 + hp_bar)) vga_data = 12'h0f0;
+                        else if(h_cnt > 10'd119 && h_cnt < (10'd120 + p2_cur_hp)) vga_data = 12'h0f0;
                     end
                     else begin
                         if(h_cnt < 10'd82) vga_data = 12'h000;
@@ -80,7 +80,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                     else if(v_cnt < 10'd310 && v_cnt > 10'd299) begin
                         if(h_cnt < 10'd322) vga_data = 12'h000;
                         else if (h_cnt > 10'd557) vga_data = 12'h000;
-                        else if(h_cnt > 10'd359 && h_cnt < (10'd360 + hp_bar)) vga_data = 12'h0f0;
+                        else if(h_cnt > 10'd359 && h_cnt < (10'd360 + p1_cur_hp)) vga_data = 12'h0f0;
                     end
                     else begin
                         if(h_cnt < 10'd322) vga_data = 12'h000;
