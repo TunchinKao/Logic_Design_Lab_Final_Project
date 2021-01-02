@@ -60,7 +60,17 @@ parameter press_D = 5'b01000;
 parameter press_L = 5'b00100;
 parameter press_R = 5'b00010;
 parameter press_C = 5'b10001;
-
+ 
 assign p1_pokemon_cur_hp = p1_pokemon_hp;
+
+parameter [6-1:0] fight_state_menu = 6'd1;
+parameter [6-1:0] fight_state_choosing_skill = 6'd2;
+parameter [6-1:0] fight_state_animation_p1 = 6'd3; // p1 attack
+parameter [6-1:0] fight_state_animation_p2 = 6'd4; // p2 attack
+parameter [6-1:0] fight_state_hpReducing_p1 = 6'd5; // p1 reducing hp
+parameter [6-1:0] fight_state_hpReducing_p2 = 6'd6; // p2 reducing hp
+always @(posedge clk) begin
+    
+end
 
 endmodule

@@ -28,6 +28,8 @@ module fight_scene(
     );
     wire [7:0] hp_bar;
     // assign hp_bar = 80 * (hp + 1'b1);
+    reg [10-1:0] option_h_len[0:4];
+    reg [10-1:0] option_v_len[0:4];
     assign hp_bar = hp;
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
@@ -73,6 +75,9 @@ module fight_scene(
                 else begin
                     if(h_cnt < 10'd85) vga_data = 12'h000;
                     else if(h_cnt > 10'd555) vga_data = 12'h000;
+                    else begin
+                        
+                    end
                 end         
             end
         end
