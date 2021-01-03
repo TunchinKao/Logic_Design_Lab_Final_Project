@@ -65,13 +65,14 @@ parameter press_R = 5'b00010;
 parameter press_C = 5'b00001;
 
 reg [8-1:0] pokemon_hp    [0:8-1];
+reg [8-1:0] pokemon_speed [0:8-1];
 reg [8-1:0] skill_1_damage[0:8-1];
 reg [8-1:0] skill_2_damage[0:8-1];
 reg [8-1:0] skill_3_damage[0:8-1];
 
     wire [4:0] buttons;
     reg [8-1:0] p1_next_id;
-
+    reg [8-1:0] p2_next_id;
     assign buttons[4:0] = {key_U, key_D, key_L, key_R, key_C};
 
     always @(posedge clk) begin
@@ -82,26 +83,18 @@ reg [8-1:0] skill_3_damage[0:8-1];
                 start_scene:begin
                     p1_pokemon_id <= poke_1;
                 end 
-                choose_scene:begin
+                choose_scene:begin // todo : better index notation
                     p1_pokemon_id <= p1_next_id;
                     p1_pokemon_hp <= pokemon_hp[p1_next_id - 1];
                     p1_skill_1_damage <= skill_1_damage[p1_next_id - 1];
                     p1_skill_2_damage <= skill_2_damage[p1_next_id - 1];
                     p1_skill_3_damage <= skill_3_damage[p1_next_id - 1];
-                    if(p1_next_id < poke_num)begin
-                        p2_pokemon_id <= p1_next_id + 8'd1;
-                        p2_pokemon_hp <= pokemon_hp[p1_next_id];
-                        p2_skill_1_damage <= skill_1_damage[p1_next_id];
-                        p2_skill_2_damage <= skill_2_damage[p1_next_id];
-                        p2_skill_3_damage <= skill_3_damage[p1_next_id];
-                    end else begin
-                        p2_pokemon_id <= 8'd1;
-                        p2_pokemon_hp <= pokemon_hp[8'd1];
-                        p2_skill_1_damage <= skill_1_damage[8'd1];
-                        p2_skill_2_damage <= skill_2_damage[8'd1];
-                        p2_skill_3_damage <= skill_3_damage[8'd1];
                     
-                    end
+                    p2_pokemon_id <= p2_next_id;
+                    p2_pokemon_hp <= pokemon_hp[p2_next_id - 1];
+                    p2_skill_1_damage <= skill_1_damage[p2_next_id - 1];
+                    p2_skill_2_damage <= skill_2_damage[p2_next_id - 1];
+                    p2_skill_3_damage <= skill_3_damage[p2_next_id - 1];
                 end
                 default:
                     p1_pokemon_id <= p1_pokemon_id; 
@@ -110,34 +103,42 @@ reg [8-1:0] skill_3_damage[0:8-1];
     end
     always @(*) begin
         pokemon_hp[0] = 50;
+        pokemon_speed[0] = 500;
         skill_1_damage[0] = 8'd30;
         skill_2_damage[0] = 8'd40;
         skill_3_damage[0] = 8'd50;
         pokemon_hp[1] = 60;
+        pokemon_speed[1] = 450;
         skill_1_damage[1] = 8'd30;
         skill_2_damage[1] = 8'd40;
         skill_3_damage[1] = 8'd50;
         pokemon_hp[2] = 70;
+        pokemon_speed[2] = 400;
         skill_1_damage[2] = 8'd30;
         skill_2_damage[2] = 8'd40;
         skill_3_damage[2] = 8'd50;
         pokemon_hp[3] = 90;
+        pokemon_speed[3] = 350;
         skill_1_damage[3] = 8'd30;
         skill_2_damage[3] = 8'd40;
         skill_3_damage[3] = 8'd50;
         pokemon_hp[4] = 100;
+        pokemon_speed[4] = 300;
         skill_1_damage[4] = 8'd30;
         skill_2_damage[4] = 8'd40;
         skill_3_damage[4] = 8'd50;
         pokemon_hp[5] = 200;
+        pokemon_speed[5] = 250;
         skill_1_damage[5] = 8'd30;
         skill_2_damage[5] = 8'd40;
         skill_3_damage[5] = 8'd50;
         pokemon_hp[6] = 220;
+        pokemon_speed[6] = 200;
         skill_1_damage[6] = 8'd30;
         skill_2_damage[6] = 8'd40;
         skill_3_damage[6] = 8'd50;
         pokemon_hp[7] = 240;
+        pokemon_speed[7] = 150;
         skill_1_damage[7] = 8'd30;
         skill_2_damage[7] = 8'd40;
         skill_3_damage[7] = 8'd50;
@@ -157,6 +158,10 @@ reg [8-1:0] skill_3_damage[0:8-1];
     */
     // p2_next_id
     always @(*) begin
+        if(p1_next_id > 1)
+            p2_next_id = p1_next_id - 1;
+        else 
+            p2_next_id = 8'd8;
         case (p1_pokemon_id)
             poke_1:begin
                 case (buttons)

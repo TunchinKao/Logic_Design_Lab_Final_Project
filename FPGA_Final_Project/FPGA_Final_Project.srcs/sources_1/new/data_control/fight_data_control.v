@@ -148,26 +148,16 @@ parameter [4-1:0] option_state_4 = 4'd4;
                 end else begin
                     next_fight_state = cur_fight_state ;
                 end
-                
             end 
             fight_state_choosing_skill:begin
                 if(buttons == press_C)begin
                     case (cur_option_state)
-                        option_state_1 :begin
-                            next_fight_state = fight_state_animation_p1;
-                        end 
-                        option_state_2 :begin
-                            next_fight_state = fight_state_animation_p1;
-                        end 
-                        option_state_3 :begin
-                            next_fight_state = fight_state_animation_p1;
-                        end 
                         option_state_4 :begin
-                            next_fight_state = fight_state_animation_p1;
+                            next_fight_state = fight_state_menu;
                         end 
                         /// todo : choose run option
                         default: 
-                            next_fight_state = cur_fight_state;
+                            next_fight_state = fight_state_animation_p1;
                     endcase
                 end else begin
                     next_fight_state = cur_fight_state ;

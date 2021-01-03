@@ -114,7 +114,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 OPTRACE "Implementation" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -139,7 +138,7 @@ OPTRACE "set parameters" START { }
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/top.dcp
-  read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
+  read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc
 OPTRACE "read constraints: implementation" END { }
