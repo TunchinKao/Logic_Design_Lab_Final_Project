@@ -31,11 +31,13 @@ module fight_data_control(
         input key_R,
         input [8-1:0] p1_pokemon_id,
         input [8-1:0] p1_pokemon_hp,            // initial hp
+        input [8-1:0] p1_pokemon_speed,
         input [8-1:0] p1_skill_1_damage,
         input [8-1:0] p1_skill_2_damage,
         input [8-1:0] p1_skill_3_damage,
         input [8-1:0] p2_pokemon_id,
         input [8-1:0] p2_pokemon_hp,
+        input [8-1:0] p2_pokemon_speed,
         input [8-1:0] p2_skill_1_damage,
         input [8-1:0] p2_skill_2_damage,
         input [8-1:0] p2_skill_3_damage,
@@ -155,9 +157,13 @@ parameter [4-1:0] option_state_4 = 4'd4;
                         option_state_4 :begin
                             next_fight_state = fight_state_menu;
                         end 
-                        /// todo : choose run option
-                        default: 
-                            next_fight_state = fight_state_animation_p1;
+                        default: begin
+                            if(p1_pokemon_speed >= p2_pokemon_speed)
+                                next_fight_state = fight_state_animation_p1;
+                            else begin
+                                next_fight_state = fight_state_animation_p2;
+                            end
+                        end
                     endcase
                 end else begin
                     next_fight_state = cur_fight_state ;
@@ -166,8 +172,20 @@ parameter [4-1:0] option_state_4 = 4'd4;
             fight_state_animation_p1 : begin
                 next_fight_state = (counter_animate_done == 1'b1) ? fight_state_hpReducing_p2 : fight_state_animation_p1;
             end
+            fight_state_animation_p2 : begin
+                next_fight_state = (counter_animate_done == 1'b1) ? fight_state_hpReducing_p1 : fight_state_animation_p2;
+            end
+            fight_state_hpReducing_p1 : begin
+                if(p1_pokemon_speed >= p2_pokemon_speed) // means that p1 have attacked
+                    next_fight_state = (p1_pokemon_cur_hp == target_p1_pokemon_hp|| p1_pokemon_cur_hp == 0) ? fight_state_menu : fight_state_hpReducing_p1;
+                else                                     // means that p1 attack next
+                    next_fight_state = (p1_pokemon_cur_hp == target_p1_pokemon_hp|| p1_pokemon_cur_hp == 0) ? fight_state_animation_p1 : fight_state_hpReducing_p1;
+            end
             fight_state_hpReducing_p2 : begin
-                next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp|| p2_pokemon_cur_hp == 0) ? fight_state_menu : fight_state_hpReducing_p2;
+                if(p1_pokemon_speed >= p2_pokemon_speed)    // means that p2 attack next
+                    next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp|| p2_pokemon_cur_hp == 0) ? fight_state_animation_p2 : fight_state_hpReducing_p2;
+                else
+                    next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp|| p2_pokemon_cur_hp == 0) ? fight_state_menu : fight_state_hpReducing_p2;
             end
             default: 
                 next_fight_state = cur_fight_state;
@@ -182,6 +200,9 @@ parameter [4-1:0] option_state_4 = 4'd4;
     always @(*) begin
         case (cur_fight_state)
             fight_state_animation_p1 : begin
+                next_counter_animate_start = (counter_animate_done == 1'b1) ? 1'b0 : 1'b1;
+            end
+            fight_state_animation_p2 : begin
                 next_counter_animate_start = (counter_animate_done == 1'b1) ? 1'b0 : 1'b1;
             end
             default:
@@ -213,39 +234,51 @@ parameter [4-1:0] option_state_4 = 4'd4;
             end
         endcase
     end
-    /// target p2 hp control ------------------------------------------------------------------
+    /// target p1, p2 hp control ------------------------------------------------------------------
+    //  p2 skill use stupid choose
     always @(posedge clk) begin
         case(cur_fight_state)
             fight_state_choosing_skill:begin
                 if(buttons == press_C)begin
                     case (cur_option_state)
                         option_state_1 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_1_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_1_damage;
                         end 
                         option_state_2 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_2_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_2_damage;
                         end 
                         option_state_3 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_3_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_3_damage;
                         end 
                         // option_state_4 :begin
                         //     target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_4_damage;
                         // end 
                         /// todo : choose run option
-                        default: 
+                        default: begin
+                            target_p1_pokemon_hp <= target_p1_pokemon_hp;
                             target_p2_pokemon_hp <= target_p2_pokemon_hp;
+                        end
                     endcase
                 end else begin
+                    target_p1_pokemon_hp <= target_p1_pokemon_hp;
                     target_p2_pokemon_hp <= target_p2_pokemon_hp;
                 end
             end
-            default:
+            default:begin
+                target_p1_pokemon_hp <= target_p1_pokemon_hp;    
                 target_p2_pokemon_hp <= target_p2_pokemon_hp;
+            end
         endcase
     end
     // hp reducing counter counting part -----------------------------------------------
     always @(*) begin
         case(cur_fight_state)
+            
+            fight_state_hpReducing_p1 :
+                next_counter_hpReducing_start = 1'b1;
             fight_state_hpReducing_p2 :
                 next_counter_hpReducing_start = 1'b1;
             default:

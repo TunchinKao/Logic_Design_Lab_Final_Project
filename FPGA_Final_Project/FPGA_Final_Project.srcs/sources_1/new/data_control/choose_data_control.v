@@ -31,11 +31,13 @@ module choose_data_control(
         input key_R,
         output reg [8-1:0] p1_pokemon_id,
         output reg [8-1:0] p1_pokemon_hp,
+        output reg [8-1:0] p1_pokemon_speed,
         output reg [8-1:0] p1_skill_1_damage,
         output reg [8-1:0] p1_skill_2_damage,
         output reg [8-1:0] p1_skill_3_damage,
         output reg [8-1:0] p2_pokemon_id,
         output reg [8-1:0] p2_pokemon_hp,
+        output reg [8-1:0] p2_pokemon_speed,
         output reg [8-1:0] p2_skill_1_damage,
         output reg [8-1:0] p2_skill_2_damage,
         output reg [8-1:0] p2_skill_3_damage
@@ -86,12 +88,14 @@ reg [8-1:0] skill_3_damage[0:8-1];
                 choose_scene:begin // todo : better index notation
                     p1_pokemon_id <= p1_next_id;
                     p1_pokemon_hp <= pokemon_hp[p1_next_id - 1];
+                    p1_pokemon_speed <= pokemon_speed[p1_next_id - 1];
                     p1_skill_1_damage <= skill_1_damage[p1_next_id - 1];
                     p1_skill_2_damage <= skill_2_damage[p1_next_id - 1];
                     p1_skill_3_damage <= skill_3_damage[p1_next_id - 1];
                     
                     p2_pokemon_id <= p2_next_id;
                     p2_pokemon_hp <= pokemon_hp[p2_next_id - 1];
+                    p2_pokemon_speed <= pokemon_speed[p2_next_id - 1];
                     p2_skill_1_damage <= skill_1_damage[p2_next_id - 1];
                     p2_skill_2_damage <= skill_2_damage[p2_next_id - 1];
                     p2_skill_3_damage <= skill_3_damage[p2_next_id - 1];
