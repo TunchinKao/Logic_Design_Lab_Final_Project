@@ -62,7 +62,7 @@ always @(*) begin
         end
         fight_scene:begin
             if(key_C)
-                next_scene_state = win_scene;
+                next_scene_state = scene_state ;
             else begin
                 next_scene_state = scene_state ;
             end
