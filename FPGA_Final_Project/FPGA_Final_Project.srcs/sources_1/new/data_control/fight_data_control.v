@@ -78,7 +78,8 @@ parameter [6-1:0] fight_state_animation_p1 = 6'd3; // p1 attack
 parameter [6-1:0] fight_state_animation_p2 = 6'd4; // p2 attack
 parameter [6-1:0] fight_state_hpReducing_p1 = 6'd5; // p1 reducing hp
 parameter [6-1:0] fight_state_hpReducing_p2 = 6'd6; // p2 reducing hp
-parameter [6-1:0] fight_state_ending = 6'd7;        // one of the player die
+parameter [6-1:0] fight_state_p1_win = 6'd7;        // one of the player die
+parameter [6-1:0] fight_state_p2_win = 6'd8;
 
 parameter [4-1:0] option_state_1 = 4'd1;
 parameter [4-1:0] option_state_2 = 4'd2;
@@ -155,6 +156,9 @@ parameter [4-1:0] option_state_4 = 4'd4;
                             next_fight_state = fight_state_choosing_skill;
                         end 
                         /// todo : choose run option
+                        option_state_2 : begin
+                            next_fight_state = fight_state_p2_win;
+                        end
                         default: 
                             next_fight_state = cur_fight_state;
                     endcase
@@ -189,7 +193,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
             fight_state_hpReducing_p1 : begin
                 if(p1_pokemon_speed >= p2_pokemon_speed)begin // means that p1 have attacked
                     if(p1_pokemon_cur_hp == 0)begin
-                        next_fight_state = fight_state_ending;
+                        next_fight_state = fight_state_p2_win;
                     end else begin
                         next_fight_state = (p1_pokemon_cur_hp == target_p1_pokemon_hp)? fight_state_menu : fight_state_hpReducing_p1;
                     end                                                             
@@ -197,7 +201,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                 else                                     // means that p1 attack next
                 begin
                     if(p1_pokemon_cur_hp == 0)begin
-                        next_fight_state = fight_state_ending;
+                        next_fight_state = fight_state_p2_win;
                     end else begin
                         next_fight_state = (p1_pokemon_cur_hp == target_p1_pokemon_hp) ? fight_state_animation_p1 : fight_state_hpReducing_p1;
                     end
@@ -206,21 +210,24 @@ parameter [4-1:0] option_state_4 = 4'd4;
             fight_state_hpReducing_p2 : begin
                 if(p1_pokemon_speed >= p2_pokemon_speed)begin    // means that p2 attack next
                     if(p2_pokemon_cur_hp == 0)begin
-                        next_fight_state = fight_state_ending;
+                        next_fight_state = fight_state_p1_win;
                     end else begin
                         next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp) ? fight_state_animation_p2 : fight_state_hpReducing_p2;
                     end
                 end
                 else begin
                     if(p2_pokemon_cur_hp == 0)begin
-                        next_fight_state = fight_state_ending;
+                        next_fight_state = fight_state_p1_win;
                     end else begin
                         next_fight_state = (p2_pokemon_cur_hp == target_p2_pokemon_hp) ? fight_state_menu : fight_state_hpReducing_p2;
                     end
                 end
             end
-            fight_state_ending:begin
-                next_fight_state = fight_state_ending;
+            fight_state_p1_win:begin
+                next_fight_state = fight_state_p1_win;
+            end
+            fight_state_p2_win:begin
+                next_fight_state = fight_state_p2_win;
             end
             default: 
                 next_fight_state = cur_fight_state;
@@ -234,12 +241,16 @@ parameter [4-1:0] option_state_4 = 4'd4;
     end
     // ending counter counting part
     always @(*) begin
-        if(cur_fight_state == fight_state_ending)begin
-            next_counter_ending_start = (counter_ending_done == 1'b1) ? 1'b0 : 1'b1;
-        end
-        else begin
-            next_counter_ending_start = 1'b0;
-        end
+        case (cur_fight_state)
+            fight_state_p1_win :  begin
+                next_counter_ending_start = (counter_ending_done == 1'b1) ? 1'b0 : 1'b1;            
+            end 
+            fight_state_p2_win : begin
+                next_counter_ending_start = (counter_ending_done == 1'b1) ? 1'b0 : 1'b1;                
+            end
+            default: 
+                next_counter_ending_start = 1'b0;
+        endcase
     end
     // animation counter counting part -------------------------------------------
     assign testSignal = counter_ending_start;
