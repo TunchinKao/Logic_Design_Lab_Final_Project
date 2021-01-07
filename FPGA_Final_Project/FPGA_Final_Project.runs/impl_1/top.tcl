@@ -122,6 +122,7 @@ set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 4
+  set_param xicom.use_bs_reader 1
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7a35tcpg236-1
   set_property design_mode GateLvl [current_fileset]
@@ -138,8 +139,8 @@ OPTRACE "set parameters" START { }
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/top.dcp
-  read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
   read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci
+  read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc
 OPTRACE "read constraints: implementation" END { }

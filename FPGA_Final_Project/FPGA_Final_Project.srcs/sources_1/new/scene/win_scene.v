@@ -21,6 +21,7 @@
 
 
 module win_scene(
+    input clk,
     input [9:0] v_cnt,
     input [9:0] h_cnt,
     output reg [11:0] vga_data

@@ -24,12 +24,13 @@ module start_scene(
         input clk,
         input [9:0]v_cnt,
         input [9:0]h_cnt,
-        output  [11:0] vga_data
+        output [11:0] vga_data
     );
+parameter width = 320;
     wire [16:0] pixel_addr;
     wire clk_25MHz;
     wire [11:0] data;
-    assign pixel_addr = ((h_cnt>>1) + 320 * (v_cnt >> 1)) % 76800;
+    assign pixel_addr = ((h_cnt>>2) + 160 * (v_cnt >> 2)) % 19200;
     // always @(*) begin
     //     vga_data = 12'h00d;
     // end

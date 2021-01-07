@@ -217,6 +217,7 @@ module top(
         .option_state(option_state)
     );
     win_scene ws(
+        .clk(clk),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(win_RGB)

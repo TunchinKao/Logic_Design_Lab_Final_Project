@@ -71,6 +71,7 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -89,7 +90,7 @@ set_property ip_output_repo d:/Computer_Programming/Logic_Designer/Logic_Design_
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-add_files d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/Pictrans/out.coe
+add_files d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/title_160_120.coe
 read_verilog -library xil_defaultlib {
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/keyboard/Keyboard_Decoder.v
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/Onepulse.v
@@ -105,10 +106,10 @@ read_verilog -library xil_defaultlib {
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/win_scene.v
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v
 }
-read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
-
 read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci
 set_property used_in_implementation false [get_files -all d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_ooc.xdc]
+
+read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
