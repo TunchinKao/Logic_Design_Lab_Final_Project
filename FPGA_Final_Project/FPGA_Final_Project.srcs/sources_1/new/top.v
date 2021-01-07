@@ -45,6 +45,7 @@ module top(
     wire [9:0] v_cnt;  //480
     wire up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal;
     wire [3:0] scene_state;
+    wire fight_to_end_scene_Signal;
     wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;
     // for pokemon data
         // ----- p1
@@ -128,7 +129,8 @@ module top(
         .key_R(rt_Signal),
         .clk(clk),
         .reset(rst),
-        .scene_state(scene_state)
+        .scene_state(scene_state),
+        .fight_to_end_scene(fight_to_end_scene_Signal)
     );
     vga_controller   vga_test(
       .pclk(clk_25MHz),
@@ -174,7 +176,6 @@ module top(
         .vga_data(choose_RGB)
     );
     // fight_part
-    
     fight_data_control fdc(
         
         .clk(clk),
@@ -201,7 +202,8 @@ module top(
         .p2_pokemon_speed(p2_pokemon_speed),
         .testSignal(lights[6]),
         .fight_state(fight_state),
-        .option_state(option_state)
+        .option_state(option_state),
+        .to_end_scene(fight_to_end_scene_Signal)
     );
     
     fight_scene fs(

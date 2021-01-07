@@ -28,6 +28,7 @@ module state_control(
     input key_R,
     input clk,
     input reset,
+    input fight_to_end_scene,
     output reg [3:0] scene_state
     );
 
@@ -61,8 +62,8 @@ always @(*) begin
             end
         end
         fight_scene:begin
-            if(key_C)
-                next_scene_state = scene_state ;
+            if(fight_to_end_scene)
+                next_scene_state = win_scene ;
             else begin
                 next_scene_state = scene_state ;
             end
