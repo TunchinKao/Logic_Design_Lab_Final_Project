@@ -3,13 +3,6 @@
 
 # XDC: imports/demo1/Basys3_Master.xdc
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-# IP: ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==KeyboardCtrl_0 || ORIG_REF_NAME==KeyboardCtrl_0} -quiet] -quiet
-=======
-=======
->>>>>>> master
 # IP: ip/title_320_240_mem/title_320_240_mem.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==title_320_240_mem || ORIG_REF_NAME==title_320_240_mem} -quiet] -quiet
 
@@ -17,7 +10,3 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==title_320_240_m
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==KeyboardCtrl_0 || ORIG_REF_NAME==KeyboardCtrl_0} -quiet] -quiet
 
 # XDC: ip/title_320_240_mem/title_320_240_mem_ooc.xdc
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master

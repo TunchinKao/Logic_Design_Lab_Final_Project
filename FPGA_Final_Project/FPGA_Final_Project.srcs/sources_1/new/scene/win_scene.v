@@ -42,7 +42,7 @@ module win_scene(
       .clk(clk),
       .clk1(clk_25MHz)
     );
-    blk_mem_gen_1 blk_mem_gen_1_inst(
+    title_320_240_mem end_scene_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),

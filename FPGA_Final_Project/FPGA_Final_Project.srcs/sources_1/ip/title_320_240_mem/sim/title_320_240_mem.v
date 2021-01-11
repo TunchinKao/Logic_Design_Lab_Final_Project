@@ -53,15 +53,7 @@
 `timescale 1ns/1ps
 
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-<<<<<<< HEAD
 module title_320_240_mem (
-=======
-<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/sim/blk_mem_gen_1.v
-module blk_mem_gen_1 (
-=======
-module title_320_240_mem (
->>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/sim/title_320_240_mem.v
->>>>>>> master
   clka,
   wea,
   addra,
@@ -98,18 +90,8 @@ output wire [11 : 0] douta;
     .C_ALGORITHM(1),
     .C_PRIM_TYPE(1),
     .C_LOAD_INIT_FILE(1),
-<<<<<<< HEAD
     .C_INIT_FILE_NAME("title_320_240_mem.mif"),
     .C_INIT_FILE("title_320_240_mem.mem"),
-=======
-<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/sim/blk_mem_gen_1.v
-    .C_INIT_FILE_NAME("blk_mem_gen_1.mif"),
-    .C_INIT_FILE("blk_mem_gen_1.mem"),
-=======
-    .C_INIT_FILE_NAME("title_320_240_mem.mif"),
-    .C_INIT_FILE("title_320_240_mem.mem"),
->>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/sim/title_320_240_mem.v
->>>>>>> master
     .C_USE_DEFAULT_DATA(0),
     .C_DEFAULT_DATA("0"),
     .C_HAS_RSTA(0),
