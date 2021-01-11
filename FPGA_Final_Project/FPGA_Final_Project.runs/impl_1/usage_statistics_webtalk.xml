@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Mon Jan 11 20:46:44 2021'>
+<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Mon Jan 11 20:51:37 2021'>
 <section name="__ROOT__" level="0" order="1" description="">
  <section name="software_version_and_target_device" level="1" order="1" description="">
   <keyValuePair key="beta" value="FALSE" description="" />
   <keyValuePair key="build_version" value="2960000" description="" />
-  <keyValuePair key="date_generated" value="Mon Jan 11 20:46:44 2021" description="" />
+  <keyValuePair key="date_generated" value="Mon Jan 11 20:51:37 2021" description="" />
   <keyValuePair key="os_platform" value="WIN64" description="" />
   <keyValuePair key="product_version" value="Vivado v2020.1.1 (64-bit)" description="" />
   <keyValuePair key="project_id" value="68414011fea94d31bd17b2fd4d613b68" description="" />
-  <keyValuePair key="project_iteration" value="109" description="" />
+  <keyValuePair key="project_iteration" value="111" description="" />
   <keyValuePair key="random_id" value="72c00153963b56c587f8584bc694aaee" description="" />
   <keyValuePair key="registration_id" value="72c00153963b56c587f8584bc694aaee" description="" />
   <keyValuePair key="route_design" value="TRUE" description="" />
@@ -529,141 +529,12 @@
  </section>
  <section name="vivado_usage" level="1" order="10" description="">
   <section name="gui_handlers" level="2" order="1" description="">
-   <keyValuePair key="abstractcombinedpanel_add_element" value="3" description="" />
-   <keyValuePair key="abstractcombinedpanel_remove_selected_elements" value="2" description="" />
-   <keyValuePair key="abstractfileview_reload" value="71" description="" />
-   <keyValuePair key="addrepositoryinfodialog_ok" value="3" description="" />
-   <keyValuePair key="addsrcwizard_specify_hdl_netlist_block_design" value="1" description="" />
-   <keyValuePair key="addsrcwizard_specify_or_create_constraint_files" value="1" description="" />
-   <keyValuePair key="basedialog_cancel" value="114" description="" />
-   <keyValuePair key="basedialog_no" value="6" description="" />
-   <keyValuePair key="basedialog_ok" value="164" description="" />
-   <keyValuePair key="basedialog_yes" value="157" description="" />
-   <keyValuePair key="cmdmsgdialog_ok" value="40" description="" />
-   <keyValuePair key="confirmsavetexteditsdialog_no" value="1" description="" />
-   <keyValuePair key="constraintschooserpanel_add_files" value="1" description="" />
-   <keyValuePair key="coreandinterfacesbasetreetablepanel_refresh_repository" value="1" description="" />
-   <keyValuePair key="corebrowserview_group_cores_by_taxonomy_or_repository" value="2" description="" />
-   <keyValuePair key="coretreetablepanel_add_ip_to_repository" value="1" description="" />
-   <keyValuePair key="coretreetablepanel_core_tree_table" value="145" description="" />
-   <keyValuePair key="coretreetablepanel_delete_ip" value="3" description="" />
-   <keyValuePair key="coretreetablepanel_disable_ip" value="1" description="" />
-   <keyValuePair key="coretreetablepanel_enable_ip" value="1" description="" />
-   <keyValuePair key="createsrcfiledialog_file_location" value="4" description="" />
-   <keyValuePair key="createsrcfiledialog_file_name" value="17" description="" />
-   <keyValuePair key="customizecoredialog_documentation" value="1" description="" />
-   <keyValuePair key="customizecoredialog_ip_location" value="1" description="" />
-   <keyValuePair key="customizecoredialog_switch_to_defaults" value="2" description="" />
-   <keyValuePair key="customizeerrordialog_ok" value="6" description="" />
-   <keyValuePair key="definemodulesdialog_define_modules_and_specify_io_ports" value="66" description="" />
-   <keyValuePair key="definemodulesdialog_entity_name" value="1" description="" />
-   <keyValuePair key="definemodulesdialog_new_source_files" value="7" description="" />
-   <keyValuePair key="filesetpanel_file_set_panel_tree" value="298" description="" />
-   <keyValuePair key="filesetpanel_messages" value="2" description="" />
-   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="286" description="" />
-   <keyValuePair key="hacgccoefilewidget_browse" value="9" description="" />
-   <keyValuePair key="hcodeeditor_blank_operations" value="2" description="" />
-   <keyValuePair key="hcodeeditor_commands_to_fold_text" value="2" description="" />
-   <keyValuePair key="hcodeeditor_diff_with" value="2" description="" />
-   <keyValuePair key="hpopuptitle_close" value="1" description="" />
-   <keyValuePair key="ipstatustablepanel_ip_status_table" value="1" description="" />
-   <keyValuePair key="ipstatustablepanel_more_info" value="1" description="" />
-   <keyValuePair key="mainmenumgr_checkpoint" value="3" description="" />
-   <keyValuePair key="mainmenumgr_constraints" value="3" description="" />
-   <keyValuePair key="mainmenumgr_edit" value="4" description="" />
-   <keyValuePair key="mainmenumgr_export" value="2" description="" />
-   <keyValuePair key="mainmenumgr_file" value="12" description="" />
-   <keyValuePair key="mainmenumgr_flow" value="2" description="" />
-   <keyValuePair key="mainmenumgr_ip" value="3" description="" />
-   <keyValuePair key="mainmenumgr_open_recent_project" value="3" description="" />
-   <keyValuePair key="mainmenumgr_project" value="6" description="" />
-   <keyValuePair key="mainmenumgr_text_editor" value="3" description="" />
-   <keyValuePair key="mainmenumgr_window" value="92" description="" />
-   <keyValuePair key="modifiedconstraintswithouttargetdialog_update" value="1" description="" />
-   <keyValuePair key="msgtreepanel_message_view_tree" value="80" description="" />
-   <keyValuePair key="msgview_error_messages" value="2" description="" />
-   <keyValuePair key="msgview_warning_messages" value="4" description="" />
-   <keyValuePair key="numjobschooser_number_of_jobs" value="2" description="" />
-   <keyValuePair key="openfileaction_open_directory" value="1" description="" />
-   <keyValuePair key="pacommandnames_add_sources" value="15" description="" />
-   <keyValuePair key="pacommandnames_auto_connect_target" value="37" description="" />
-   <keyValuePair key="pacommandnames_auto_update_hier" value="30" description="" />
-   <keyValuePair key="pacommandnames_clock_regions_window" value="1" description="" />
-   <keyValuePair key="pacommandnames_core_gen" value="2" description="" />
-   <keyValuePair key="pacommandnames_exit" value="1" description="" />
-   <keyValuePair key="pacommandnames_fileset_window" value="14" description="" />
-   <keyValuePair key="pacommandnames_hardware_window" value="1" description="" />
-   <keyValuePair key="pacommandnames_message_window" value="4" description="" />
-   <keyValuePair key="pacommandnames_open_hardware_manager" value="11" description="" />
-   <keyValuePair key="pacommandnames_open_project" value="1" description="" />
-   <keyValuePair key="pacommandnames_ports_window" value="13" description="" />
-   <keyValuePair key="pacommandnames_src_replace_file" value="1" description="" />
-   <keyValuePair key="paviews_code" value="9" description="" />
-   <keyValuePair key="paviews_ip_catalog" value="7" description="" />
-   <keyValuePair key="paviews_project_summary" value="25" description="" />
-   <keyValuePair key="planaheadtab_refresh_ip_catalog" value="2" description="" />
-   <keyValuePair key="programdebugtab_open_recently_opened_target" value="16" description="" />
-   <keyValuePair key="programdebugtab_open_target" value="36" description="" />
-   <keyValuePair key="programdebugtab_program_device" value="128" description="" />
-   <keyValuePair key="programfpgadialog_program" value="121" description="" />
-   <keyValuePair key="programfpgadialog_specify_bitstream_file" value="1" description="" />
-   <keyValuePair key="progressdialog_cancel" value="10" description="" />
-   <keyValuePair key="projecttab_close_design" value="6" description="" />
-   <keyValuePair key="projecttab_reload" value="12" description="" />
-   <keyValuePair key="propertiesview_next_object" value="4" description="" />
-   <keyValuePair key="propertiesview_previous_object" value="2" description="" />
-   <keyValuePair key="rdicommands_delete" value="24" description="" />
-   <keyValuePair key="rdicommands_settings" value="2" description="" />
-   <keyValuePair key="removesourcesdialog_also_delete" value="6" description="" />
-   <keyValuePair key="rungadget_show_warning_and_error_messages_in_messages" value="1" description="" />
-   <keyValuePair key="saveprojectutils_save" value="2" description="" />
-   <keyValuePair key="settingsdialog_options_tree" value="1" description="" />
-   <keyValuePair key="settingsdialog_project_tree" value="14" description="" />
-   <keyValuePair key="settingsprojectiprepositorypage_add_repository" value="6" description="" />
-   <keyValuePair key="settingsprojectiprepositorypage_refresh_all" value="2" description="" />
-   <keyValuePair key="settingsprojectiprepositorypage_repository_chooser" value="9" description="" />
-   <keyValuePair key="signaltreepanel_signal_tree_table" value="96" description="" />
-   <keyValuePair key="simpleoutputproductdialog_generate_output_products_immediately" value="13" description="" />
-   <keyValuePair key="simpleoutputproductdialog_synthesize_design_globally" value="5" description="" />
-   <keyValuePair key="srcchooserpanel_add_directories" value="1" description="" />
-   <keyValuePair key="srcchooserpanel_add_hdl_and_netlist_files_to_your_project" value="2" description="" />
-   <keyValuePair key="srcchooserpanel_add_or_create_source_file" value="1" description="" />
-   <keyValuePair key="srcchooserpanel_create_file" value="19" description="" />
-   <keyValuePair key="srcchooserpanel_make_local_copy_of_these_files_into" value="1" description="" />
-   <keyValuePair key="srcmenu_ip_documentation" value="1" description="" />
-   <keyValuePair key="srcmenu_ip_hierarchy" value="23" description="" />
-   <keyValuePair key="srcmenu_refresh_hierarchy" value="14" description="" />
-   <keyValuePair key="stalerundialog_no" value="1" description="" />
-   <keyValuePair key="stalerundialog_open_design" value="1" description="" />
-   <keyValuePair key="statemonitor_reset_run" value="3" description="" />
-   <keyValuePair key="syntheticagettingstartedview_recent_projects" value="8" description="" />
-   <keyValuePair key="syntheticastatemonitor_cancel" value="16" description="" />
-   <keyValuePair key="taskbanner_close" value="3" description="" />
+   <keyValuePair key="basedialog_cancel" value="1" description="" />
+   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="4" description="" />
+   <keyValuePair key="syntheticastatemonitor_cancel" value="1" description="" />
   </section>
   <section name="java_command_handlers" level="2" order="2" description="">
-   <keyValuePair key="addsources" value="14" description="" />
-   <keyValuePair key="autoconnecttarget" value="37" description="" />
-   <keyValuePair key="coreview" value="19" description="" />
-   <keyValuePair key="customizecore" value="25" description="" />
-   <keyValuePair key="editdelete" value="28" description="" />
-   <keyValuePair key="fileexit" value="5" description="" />
-   <keyValuePair key="fliptoviewtasksynthesis" value="1" description="" />
-   <keyValuePair key="launchprogramfpga" value="128" description="" />
-   <keyValuePair key="openhardwaremanager" value="23" description="" />
-   <keyValuePair key="openproject" value="1" description="" />
-   <keyValuePair key="openrecenttarget" value="3" description="" />
-   <keyValuePair key="projectsummary" value="1" description="" />
-   <keyValuePair key="recustomizecore" value="3" description="" />
-   <keyValuePair key="resetlayout" value="11" description="" />
-   <keyValuePair key="runbitgen" value="180" description="" />
-   <keyValuePair key="runsynthesis" value="24" description="" />
-   <keyValuePair key="savedesign" value="8" description="" />
-   <keyValuePair key="showview" value="82" description="" />
-   <keyValuePair key="toolssettings" value="8" description="" />
-   <keyValuePair key="unselectallcmdhandler" value="1" description="" />
-   <keyValuePair key="updatesourcefiles" value="1" description="" />
-   <keyValuePair key="viewtaskimplementation" value="8" description="" />
-   <keyValuePair key="viewtasksynthesis" value="13" description="" />
+   <keyValuePair key="runbitgen" value="2" description="" />
   </section>
   <section name="other_data" level="2" order="3" description="">
    <keyValuePair key="guimode" value="18" description="" />
