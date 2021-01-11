@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.1.1 (win64) Build 2960000 Wed Aug  5 22:57:20 MDT 2020
-// Date        : Tue Dec 29 20:47:41 2020
+// Date        : Mon Jan 11 23:29:09 2021
 // Host        : LAPTOP-J5R9FCMI running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim -rename_top KeyboardCtrl_0 -prefix
 //               KeyboardCtrl_0_ KeyboardCtrl_0_sim_netlist.v

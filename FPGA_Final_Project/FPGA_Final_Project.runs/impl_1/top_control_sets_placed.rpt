@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1.1 (win64) Build 2960000 Wed Aug  5 22:57:20 MDT 2020
-| Date         : Mon Jan 11 22:17:25 2021
+| Date         : Mon Jan 11 23:49:22 2021
 | Host         : LAPTOP-J5R9FCMI running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -76,8 +76,8 @@ Table of Contents
 |  clk_wiz_0_inst/Q[0]              |                                                   | rst_IBUF                              |                2 |              2 |         1.00 |
 |  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/bits_count        | rst_IBUF                              |                2 |              4 |         2.00 |
 |  clk_IBUF_BUFG                    | key_de/op/E[0]                                    | rst_IBUF                              |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/rx_valid          | rst_IBUF                              |                3 |              8 |         2.67 |
 |  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/rx_finish         | rst_IBUF                              |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/rx_valid          | rst_IBUF                              |                3 |              8 |         2.67 |
 |  clk_wiz_0_inst/Q[0]              |                                                   | vga_test/pixel_cnt[9]_i_1_n_0         |                5 |             10 |         2.00 |
 |  clk_wiz_0_inst/Q[0]              | vga_test/line_cnt                                 | vga_test/line_cnt[9]_i_1_n_0          |                5 |             10 |         2.00 |
 |  clk_IBUF_BUFG                    |                                                   |                                       |                7 |             10 |         1.43 |

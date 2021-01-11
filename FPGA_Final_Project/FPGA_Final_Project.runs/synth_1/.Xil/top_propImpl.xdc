@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc rfile:../../../FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/constraint_files/imports/demo1/Basys3_Master.xdc rfile:../../../../sources/constraint_files/imports/demo1/Basys3_Master.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:7 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports clk]
 set_property src_info {type:XDC file:1 line:119 export:INPUT save:INPUT read:READ} [current_design]

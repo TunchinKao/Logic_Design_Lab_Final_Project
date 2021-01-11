@@ -39,7 +39,7 @@ parameter title_height = 240;
       .clk(clk),
       .clk1(clk_25MHz)
     );
-    title_320_240_mem start_scene_inst(
+    title_320_240_mem start_scene_in00st(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),

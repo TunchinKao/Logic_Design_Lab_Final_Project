@@ -70,6 +70,8 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -82,7 +84,7 @@ set_property parent.project_path D:/Computer_Programming/Logic_Designer/Logic_De
 set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_repo_paths d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/ip [current_project]
+set_property ip_repo_paths d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sample_ip [current_project]
 update_ip_catalog
 set_property ip_output_repo d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
@@ -91,24 +93,24 @@ OPTRACE "Adding files" START { }
 add_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/title_320_240.coe
 add_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/pokemon_alphabet_320_133.coe
 read_verilog -library xil_defaultlib {
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/keyboard/Keyboard_Decoder.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/Onepulse.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/data_control/choose_data_control.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/choose_scene.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/clk_divisor.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/counter.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/data_control/fight_data_control.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/fight_scene.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/start_scene.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/state_control.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/vga.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/win_scene.v
-  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/keyboard/Keyboard_Decoder.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/OnePulse.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/data_control/choose_data_control.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/scene/choose_scene.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/clk_divisor.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/counter.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/data_control/fight_data_control.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/scene/fight_scene.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/scene/start_scene.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/state_control.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/vga.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/scene/win_scene.v
+  D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/verilog_files/top.v
 }
 read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.xci
 set_property used_in_implementation false [get_files -all d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem_ooc.xdc]
 
-read_ip -quiet D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
+read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0.xci
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -119,8 +121,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc
-set_property used_in_implementation false [get_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/constrs_1/imports/demo1/Basys3_Master.xdc]
+read_xdc D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/constraint_files/imports/demo1/Basys3_Master.xdc
+set_property used_in_implementation false [get_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/sources/constraint_files/imports/demo1/Basys3_Master.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
