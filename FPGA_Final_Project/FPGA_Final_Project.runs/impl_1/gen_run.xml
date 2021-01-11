@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1610370734">
+=======
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1610368787">
+>>>>>>> master
 =======
 <GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1610368787">
 >>>>>>> master
@@ -82,7 +86,10 @@
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
     <File Path="$PSRCDIR/sources_1/ip/title_320_240_mem/title_320_240_mem.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -190,6 +197,7 @@
       </FileInfo>
     </File>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <File Path="$PSRCDIR/sources_1/ip/title_320_240_mem/title_320_240_mem.xci">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -198,6 +206,8 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+=======
+>>>>>>> master
 =======
 >>>>>>> master
     <File Path="$PSRCDIR/sources_1/ip/pokemon_alpha_320_133_mem/pokemon_alpha_320_133_mem.xci">

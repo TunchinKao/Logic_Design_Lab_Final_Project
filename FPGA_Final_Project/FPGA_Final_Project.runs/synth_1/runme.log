@@ -558,4 +558,7 @@ synth_design: Time (s): cpu = 00:01:03 ; elapsed = 00:01:06 . Memory (MB): peak 
 INFO: [Common 17-1381] The checkpoint 'D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
 INFO: [Common 17-206] Exiting Vivado at Mon Jan 11 20:40:59 2021...
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master

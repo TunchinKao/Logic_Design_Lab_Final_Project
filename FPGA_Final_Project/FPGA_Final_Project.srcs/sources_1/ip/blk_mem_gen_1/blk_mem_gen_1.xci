@@ -6,7 +6,11 @@
   <spirit:version>1.0</spirit:version>
   <spirit:componentInstances>
     <spirit:componentInstance>
+<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.xci
       <spirit:instanceName>blk_mem_gen_1</spirit:instanceName>
+=======
+      <spirit:instanceName>title_320_240_mem</spirit:instanceName>
+>>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.xci
       <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="blk_mem_gen" spirit:version="8.4"/>
       <spirit:configurableElementValues>
         <spirit:configurableElementValue spirit:referenceId="ADDRBLOCK_RANGE.S_1.Mem0">4096</spirit:configurableElementValue>
@@ -131,8 +135,13 @@
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_SOFTECC_OUTPUT_REGS_B">0</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INITA_VAL">0</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INITB_VAL">0</spirit:configurableElementValue>
+<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.xci
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INIT_FILE">blk_mem_gen_1.mem</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INIT_FILE_NAME">blk_mem_gen_1.mif</spirit:configurableElementValue>
+=======
+        <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INIT_FILE">title_320_240_mem.mem</spirit:configurableElementValue>
+        <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INIT_FILE_NAME">title_320_240_mem.mif</spirit:configurableElementValue>
+>>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.xci
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INTERFACE_TYPE">0</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_LOAD_INIT_FILE">1</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_MEM_TYPE">0</spirit:configurableElementValue>
@@ -175,7 +184,11 @@
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CTRL_ECC_ALGO">NONE</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Coe_File">../../../../../graphs/title_320_240.coe</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Collision_Warnings">ALL</spirit:configurableElementValue>
+<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.xci
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Component_Name">blk_mem_gen_1</spirit:configurableElementValue>
+=======
+        <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Component_Name">title_320_240_mem</spirit:configurableElementValue>
+>>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.xci
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Disable_Collision_Warnings">false</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Disable_Out_of_Range_Warnings">false</spirit:configurableElementValue>
         <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ECC">false</spirit:configurableElementValue>

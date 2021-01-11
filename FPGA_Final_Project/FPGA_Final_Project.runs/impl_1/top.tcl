@@ -117,6 +117,7 @@ proc step_failed { step } {
 
 OPTRACE "Implementation" START { ROLLUP_1 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
 start_step init_design
 set ACTIVE_STEP init_design
@@ -298,6 +299,8 @@ if {$rc} {
 
 OPTRACE "route_design misc" END { }
 OPTRACE "Phase: Route Design" END { }
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 OPTRACE "Phase: Write Bitstream" START { ROLLUP_AUTO }

@@ -55,10 +55,20 @@
 
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 <<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.veo
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.veo
+>>>>>>> master
 blk_mem_gen_1 your_instance_name (
 =======
 title_320_240_mem your_instance_name (
 >>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.veo
+<<<<<<< HEAD
+=======
+=======
+title_320_240_mem your_instance_name (
+>>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.veo
+>>>>>>> master
   .clka(clka),    // input wire clka
   .wea(wea),      // input wire [0 : 0] wea
   .addra(addra),  // input wire [16 : 0] addra
@@ -68,11 +78,22 @@ title_320_240_mem your_instance_name (
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 
 <<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.veo
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1.veo
+>>>>>>> master
 // You must compile the wrapper file blk_mem_gen_1.v when simulating
 // the core, blk_mem_gen_1. When compiling the wrapper file, be sure to
 =======
 // You must compile the wrapper file title_320_240_mem.v when simulating
 // the core, title_320_240_mem. When compiling the wrapper file, be sure to
 >>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.veo
+<<<<<<< HEAD
+=======
+=======
+// You must compile the wrapper file title_320_240_mem.v when simulating
+// the core, title_320_240_mem. When compiling the wrapper file, be sure to
+>>>>>>> master:FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.veo
+>>>>>>> master
 // reference the Verilog simulation library.
 

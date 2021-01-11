@@ -106,7 +106,10 @@ read_verilog -library xil_defaultlib {
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 read_ip -quiet d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem.xci
 set_property used_in_implementation false [get_files -all d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/title_320_240_mem_ooc.xdc]
 
