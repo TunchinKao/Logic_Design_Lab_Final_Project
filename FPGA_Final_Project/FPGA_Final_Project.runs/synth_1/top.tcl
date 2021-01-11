@@ -71,8 +71,6 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -91,7 +89,8 @@ set_property ip_output_repo d:/Computer_Programming/Logic_Designer/Logic_Design_
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-add_files d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/title_320_240.coe
+add_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/title_320_240.coe
+add_files D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/graphs/pokemon_alphabet_320_133.coe
 read_verilog -library xil_defaultlib {
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/keyboard/Keyboard_Decoder.v
   D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/Onepulse.v

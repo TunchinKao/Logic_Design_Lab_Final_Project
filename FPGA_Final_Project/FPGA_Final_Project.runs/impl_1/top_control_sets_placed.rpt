@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1.1 (win64) Build 2960000 Wed Aug  5 22:57:20 MDT 2020
-| Date         : Mon Jan 11 19:42:54 2021
+| Date         : Mon Jan 11 20:41:41 2021
 | Host         : LAPTOP-J5R9FCMI running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -78,18 +78,18 @@ Table of Contents
 |  clk_IBUF_BUFG                    | key_de/op/E[0]                                    | rst_IBUF                              |                2 |              5 |         2.50 |
 |  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/rx_finish         | rst_IBUF                              |                1 |              8 |         8.00 |
 |  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/rx_valid          | rst_IBUF                              |                2 |              8 |         4.00 |
-|  clk_wiz_0_inst/Q[0]              |                                                   | vga_test/pixel_cnt[9]_i_1_n_0         |                5 |             10 |         2.00 |
-|  clk_wiz_0_inst/Q[0]              | vga_test/line_cnt                                 | vga_test/line_cnt[9]_i_1_n_0          |                3 |             10 |         3.33 |
 |  clk_IBUF_BUFG                    |                                                   |                                       |                7 |             10 |         1.43 |
 |  clk_IBUF_BUFG                    | key_de/key                                        | rst_IBUF                              |                3 |             10 |         3.33 |
-|  ss/beta_clk_wiz_0_inst/Q_BUFG[0] |                                                   |                                       |                5 |             11 |         2.20 |
+|  clk_wiz_0_inst/Q[0]              |                                                   | vga_test/pixel_cnt[9]_i_1_n_0         |                5 |             10 |         2.00 |
+|  clk_wiz_0_inst/Q[0]              | vga_test/line_cnt                                 | vga_test/line_cnt[9]_i_1_n_0          |                3 |             10 |         3.33 |
 |  clk_IBUF_BUFG                    | key_de/inst/inst/Ps2Interface_i/frame[10]_i_1_n_0 | rst_IBUF                              |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG                    | fdc/target_p1_pokemon_hp[7]_i_1_n_0               |                                       |                4 |             16 |         4.00 |
+|  ss/beta_clk_wiz_0_inst/Q_BUFG[0] |                                                   |                                       |                5 |             11 |         2.20 |
 |  clk_IBUF_BUFG                    | sc/FSM_sequential_scene_state_reg[0]_0[0]         |                                       |                7 |             16 |         2.29 |
+|  clk_IBUF_BUFG                    | fdc/target_p1_pokemon_hp[7]_i_1_n_0               |                                       |                4 |             16 |         4.00 |
 |  clk_IBUF_BUFG                    | sc/E[0]                                           |                                       |                5 |             28 |         5.60 |
-|  clk_IBUF_BUFG                    |                                                   | fdc/endingTime/count[39]_i_1__1_n_0   |                9 |             40 |         4.44 |
 |  clk_IBUF_BUFG                    |                                                   | fdc/state_last/count[39]_i_1_n_0      |               10 |             40 |         4.00 |
 |  clk_IBUF_BUFG                    |                                                   | fdc/hpReduceTime/count[39]_i_1__0_n_0 |                9 |             40 |         4.44 |
+|  clk_IBUF_BUFG                    |                                                   | fdc/endingTime/count[39]_i_1__1_n_0   |                9 |             40 |         4.44 |
 |  clk_IBUF_BUFG                    |                                                   | rst_IBUF                              |               32 |             74 |         2.31 |
 +-----------------------------------+---------------------------------------------------+---------------------------------------+------------------+----------------+--------------+
 
