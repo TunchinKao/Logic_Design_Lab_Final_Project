@@ -22,13 +22,13 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 22648
+INFO: [Synth 8-7075] Helper process launched with PID 33108
 WARNING: [Synth 8-2507] parameter declaration becomes local in pixel_gen_scene with formal parameter declaration list [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:253]
 WARNING: [Synth 8-2507] parameter declaration becomes local in pixel_gen_scene with formal parameter declaration list [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:254]
 WARNING: [Synth 8-2507] parameter declaration becomes local in pixel_gen_scene with formal parameter declaration list [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:255]
 WARNING: [Synth 8-2507] parameter declaration becomes local in pixel_gen_scene with formal parameter declaration list [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:256]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1025.859 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1026.141 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'top' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:23]
 	Parameter ENTER_CODES bound to: 9'b001011010 
@@ -45,8 +45,8 @@ INFO: [Synth 8-6157] synthesizing module 'Keyboard_Decoder' [D:/Computer_Program
 	Parameter IS_INIT bound to: 8'b10101010 
 	Parameter IS_EXTEND bound to: 8'b11100000 
 	Parameter IS_BREAK bound to: 8'b11110000 
-INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl_0' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/.Xil/Vivado-18368-LAPTOP-J5R9FCMI/realtime/KeyboardCtrl_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'KeyboardCtrl_0' (2#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/.Xil/Vivado-18368-LAPTOP-J5R9FCMI/realtime/KeyboardCtrl_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'KeyboardCtrl_0' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/.Xil/Vivado-33036-LAPTOP-J5R9FCMI/realtime/KeyboardCtrl_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'KeyboardCtrl_0' (2#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/.Xil/Vivado-33036-LAPTOP-J5R9FCMI/realtime/KeyboardCtrl_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'OnePulse' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/Onepulse.v:62]
 INFO: [Synth 8-6155] done synthesizing module 'OnePulse' (3#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/Onepulse.v:62]
 INFO: [Synth 8-226] default block is never used [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/keyboard/Keyboard_Decoder.v:86]
@@ -60,8 +60,9 @@ INFO: [Synth 8-6155] done synthesizing module 'state_control' (5#1) [D:/Computer
 INFO: [Synth 8-6157] synthesizing module 'vga_controller' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/vga.v:22]
 INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (6#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/vga.v:22]
 INFO: [Synth 8-6157] synthesizing module 'start_scene' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/start_scene.v:23]
-	Parameter width bound to: 320 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/synth/blk_mem_gen_0.vhd:69]
+	Parameter title_width bound to: 320 - type: integer 
+	Parameter title_height bound to: 240 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'title_320_240_mem' [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/synth/title_320_240_mem.vhd:69]
 	Parameter C_FAMILY bound to: artix7 - type: string 
 	Parameter C_XDEVICEFAMILY bound to: artix7 - type: string 
 	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
@@ -78,8 +79,8 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [d:/Computer_Programming
 	Parameter C_ALGORITHM bound to: 1 - type: integer 
 	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
 	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
-	Parameter C_INIT_FILE_NAME bound to: blk_mem_gen_0.mif - type: string 
-	Parameter C_INIT_FILE bound to: blk_mem_gen_0.mem - type: string 
+	Parameter C_INIT_FILE_NAME bound to: title_320_240_mem.mif - type: string 
+	Parameter C_INIT_FILE bound to: title_320_240_mem.mem - type: string 
 	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
 	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
 	Parameter C_HAS_RSTA bound to: 0 - type: integer 
@@ -93,9 +94,9 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [d:/Computer_Programming
 	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
 	Parameter C_WRITE_WIDTH_A bound to: 12 - type: integer 
 	Parameter C_READ_WIDTH_A bound to: 12 - type: integer 
-	Parameter C_WRITE_DEPTH_A bound to: 19200 - type: integer 
-	Parameter C_READ_DEPTH_A bound to: 19200 - type: integer 
-	Parameter C_ADDRA_WIDTH bound to: 15 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 76800 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 76800 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 17 - type: integer 
 	Parameter C_HAS_RSTB bound to: 0 - type: integer 
 	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
 	Parameter C_RSTRAM_B bound to: 0 - type: integer 
@@ -107,9 +108,9 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [d:/Computer_Programming
 	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
 	Parameter C_WRITE_WIDTH_B bound to: 12 - type: integer 
 	Parameter C_READ_WIDTH_B bound to: 12 - type: integer 
-	Parameter C_WRITE_DEPTH_B bound to: 19200 - type: integer 
-	Parameter C_READ_DEPTH_B bound to: 19200 - type: integer 
-	Parameter C_ADDRB_WIDTH bound to: 15 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 76800 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 76800 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 17 - type: integer 
 	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 1 - type: integer 
 	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
 	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
@@ -134,12 +135,11 @@ INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [d:/Computer_Programming
 	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
 	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
 	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
-	Parameter C_COUNT_36K_BRAM bound to: 5 - type: string 
-	Parameter C_COUNT_18K_BRAM bound to: 5 - type: string 
-	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     6.962499 mW - type: string 
-INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_4' declared at 'd:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_4' [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/synth/blk_mem_gen_0.vhd:234]
-INFO: [Synth 8-256] done synthesizing module 'blk_mem_gen_0' (17#1) [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/blk_mem_gen_0/synth/blk_mem_gen_0.vhd:69]
-WARNING: [Synth 8-689] width (17) of port connection 'addra' does not match port width (15) of module 'blk_mem_gen_0' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/start_scene.v:44]
+	Parameter C_COUNT_36K_BRAM bound to: 26 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 1 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     9.042558 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_4' declared at 'd:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_4' [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/synth/title_320_240_mem.vhd:234]
+INFO: [Synth 8-256] done synthesizing module 'title_320_240_mem' (17#1) [d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/title_320_240_mem/synth/title_320_240_mem.vhd:69]
 INFO: [Synth 8-6155] done synthesizing module 'start_scene' (18#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/scene/start_scene.v:23]
 INFO: [Synth 8-6157] synthesizing module 'choose_data_control' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/data_control/choose_data_control.v:23]
 	Parameter start_scene bound to: 4'b0001 
@@ -235,19 +235,19 @@ INFO: [Synth 8-6157] synthesizing module 'pixel_gen_scene' [D:/Computer_Programm
 INFO: [Synth 8-6155] done synthesizing module 'pixel_gen_scene' (25#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:238]
 INFO: [Synth 8-6155] done synthesizing module 'top' (26#1) [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/top.v:23]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1178.836 ; gain = 152.977
+Finished RTL Elaboration : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1178.836 ; gain = 152.977
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1178.836 ; gain = 152.977
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.078 . Memory (MB): peak = 1178.836 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 10 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.088 . Memory (MB): peak = 1244.023 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 27 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
@@ -263,20 +263,20 @@ Parsing XDC File [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Proj
 Finished Parsing XDC File [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1239.586 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1244.023 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1239.586 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.049 . Memory (MB): peak = 1244.023 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Constraint Validation : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -285,10 +285,10 @@ Applied set_property IO_BUFFER_TYPE = NONE for PS2_CLK. (constraint file  d:/Com
 Applied set_property CLOCK_BUFFER_TYPE = NONE for PS2_CLK. (constraint file  d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0/KeyboardCtrl_0_in_context.xdc, line 2).
 Applied set_property IO_BUFFER_TYPE = NONE for PS2_DATA. (constraint file  d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0/KeyboardCtrl_0_in_context.xdc, line 3).
 Applied set_property CLOCK_BUFFER_TYPE = NONE for PS2_DATA. (constraint file  d:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/ip/KeyboardCtrl_0/KeyboardCtrl_0/KeyboardCtrl_0_in_context.xdc, line 4).
-Applied set_property DONT_TOUCH = true for ss/blk_mem_gen_0_inst. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for ss/start_scene_inst. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for key_de/inst. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'Keyboard_Decoder'
 INFO: [Synth 8-802] inferred FSM for state register 'scene_state_reg' in module 'state_control'
@@ -342,7 +342,7 @@ WARNING: [Synth 8-327] inferring latch for variable 'next_p1_pokemon_cur_hp_reg'
 WARNING: [Synth 8-327] inferring latch for variable 'next_p2_pokemon_cur_hp_reg' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/data_control/fight_data_control.v:278]
 WARNING: [Synth 8-327] inferring latch for variable 'next_option_state_reg' [D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.srcs/sources_1/new/data_control/fight_data_control.v:347]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -358,11 +358,11 @@ Detailed RTL Component Info :
 +---Registers : 
 	              512 Bit    Registers := 1     
 	               40 Bit    Registers := 3     
-	               15 Bit    Registers := 1     
+	               17 Bit    Registers := 1     
 	               10 Bit    Registers := 3     
 	                8 Bit    Registers := 12    
+	                5 Bit    Registers := 3     
 	                4 Bit    Registers := 1     
-	                3 Bit    Registers := 3     
 	                2 Bit    Registers := 2     
 	                1 Bit    Registers := 12    
 +---Muxes : 
@@ -396,7 +396,7 @@ Detailed RTL Component Info :
 	   4 Input    2 Bit        Muxes := 2     
 	   2 Input    2 Bit        Muxes := 10    
 	   3 Input    2 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 36    
+	   2 Input    1 Bit        Muxes := 84    
 	   4 Input    1 Bit        Muxes := 7     
 	   3 Input    1 Bit        Muxes := 5     
 	   5 Input    1 Bit        Muxes := 1     
@@ -416,25 +416,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:49 ; elapsed = 00:00:51 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Timing Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:00:56 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Technology Mapping : Time (s): cpu = 00:00:54 ; elapsed = 00:00:56 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -451,50 +451,50 @@ Start Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[11] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[10] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[9] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[8] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[7] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[6] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[5] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[4] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[3] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[2] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[1] to constant 0
-WARNING: [Synth 8-3295] tying undriven pin ss/blk_mem_gen_0_inst:dina[0] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[11] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[10] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[9] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[8] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[7] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[6] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[5] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[4] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[3] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[2] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[1] to constant 0
+WARNING: [Synth 8-3295] tying undriven pin ss/start_scene_inst:dina[0] to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished IO Insertion : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:54 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:54 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -513,43 +513,43 @@ Report Cell Usage:
 +------+-------------+------+
 |1     |KeyboardCtrl |     1|
 |2     |BUFG         |     1|
-|3     |CARRY4       |    77|
-|4     |LUT1         |    26|
-|5     |LUT2         |   161|
-|6     |LUT3         |   100|
-|7     |LUT4         |   174|
-|8     |LUT5         |   105|
-|9     |LUT6         |   212|
-|10    |MUXF7        |    10|
-|11    |RAMB18E1     |     5|
-|16    |RAMB36E1     |     5|
-|21    |FDCE         |    21|
-|22    |FDRE         |   226|
-|23    |FDSE         |     3|
-|24    |IBUF         |     2|
-|25    |OBUF         |    29|
-|26    |OBUFT        |     1|
+|3     |CARRY4       |    78|
+|4     |LUT1         |    27|
+|5     |LUT2         |   162|
+|6     |LUT3         |    89|
+|7     |LUT4         |   177|
+|8     |LUT5         |   132|
+|9     |LUT6         |   249|
+|10    |MUXF7        |    20|
+|11    |RAMB18E1     |     1|
+|12    |RAMB36E1     |    26|
+|38    |FDCE         |    21|
+|39    |FDRE         |   230|
+|40    |FDSE         |     3|
+|41    |IBUF         |     2|
+|42    |OBUF         |    29|
+|43    |OBUFT        |     1|
 +------+-------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:54 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1244.023 ; gain = 217.883
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 15 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:52 . Memory (MB): peak = 1239.586 ; gain = 152.977
-Synthesis Optimization Complete : Time (s): cpu = 00:00:54 ; elapsed = 00:00:55 . Memory (MB): peak = 1239.586 ; gain = 213.727
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:56 . Memory (MB): peak = 1244.023 ; gain = 217.883
+Synthesis Optimization Complete : Time (s): cpu = 00:00:58 ; elapsed = 00:01:00 . Memory (MB): peak = 1244.023 ; gain = 217.883
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1239.586 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 97 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.036 . Memory (MB): peak = 1244.023 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 125 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1239.586 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1244.023 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-66 Infos, 21 Warnings, 0 Critical Warnings and 0 Errors encountered.
+66 Infos, 20 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:00 ; elapsed = 00:01:02 . Memory (MB): peak = 1239.586 ; gain = 213.727
+synth_design: Time (s): cpu = 00:01:03 ; elapsed = 00:01:06 . Memory (MB): peak = 1244.023 ; gain = 217.883
 INFO: [Common 17-1381] The checkpoint 'D:/Computer_Programming/Logic_Designer/Logic_Design_Final_Project/FPGA_Final_Project/FPGA_Final_Project.runs/synth_1/top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jan  7 15:54:03 2021...
+INFO: [Common 17-206] Exiting Vivado at Mon Jan 11 19:42:11 2021...

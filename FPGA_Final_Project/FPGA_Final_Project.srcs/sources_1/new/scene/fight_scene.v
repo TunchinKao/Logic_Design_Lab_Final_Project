@@ -62,8 +62,8 @@ parameter [4-1:0] option_state_4 = 4'd4;
                     else if(v_cnt < 10'd50 && v_cnt > 10'd39) begin
                         if(h_cnt < 10'd82) vga_data = 12'h000;
                         else if (h_cnt > 10'd317) vga_data = 12'h000;
-                        else if(h_cnt > 10'd119 && h_cnt < 10'd280) begin
-                            if(p2_cur_hp )s
+                        else if(h_cnt > 10'd119 && h_cnt < (10'd120 + p2_cur_hp)) begin
+
                             vga_data = 12'h0f0;
                         end 
                     end

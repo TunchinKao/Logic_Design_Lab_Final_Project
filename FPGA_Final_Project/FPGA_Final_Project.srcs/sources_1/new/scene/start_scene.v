@@ -26,11 +26,12 @@ module start_scene(
         input [9:0]h_cnt,
         output [11:0] vga_data
     );
-parameter width = 320;
+parameter title_width = 320;
+parameter title_height = 240;
     wire [16:0] pixel_addr;
     wire clk_25MHz;
     wire [11:0] data;
-    assign pixel_addr = ((h_cnt>>2) + 160 * (v_cnt >> 2)) % 19200;
+    assign pixel_addr = ((h_cnt>>1) + title_width * (v_cnt >> 1)) % (title_width * title_height);
     // always @(*) begin
     //     vga_data = 12'h00d;
     // end
@@ -38,7 +39,7 @@ parameter width = 320;
       .clk(clk),
       .clk1(clk_25MHz)
     );
-    blk_mem_gen_0 blk_mem_gen_0_inst(
+    title_320_240_mem start_scene_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),
