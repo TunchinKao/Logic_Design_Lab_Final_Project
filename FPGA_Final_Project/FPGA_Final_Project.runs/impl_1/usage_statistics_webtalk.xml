@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Mon Jan 11 19:43:28 2021'>
+<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Mon Jan 11 20:42:15 2021'>
 <section name="__ROOT__" level="0" order="1" description="">
  <section name="software_version_and_target_device" level="1" order="1" description="">
   <keyValuePair key="beta" value="FALSE" description="" />
   <keyValuePair key="build_version" value="2960000" description="" />
-  <keyValuePair key="date_generated" value="Mon Jan 11 19:43:28 2021" description="" />
+  <keyValuePair key="date_generated" value="Mon Jan 11 20:42:15 2021" description="" />
   <keyValuePair key="os_platform" value="WIN64" description="" />
   <keyValuePair key="product_version" value="Vivado v2020.1.1 (64-bit)" description="" />
   <keyValuePair key="project_id" value="68414011fea94d31bd17b2fd4d613b68" description="" />
-  <keyValuePair key="project_iteration" value="107" description="" />
+  <keyValuePair key="project_iteration" value="108" description="" />
   <keyValuePair key="random_id" value="72c00153963b56c587f8584bc694aaee" description="" />
   <keyValuePair key="registration_id" value="72c00153963b56c587f8584bc694aaee" description="" />
   <keyValuePair key="route_design" value="TRUE" description="" />
@@ -626,8 +626,8 @@
   <section name="usage" level="2" order="2" description="">
    <keyValuePair key="elapsed" value="00:01:05s" description="" />
    <keyValuePair key="hls_ip" value="0" description="" />
-   <keyValuePair key="memory_gain" value="217.883MB" description="" />
-   <keyValuePair key="memory_peak" value="1244.023MB" description="" />
+   <keyValuePair key="memory_gain" value="215.457MB" description="" />
+   <keyValuePair key="memory_peak" value="1243.180MB" description="" />
   </section>
  </section>
  <section name="unisim_transformation" level="1" order="11" description="">
@@ -685,10 +685,10 @@
    <keyValuePair key="addrepositoryinfodialog_ok" value="3" description="" />
    <keyValuePair key="addsrcwizard_specify_hdl_netlist_block_design" value="1" description="" />
    <keyValuePair key="addsrcwizard_specify_or_create_constraint_files" value="1" description="" />
-   <keyValuePair key="basedialog_cancel" value="113" description="" />
+   <keyValuePair key="basedialog_cancel" value="114" description="" />
    <keyValuePair key="basedialog_no" value="6" description="" />
-   <keyValuePair key="basedialog_ok" value="162" description="" />
-   <keyValuePair key="basedialog_yes" value="156" description="" />
+   <keyValuePair key="basedialog_ok" value="163" description="" />
+   <keyValuePair key="basedialog_yes" value="157" description="" />
    <keyValuePair key="cmdmsgdialog_ok" value="40" description="" />
    <keyValuePair key="confirmsavetexteditsdialog_no" value="1" description="" />
    <keyValuePair key="constraintschooserpanel_add_files" value="1" description="" />
@@ -710,7 +710,7 @@
    <keyValuePair key="definemodulesdialog_new_source_files" value="7" description="" />
    <keyValuePair key="filesetpanel_file_set_panel_tree" value="293" description="" />
    <keyValuePair key="filesetpanel_messages" value="2" description="" />
-   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="284" description="" />
+   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="285" description="" />
    <keyValuePair key="hacgccoefilewidget_browse" value="9" description="" />
    <keyValuePair key="hcodeeditor_blank_operations" value="2" description="" />
    <keyValuePair key="hcodeeditor_commands_to_fold_text" value="2" description="" />
@@ -801,10 +801,10 @@
    <keyValuePair key="projectsummary" value="1" description="" />
    <keyValuePair key="recustomizecore" value="2" description="" />
    <keyValuePair key="resetlayout" value="11" description="" />
-   <keyValuePair key="runbitgen" value="178" description="" />
+   <keyValuePair key="runbitgen" value="179" description="" />
    <keyValuePair key="runsynthesis" value="24" description="" />
    <keyValuePair key="savedesign" value="8" description="" />
-   <keyValuePair key="showview" value="81" description="" />
+   <keyValuePair key="showview" value="82" description="" />
    <keyValuePair key="toolssettings" value="8" description="" />
    <keyValuePair key="unselectallcmdhandler" value="1" description="" />
    <keyValuePair key="updatesourcefiles" value="1" description="" />
@@ -821,13 +821,13 @@
    <keyValuePair key="currentsynthesisrun" value="synth_1" description="" />
    <keyValuePair key="default_library" value="xil_defaultlib" description="" />
    <keyValuePair key="designmode" value="RTL" description="" />
-   <keyValuePair key="export_simulation_activehdl" value="17" description="" />
-   <keyValuePair key="export_simulation_ies" value="17" description="" />
-   <keyValuePair key="export_simulation_modelsim" value="17" description="" />
-   <keyValuePair key="export_simulation_questa" value="17" description="" />
-   <keyValuePair key="export_simulation_riviera" value="17" description="" />
-   <keyValuePair key="export_simulation_vcs" value="17" description="" />
-   <keyValuePair key="export_simulation_xsim" value="17" description="" />
+   <keyValuePair key="export_simulation_activehdl" value="19" description="" />
+   <keyValuePair key="export_simulation_ies" value="19" description="" />
+   <keyValuePair key="export_simulation_modelsim" value="19" description="" />
+   <keyValuePair key="export_simulation_questa" value="19" description="" />
+   <keyValuePair key="export_simulation_riviera" value="19" description="" />
+   <keyValuePair key="export_simulation_vcs" value="19" description="" />
+   <keyValuePair key="export_simulation_xsim" value="19" description="" />
    <keyValuePair key="implstrategy" value="Vivado Implementation Defaults" description="" />
    <keyValuePair key="launch_simulation_activehdl" value="0" description="" />
    <keyValuePair key="launch_simulation_ies" value="0" description="" />
@@ -837,7 +837,7 @@
    <keyValuePair key="launch_simulation_vcs" value="0" description="" />
    <keyValuePair key="launch_simulation_xsim" value="0" description="" />
    <keyValuePair key="simulator_language" value="Mixed" description="" />
-   <keyValuePair key="srcsetcount" value="17" description="" />
+   <keyValuePair key="srcsetcount" value="19" description="" />
    <keyValuePair key="synthesisstrategy" value="Vivado Synthesis Defaults" description="" />
    <keyValuePair key="target_language" value="Verilog" description="" />
    <keyValuePair key="target_simulator" value="XSim" description="" />
