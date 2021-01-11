@@ -76,6 +76,12 @@ module top(
     // Db_and_OP lt_proc(.clk(clk), .button(ltBt), .button_db_op_ex(lt_Signal));
     // Db_and_OP ct_proc(.clk(clk), .button(ctBt), .button_db_op_ex(ct_Signal));
     
+    // scene image memory wires
+    wire [16:0] start_scene_pixel_addr;
+
+    // image vga data output wires
+    wire [11:0] title_320_240_mem_vga_data;
+
     // LIGHT TESTING---------------------------
 
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
@@ -145,7 +151,9 @@ module top(
         .clk(clk),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
-        .vga_data(start_RGB)
+        .vga_data(start_RGB),
+        .mem_title_vga_data(title_320_240_mem_vga_data),
+        .pixel_addr(start_scene_pixel_addr)
     );
     
     choose_data_control cdc(
@@ -232,6 +240,16 @@ module top(
         .RGB_out(output_RGB)
     );
     assign {vgaRed, vgaGreen, vgaBlue} = output_RGB;
+
+// log image block memory
+    
+    title_320_240_mem start_scene_in00st(
+      .clka(clk_25MHz),
+      .wea(0),
+      .addra(pixel_addr),
+      .dina(data[11:0]),
+      .douta(title_320_240_mem_vga_data)
+    ); 
 endmodule
 
 
