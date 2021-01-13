@@ -93,3 +93,33 @@ parameter poke_8 = 8'd8;
         end
     end
 endmodule
+
+module display_frame (
+    input [cnt_WIDTH - 1 : 0] h_cnt,
+    input [cnt_WIDTH - 1 : 0] v_cnt,
+    input [cnt_WIDTH - 1 : 0] h_start,
+    input [cnt_WIDTH - 1 : 0] v_start,
+    input [cnt_WIDTH - 1 : 0] h_len,
+    input [cnt_WIDTH - 1 : 0] v_len,
+    output reg in_frame
+);
+
+always @ (*) begin
+    if(h_cnt >= (h_start - 2) && h_cnt < h_start) begin
+        if(v_cnt > (v_start - 2) && v_cnt <= (v_start + 62)) in_frame = 1;
+        else in_frame = 0;
+    end
+    else if(h_cnt >= h_start && h_cnt < (h_start + 60)) begin
+        if(v_cnt > (v_start - 2) && v_cnt <= v_start) in_frame = 1;
+        else if(v_cnt > (v_start + 60) && v_cnt <= (v_start + 62)) in_frame = 1;
+        else in_frame = 0;
+    end
+    else if(h_cnt >= (h_start + 60) && h_cnt < (h_start + 62)) begin
+        if(v_cnt > (v_start + 60) && v_cnt <= (v_start + 62)) in_frame = 1;
+        else in_frame = 0;
+    end
+    else in_frame = 0;
+end
+
+endmodule
+    
