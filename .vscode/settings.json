@@ -4,8 +4,12 @@
         "endmodule",
         "hsync",
         "inout",
+        "inrange",
         "pclk",
+        "poke",
         "posedge",
+        "posi",
+        "v",
         "vsync"
     ]
 }

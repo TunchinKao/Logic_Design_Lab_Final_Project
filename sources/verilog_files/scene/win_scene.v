@@ -24,7 +24,9 @@ module win_scene(
     input clk,
     input [9:0] v_cnt,
     input [9:0] h_cnt,
-    output reg [11:0] vga_data
+    input [11:0] mem_title_vga_data,
+    output reg [11:0] vga_data,
+    output [16:0] pixel_addr
     );
     // always @(*) begin
     //     vga_data = 12'hf09;
@@ -32,21 +34,9 @@ module win_scene(
     parameter width = 320;
     parameter height = 240;
     wire [16:0] pixel_addr;
-    wire clk_25MHz;
-    wire [11:0] data;
     assign pixel_addr = ((h_cnt>>1) + width * (v_cnt >> 1)) % (width * height);
     always @(*) begin
-        vga_data = 12'h00d;
+        // vga_data = 12'h00d;
+        vga_data = mem_title_vga_data;
     end
-    // clock_divisor beta_clk_wiz_1_inst(
-    //   .clk(clk),
-    //   .clk1(clk_25MHz)
-    // );
-    // title_320_240_mem end_scene_inst(
-    //   .clka(clk_25MHz),
-    //   .wea(0),
-    //   .addra(pixel_addr),
-    //   .dina(data[11:0]),
-    //   .douta(vga_data)
-    // ); 
 endmodule

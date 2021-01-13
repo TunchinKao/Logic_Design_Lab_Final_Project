@@ -78,10 +78,13 @@ module top(
     
     // scene image memory wires
     wire [16:0] start_scene_pixel_addr;
-
+    wire [16:0] choose_scene_pixel_addr;
+    wire [16:0] fight_scene_pixel_addr;
+    wire [16:0] win_scene_pixel_addr;
+    wire [16:0] pixel_addr;
     // image vga data output wires
-    wire [11:0] title_320_240_mem_vga_data;
-
+    wire [11:0] title_mem_vga_data, alpha_mem_vga_data, poke_mem_vga_data;
+    
     // LIGHT TESTING---------------------------
 
     // assign lights[4:0] = {up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal};
@@ -152,7 +155,7 @@ module top(
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(start_RGB),
-        .mem_title_vga_data(title_320_240_mem_vga_data),
+        .mem_title_vga_data(title_mem_vga_data),
         .pixel_addr(start_scene_pixel_addr)
     );
     
@@ -182,7 +185,10 @@ module top(
         .pokemon_id(p1_pokemon_id),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
-        .vga_data(choose_RGB)
+        .vga_data(choose_RGB),
+        .poke_mem_vga_data(poke_mem_vga_data),
+        .alpha_mem_vga_data(alpha_mem_vga_data),
+        .pixel_addr(choose_scene_pixel_addr)
     );
     // fight_part
     fight_data_control fdc(
@@ -228,7 +234,9 @@ module top(
         .clk(clk),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
-        .vga_data(win_RGB)
+        .vga_data(win_RGB),
+        .mem_title_vga_data(title_mem_vga_data),
+        .pixel_addr(win_scene_pixel_addr)
     );
     pixel_gen_scene pgs(
         .valid(valid),
@@ -243,15 +251,79 @@ module top(
 
 // log image block memory
     
-    title_320_240_mem start_scene_in00st(
+    wire [11:0] data_for_title, data_for_poke, data_for_alpha;
+    
+    title_240_240_mem load_title_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),
-      .dina(data[11:0]),
-      .douta(title_320_240_mem_vga_data)
+      .dina(data_for_title[11:0]),
+      .douta(title_mem_vga_data)
     ); 
+    poke_480_120_mem load_pokemon_inst(
+      .clka(clk_25MHz),
+      .wea(0),
+      .addra(pixel_addr),
+      .dina(data_for_poke[11:0]),
+      .douta(poke_mem_vga_data)  
+    );
+    alphabet_mem_520_20 load_alpha_inst(
+      .clka(clk_25MHz),
+      .wea(0),
+      .addra(pixel_addr),
+      .dina(data_for_alpha[11:0]),
+      .douta(alpha_mem_vga_data)  
+        
+    );
+    addr_mux_scene choose_addr_mux(
+        .scene_state(scene_state),
+        .start_scene_pixel_addr(start_scene_pixel_addr),
+        .choose_scene_pixel_addr(choose_scene_pixel_addr),
+        .fight_scene_pixel_addr(fight_scene_pixel_addr),
+        .win_scene_pixel_addr(win_scene_pixel_addr),
+        .pixel_addr_out(pixel_addr)
+    );
+
+
 endmodule
 
+module addr_mux_scene #
+(
+    parameter    INPUT_WIDTH  = 17,
+    parameter    OUTPUT_WIDTH = 17
+)
+(
+    input   [3:0]                   scene_state,
+    input   [INPUT_WIDTH - 1 : 0]   start_scene_pixel_addr,
+    input   [INPUT_WIDTH - 1 : 0]   choose_scene_pixel_addr,
+    input   [INPUT_WIDTH - 1 : 0]   fight_scene_pixel_addr,
+    input   [INPUT_WIDTH - 1 : 0]   win_scene_pixel_addr,
+    output reg  [OUTPUT_WIDTH - 1 : 0]   pixel_addr_out
+);
+parameter start_scene = 4'b0001;
+parameter choose_scene = 4'b0010;
+parameter fight_scene = 4'b0011;
+parameter win_scene = 4'b0100;
+always @(*) begin
+    case (scene_state)
+        start_scene :begin
+            pixel_addr_out = start_scene_pixel_addr;
+        end 
+        choose_scene :begin
+            pixel_addr_out = choose_scene_pixel_addr;
+        end
+        fight_scene : begin
+            pixel_addr_out = fight_scene_pixel_addr;
+        end
+        win_scene : begin
+            pixel_addr_out = win_scene_pixel_addr;
+        end
+        default: 
+            pixel_addr_out = 16'h0;
+    endcase
+end
+
+endmodule
 
 module pixel_gen_scene #
 (
