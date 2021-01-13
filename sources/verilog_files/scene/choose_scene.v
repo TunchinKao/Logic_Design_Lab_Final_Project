@@ -40,15 +40,15 @@ parameter poke_6 = 8'd6;
 parameter poke_7 = 8'd7;
 parameter poke_8 = 8'd8;
 
-parameter poke_len = 120;
-parameter poke_img_len = 60;
+parameter poke_len = 120; // in the scene
+parameter poke_img_len = 60; // in the original coe file
 parameter poke_resize = 2;
-    reg[10-1:0] h_index, v_index;
-    reg[10-1:0] h_len, v_len;
-    always @(*) begin
-        h_len = 10'd40;
-        v_len = 10'd40;
-    end
+    // reg[10-1:0] h_index, v_index;
+    // reg[10-1:0] h_len, v_len;
+    // always @(*) begin
+    //     h_len = 10'd40;
+    //     v_len = 10'd40;
+    // end
 parameter [10-1:0] poke_h_posi [0:8] = {
     10'd0, // no poke 0
     10'd20,

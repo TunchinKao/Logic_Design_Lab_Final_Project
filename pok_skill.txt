@@ -1,0 +1,39 @@
+eevee
+1.tackle
+2.bite
+3.growl
+------------------
+flareon
+1.tackle
+2.fire fang
+3.fire spin
+-----------------
+jolteon
+1.tackle
+2.thunder
+3.agility
+-----------------
+vaporeon
+1.tackle
+2.water gun
+3.aqua ring
+------------------
+bulbasaur
+1.take down
+2.vine whip
+3.growth
+-----------------
+charmander
+1.scratch
+2.inferno
+3.growl
+-----------------
+squirtle
+1.tackle
+2.bubble
+3.protect
+-----------------
+pikachu
+1.slam
+2.thunder
+3.spark

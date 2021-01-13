@@ -222,13 +222,18 @@ module top(
     );
     
     fight_scene fs(
+        .p1_pokemon_id(p1_pokemon_id),
+        .p2_pokemon_id(p2_pokemon_id),
         .p1_cur_hp(p1_pokemon_cur_hp),
         .p2_cur_hp(p2_pokemon_cur_hp),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
         .vga_data(fight_RGB),
         .fight_state(fight_state),
-        .option_state(option_state)
+        .option_state(option_state),
+        .poke_mem_vga_data(poke_mem_vga_data),
+        .alpha_mem_vga_data(alpha_mem_vga_data),
+        .pixel_addr(fight_scene_pixel_addr)
     );
     win_scene ws(
         .clk(clk),

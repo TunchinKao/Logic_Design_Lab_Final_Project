@@ -21,15 +21,19 @@
 
 
 module fight_scene(
-        
+        input [8-1:0] p1_pokemon_id,
+        input [8-1:0] p2_pokemon_id,
         input [7:0]p1_cur_hp,
         input [7:0]p2_cur_hp,
         input [9:0]v_cnt,
         input [9:0]h_cnt,
         input [6-1:0] fight_state,
         input [4-1:0] option_state,
-        output reg [11:0] vga_data
-
+        output reg [11:0] vga_data,
+        
+        input [11:0] poke_mem_vga_data,
+        input [11:0] alpha_mem_vga_data,
+        output reg [16:0] pixel_addr
     );
 parameter [6-1:0] fight_state_menu = 6'd1;
 parameter [6-1:0] fight_state_choosing_skill = 6'd2;
@@ -72,8 +76,71 @@ parameter [10-1:0] option_v_len[0:4] = {
     10'd30,
     10'd30
 };
+
+parameter [10-1:0] poke_load_img_h_posi [0:1] = {
+    10'd80,
+    10'd440
+};
+parameter [10-1:0] poke_load_img_v_posi [0:1] = {
+    10'd200,
+    10'd0
+};
+parameter [10-1:0] poke_load_img_h_len [0:1] = {
+    10'd120,
+    10'd120
+};
+parameter [10-1:0] poke_load_img_v_len [0:1] = {
+    10'd120,
+    10'd120
+};
+parameter [10-1:0] poke_h_posi [0:8] = {
+    10'd0, // no poke 0
+    10'd20,
+    10'd180,
+    10'd340,
+    10'd500,
+    10'd20,
+    10'd180,
+    10'd340,
+    10'd500
+};
+parameter [10-1:0] poke_v_posi [0:8] = {
+    10'd0, // no poke 0
+    10'd80,
+    10'd80,
+    10'd80,
+    10'd80,
+    10'd240,
+    10'd240,
+    10'd240,
+    10'd240
+};
+parameter [10-1:0] poke_img_h_posi [0:8] = {
+    10'd0,
+    10'd0,
+    10'd60,
+    10'd120,
+    10'd180,
+    10'd240,
+    10'd300,
+    10'd360,
+    10'd420
+};
+parameter [10-1:0] poke_img_v_posi [0:8] = {
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0,
+    10'd0
+};
     wire in_p1_frame, in_p2_frame, in_text_frame, in_choose_frame;
     wire in_p1_hp_bar, in_p2_hp_bar;
+    wire in_p1_img, in_p2_img;
+    wire [17-1:0] p1_pixel_addr, p2_pixel_addr;
     display_frame p1_frame_true(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(322), .v_start(262),
@@ -103,8 +170,8 @@ parameter [10-1:0] option_v_len[0:4] = {
     inrange p1_hp_bar(
         .h_cnt(h_cnt),
         .v_cnt(v_cnt),
-        .h_start(90),
-        .v_start(40),
+        .h_start(330),
+        .v_start(300),
         .h_len(p1_cur_hp),
         .v_len(10),
         .in_true(in_p1_hp_bar)
@@ -112,13 +179,59 @@ parameter [10-1:0] option_v_len[0:4] = {
     inrange p2_hp_bar(
         .h_cnt(h_cnt),
         .v_cnt(v_cnt),
-        .h_start(330),
-        .v_start(300),
+        .h_start(90),
+        .v_start(40),
         .h_len(p2_cur_hp),
         .v_len(10),
         .in_true(in_p2_hp_bar)
     );
+    inrange if_in_p1_img_range(
+        .h_cnt(h_cnt),
+        .v_cnt(v_cnt),
+        .h_start(poke_load_img_h_posi[0]),
+        .v_start(poke_load_img_v_posi[0]),
+        .h_len(poke_load_img_h_len[0]),
+        .v_len(poke_load_img_v_len[0]),
+        .in_true(in_p1_img)
+    );
     
+    inrange if_in_p2_img_range(
+        .h_cnt(h_cnt),
+        .v_cnt(v_cnt),
+        .h_start(poke_load_img_h_posi[1]),
+        .v_start(poke_load_img_v_posi[1]),
+        .h_len(poke_load_img_h_len[1]),
+        .v_len(poke_load_img_v_len[1]),
+        .in_true(in_p2_img)
+    );
+parameter poke_resize = 2;
+parameter poke_img_len = 60;
+    display_image_inrange #(
+        .resize_HEIGHT(poke_resize),
+        .resize_WIDTH(poke_resize),
+        .image_width(480),
+        .image_height(120)
+    ) display_p1_pokemon_image(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(poke_load_img_h_posi[0]), .v_start(poke_load_img_v_posi[0]),
+        .h_len(poke_load_img_h_len[0]), .v_len(poke_load_img_v_len[0]),
+        .img_h_start(poke_img_h_posi[p1_pokemon_id]), .img_v_start(poke_img_v_posi[p1_pokemon_id]+60),
+        .img_h_len(poke_img_len), .img_v_len(poke_img_len),
+        .pixel_addr(p1_pixel_addr)    
+    );
+    display_image_inrange #(
+        .resize_HEIGHT(poke_resize),
+        .resize_WIDTH(poke_resize),
+        .image_width(480),
+        .image_height(120)
+    ) display_p2_pokemon_image(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(poke_load_img_h_posi[1]), .v_start(poke_load_img_v_posi[1]),
+        .h_len(poke_load_img_h_len[1]), .v_len(poke_load_img_v_len[1]),
+        .img_h_start(poke_img_h_posi[p2_pokemon_id]), .img_v_start(poke_img_v_posi[p2_pokemon_id]),
+        .img_h_len(poke_img_len), .img_v_len(poke_img_len),
+        .pixel_addr(p2_pixel_addr)    
+    );
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb; 
@@ -128,130 +241,23 @@ parameter [10-1:0] option_v_len[0:4] = {
             end 
             else if(in_p1_hp_bar || in_p2_hp_bar)begin
                 vga_data = 12'h0f0;
-            end else begin
+            end
+            else if(in_p1_img || in_p2_img)begin
+                vga_data = poke_mem_vga_data;
+            end
+            else begin
                 vga_data = 12'hfff;
             end
         end
     end
-    // always @(*) begin
-    //     if(h_cnt < 80) vga_data = 12'hfeb;
-    //     else if(h_cnt > 559) vga_data = 12'hfeb;
-    //     else begin    
-    //         vga_data = 12'hfff;
-    //         if(v_cnt < 10'd60) begin
-    //             if(h_cnt < 10'd320) begin    
-    //                 if(v_cnt < 10'd2) vga_data = 12'h000;
-    //                 else if(v_cnt > 10'd57) vga_data = 12'h000;
-    //                 else if(v_cnt < 10'd50 && v_cnt > 10'd39) begin
-    //                     if(h_cnt < 10'd82) vga_data = 12'h000;
-    //                     else if (h_cnt > 10'd317) vga_data = 12'h000;
-    //                     else if(h_cnt > 10'd119 && h_cnt < (10'd120 + p2_cur_hp)) begin
-    //                         vga_data = 12'h0f0;
-    //                     end 
-    //                 end
-    //                 else begin
-    //                     if(h_cnt < 10'd82) vga_data = 12'h000;
-    //                     else if (h_cnt > 10'd317) vga_data = 12'h000;
-    //                 end
-    //             end
-    //         end
-    //         else if(v_cnt < 10'd260) begin
-    //             vga_data = 12'hfff;
-    //         end
-    //         else if(v_cnt < 10'd320) begin
-    //             if(h_cnt > 10'd319) begin    
-    //                 if(v_cnt < 10'd262) vga_data = 12'h000;
-    //                 else if(v_cnt > 10'd317) vga_data = 12'h000;
-    //                 else if(v_cnt < 10'd310 && v_cnt > 10'd299) begin
-    //                     if(h_cnt < 10'd322) vga_data = 12'h000;
-    //                     else if (h_cnt > 10'd557) vga_data = 12'h000;
-    //                     else if(h_cnt > 10'd359 && h_cnt < (10'd360 + p1_cur_hp)) vga_data = 12'h0f0;
-    //                 end
-    //                 else begin
-    //                     if(h_cnt < 10'd322) vga_data = 12'h000;
-    //                     else if (h_cnt > 10'd557) vga_data = 12'h000;
-    //                 end
-    //             end
-    //         end
-    //         else if(v_cnt < 10'd480) begin
-    //             if(v_cnt < 10'd325) vga_data = 12'h000;
-    //             else if(v_cnt > 10'd474) vga_data = 12'h000;
-    //             else begin
-    //                 if(h_cnt < 10'd85) vga_data = 12'h000;
-    //                 else if(h_cnt > 10'd555) vga_data = 12'h000;
-    //                 else begin 
-    //                     if(h_cnt > option_h_index && h_cnt < option_h_index + option_h_len 
-    //                     && v_cnt > option_v_index && v_cnt < option_v_index + option_v_len)begin
-    //                         vga_data =  12'hdd3;   
-    //                     end else begin
-    //                         vga_data = 12'hfff;
-    //                     end
-    //                 end
-    //             end         
-    //         end
-    //     end
-    // end
-
-
-    // always @(*) begin
-    //     option_h_len = 10'd40;
-    //     option_v_len = 10'd40;
-    // end
-    // always @(*) begin
-    //     case (option_state)
-    //         option_state_1 : begin
-    //             option_v_index = 10'd350;
-    //             option_h_index = 10'd240;
-    //         end 
-    //         option_state_2 : begin
-    //             option_v_index = 10'd350;
-    //             option_h_index = 10'd340;
-    //         end 
-    //         option_state_3 : begin
-    //             option_v_index = 10'd400;
-    //             option_h_index = 10'd240;
-    //         end 
-    //         option_state_4 : begin
-    //             option_v_index = 10'd400;
-    //             option_h_index = 10'd340;
-    //         end 
-    //         default: begin
-    //             option_h_index = 0;
-    //             option_v_index = 0;
-                
-    //         end
-    //     endcase
-    // end
-    // always @(*) begin
-    // end
-
+    always @(*) begin
+        if(in_p1_img)begin
+            pixel_addr = p1_pixel_addr;
+        end
+        else if(in_p2_img)begin
+            pixel_addr = p2_pixel_addr;
+        end else begin
+            pixel_addr = 17'd0 ;
+        end
+    end
 endmodule
-/*
-module pkm (
-    input 
-);
-    
-endmodule
-
-module sel (
-    input v_cnt,
-    input h_cnt,
-    output reg [11:0] rgb;
-);
-
-
-    
-endmodule
-
-module ani (
-    ports
-);
-    
-endmodule
-
-module pkm_state (
-    ports
-);
-    
-endmodule
-*/
