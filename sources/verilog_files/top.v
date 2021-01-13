@@ -273,7 +273,7 @@ module top(
       .dina(data_for_poke[11:0]),
       .douta(poke_mem_vga_data)  
     );
-    alphabet_mem_520_20 load_alpha_inst(
+    alphabet_405_30_mem load_alpha_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),

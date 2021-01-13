@@ -57,24 +57,24 @@ parameter [10-1:0] option_h_posi [0:4] = {
 };
 parameter [10-1:0] option_v_posi [0:4] = {
     10'd0,
-    10'd360,
-    10'd360,
-    10'd400,
-    10'd400
+    10'd340,
+    10'd340,
+    10'd410,
+    10'd410
 };
 parameter [10-1:0] option_h_len[0:4] = {
     10'd0,
-    10'd100,
-    10'd100,
-    10'd100,
-    10'd100
+    10'd210,
+    10'd210,
+    10'd210,
+    10'd210
 };
 parameter [10-1:0] option_v_len[0:4] = {
     10'd0,
-    10'd30,
-    10'd30,
-    10'd30,
-    10'd30
+    10'd40,
+    10'd40,
+    10'd40,
+    10'd40
 };
 
 parameter [10-1:0] poke_load_img_h_posi [0:1] = {
@@ -261,15 +261,45 @@ parameter [9:0] poke_name_char [1:90] = {
 parameter [9:0] poke_name_len [1:8] = {
     5, 7, 7, 8, 9, 10, 8, 7
 };
+parameter [9:0] poke_skill_name_char[1:240] = {
+10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd2,10'd9,10'd20,10'd5,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd6,10'd9,10'd18,10'd5,10'd0,10'd6,10'd1,10'd14,10'd7,10'd0 ,
+10'd6,10'd9,10'd18,10'd5,10'd0,10'd19,10'd16,10'd9,10'd14,10'd0 ,
+10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
+10'd1,10'd7,10'd9,10'd12,10'd9,10'd20,10'd25,10'd0,10'd0,10'd0 ,
+10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd23,10'd1,10'd20,10'd5,10'd18,10'd0,10'd7,10'd21,10'd14,10'd0 ,
+10'd1,10'd17,10'd21,10'd1,10'd0,10'd18,10'd9,10'd14,10'd7,10'd0 ,
+10'd20,10'd1,10'd11,10'd5,10'd0,10'd4,10'd15,10'd23,10'd14,10'd0 ,
+10'd22,10'd9,10'd14,10'd5,10'd0,10'd23,10'd8,10'd9,10'd16,10'd0 ,
+10'd7,10'd18,10'd15,10'd23,10'd20,10'd8,10'd0,10'd0,10'd0,10'd0 ,
+10'd19,10'd3,10'd18,10'd1,10'd20,10'd3,10'd8,10'd0,10'd0,10'd0 ,
+10'd9,10'd14,10'd6,10'd5,10'd18,10'd14,10'd15,10'd0,10'd0,10'd0 ,
+10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd2,10'd21,10'd2,10'd2,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+10'd16,10'd18,10'd15,10'd20,10'd5,10'd3,10'd20,10'd0,10'd0,10'd0 ,
+10'd19,10'd12,10'd1,10'd13,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
+10'd19,10'd16,10'd1,10'd18,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0
+};
+parameter [9:0] poke_skill_name_len [1:24] ={
+    6,4,5,6,9,9,6,7,7,6,9,9,9,9,6,7,7,5,6,6,7,4,7,4
+} ;
     wire in_p1_name, in_p2_name;
     wire [16:0] p1_name_pixel_addr, p2_name_pixel_addr;
-    parameter char_v_len = 20;
+    parameter char_v_len = 30;
+    parameter char_h_len = 15;
     inrange if_in_p1_name(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(player_frame_h_posi[0] + 5), .v_start(player_frame_v_posi[0] + 5),
         
-        .h_len(200), .v_len(char_v_len),
-        // .h_len(char_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
+        // .h_len(200), .v_len(char_v_len),
+        .h_len(char_h_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
         .in_true(in_p1_name)
     );
     
@@ -277,15 +307,40 @@ parameter [9:0] poke_name_len [1:8] = {
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(player_frame_h_posi[1] + 5), .v_start(player_frame_v_posi[1] + 5),
         
-        .h_len(200), .v_len(char_v_len),
-        // .h_len(char_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
+        // .h_len(200), .v_len(char_v_len),
+        .h_len(char_h_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
         .in_true(in_p2_name)
     );
-    display_string_at_range #(.image_width(520), .image_height(20))
-    display_p1_name(
+    wire in_option[1:4];
+    inrange if_option_1(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[1] + 5), .v_start(option_v_posi[1] + 5),
+        .h_len(option_h_len[1] - 10), .v_len(option_v_len[1] - 10),
+        .in_true(in_option[1])
+    );
+    
+    inrange if_option_2(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[2] + 5), .v_start(option_v_posi[2] + 5),
+        .h_len(option_h_len[2] - 10), .v_len(option_v_len[2] - 10),
+        .in_true(in_option[2])
+    );
+    inrange if_option_3(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[3] + 5), .v_start(option_v_posi[3] + 5),
+        .h_len(option_h_len[3] - 10), .v_len(option_v_len[3] - 10),
+        .in_true(in_option[3])
+    );
+    inrange if_option_4(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[4] + 5), .v_start(option_v_posi[4] + 5),
+        .h_len(option_h_len[4] - 10), .v_len(option_v_len[4] - 10),
+        .in_true(in_option[4])
+    );
+    display_string_at_range display_p1_name(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(player_frame_h_posi[0] + 5), .v_start(player_frame_v_posi[0] + 5),
-        .h_len(char_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
+        .h_len(char_h_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
         .char_1(poke_name_char[p1_pokemon_id * 10 + 1]),
         .char_2(poke_name_char[p1_pokemon_id * 10 + 2]),
         .char_3(poke_name_char[p1_pokemon_id * 10 + 3]),
@@ -298,11 +353,10 @@ parameter [9:0] poke_name_len [1:8] = {
         .char_10(poke_name_char[p1_pokemon_id * 10 + 10]),
         .pixel_addr(p1_name_pixel_addr)
     );
-    display_string_at_range #(.image_width(520), .image_height(20))
-    display_p2_name(
+    display_string_at_range display_p2_name(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(player_frame_h_posi[1] + 5), .v_start(player_frame_v_posi[1] + 5),
-        .h_len(char_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
+        .h_len(char_h_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
         .char_1(poke_name_char[p2_pokemon_id * 10 + 1]),
         .char_2(poke_name_char[p2_pokemon_id * 10 + 2]),
         .char_3(poke_name_char[p2_pokemon_id * 10 + 3]),
@@ -314,6 +368,105 @@ parameter [9:0] poke_name_len [1:8] = {
         .char_9(poke_name_char[p2_pokemon_id * 10 + 9]),
         .char_10(poke_name_char[p2_pokemon_id * 10 + 10]),
         .pixel_addr(p2_name_pixel_addr)
+    );
+    wire [16:0] p1_skill_1_pixel_addr, p1_skill_2_pixel_addr,  p1_skill_3_pixel_addr; 
+    display_string_at_range display_skill_1_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[1] + 5), .v_start(option_v_posi[1] + 5),
+        .h_len(char_h_len * poke_skill_name_len[(p1_pokemon_id - 1) * 3 + 1]), .v_len(char_v_len),
+        .char_1(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 1]),
+        .char_2(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 2]),
+        .char_3(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 3]),
+        .char_4(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 4]),
+        .char_5(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 5]),
+        .char_6(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 6]),
+        .char_7(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 7]),
+        .char_8(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 8]),
+        .char_9(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 9]),
+        .char_10(poke_skill_name_char[((p1_pokemon_id - 1) * 3) * 10 + 10]),
+        .pixel_addr(p1_skill_1_pixel_addr)
+    );
+    display_string_at_range display_skill_2_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[2] + 5), .v_start(option_v_posi[2] + 5),
+        .h_len(char_h_len * poke_skill_name_len[(p1_pokemon_id - 1) * 3 + 2]), .v_len(char_v_len),
+        .char_1(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 1]),
+        .char_2(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 2]),
+        .char_3(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 3]),
+        .char_4(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 4]),
+        .char_5(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 5]),
+        .char_6(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 6]),
+        .char_7(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 7]),
+        .char_8(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 8]),
+        .char_9(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 9]),
+        .char_10(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 1) * 10 + 10]),
+        .pixel_addr(p1_skill_2_pixel_addr)
+    );
+    display_string_at_range display_skill_3_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[3] + 5), .v_start(option_v_posi[3] + 5),
+        .h_len(char_h_len * poke_skill_name_len[(p1_pokemon_id - 1) * 3 + 3]), .v_len(char_v_len),
+        .char_1(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 1]),
+        .char_2(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 2]),
+        .char_3(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 3]),
+        .char_4(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 4]),
+        .char_5(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 5]),
+        .char_6(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 6]),
+        .char_7(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 7]),
+        .char_8(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 8]),
+        .char_9(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 9]),
+        .char_10(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + 2) * 10 + 10]),
+        .pixel_addr(p1_skill_3_pixel_addr)
+    );
+    
+    wire [16:0] text_back_pixel_addr, text_attack_pixel_addr,  text_run_pixel_addr; 
+    display_string_at_range display_back_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[4] + 5), .v_start(option_v_posi[4] + 5),
+        .h_len(15 * 4), .v_len(30),
+        .char_1(2),
+        .char_2(1),
+        .char_3(3),
+        .char_4(11),
+        .char_5(0),
+        .char_6(0),
+        .char_7(0),
+        .char_8(0),
+        .char_9(0),
+        .char_10(0),
+        .pixel_addr(text_back_pixel_addr)
+    );
+    display_string_at_range display_attack_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[1] + 5), .v_start(option_v_posi[1] + 5),
+        .h_len(15 * 6), .v_len(30),
+        .char_1(1),
+        .char_2(20),
+        .char_3(20),
+        .char_4(1),
+        .char_5(3),
+        .char_6(11),
+        .char_7(0),
+        .char_8(0),
+        .char_9(0),
+        .char_10(0),
+        .pixel_addr(text_attack_pixel_addr)
+    );
+    display_string_at_range display_run_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(option_h_posi[2] + 5), .v_start(option_v_posi[2] + 5),
+        .h_len(15 * 3), .v_len(30),
+        .char_1(18),
+        .char_2(21),
+        .char_3(14),
+        .char_4(0),
+        .char_5(0),
+        .char_6(0),
+        .char_7(0),
+        .char_8(0),
+        .char_9(0),
+        .char_10(0),
+        .pixel_addr(text_run_pixel_addr)
     );
 
     always @(*) begin
@@ -330,6 +483,13 @@ parameter [9:0] poke_name_len [1:8] = {
                 vga_data = poke_mem_vga_data;
             end else if(in_p1_name || in_p2_name)begin
                 vga_data = alpha_mem_vga_data;
+            end
+            else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
+                if(fight_state == fight_state_choosing_skill || fight_state ==  fight_state_menu)
+                    vga_data = alpha_mem_vga_data;
+                else begin
+                    vga_data = 12'hfff;
+                end
             end
             else begin
                 vga_data = 12'hfff;
@@ -348,7 +508,46 @@ parameter [9:0] poke_name_len [1:8] = {
         end    
         else if(in_p2_name) begin
             pixel_addr = p2_name_pixel_addr;
-        end    
+        end  
+        else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
+            case ({in_option[1],in_option[2],in_option[3],in_option[4]})
+                4'b1000:begin
+                    if(fight_state == fight_state_menu)begin
+                        pixel_addr = text_attack_pixel_addr;
+                    end else if(fight_state == fight_state_choosing_skill)begin
+                        pixel_addr = p1_skill_1_pixel_addr;
+                    end else begin
+                        pixel_addr = 17'd0;
+                    end
+                end
+                    
+                4'b0100:begin
+                    if(fight_state == fight_state_menu)begin
+                        pixel_addr = text_run_pixel_addr;
+                    end else if(fight_state == fight_state_choosing_skill)begin
+                        pixel_addr = p1_skill_2_pixel_addr;
+                    end else begin
+                        pixel_addr = 17'd0;
+                    end
+                end
+                4'b0010:begin
+                    if(fight_state == fight_state_choosing_skill)begin
+                        pixel_addr = p1_skill_3_pixel_addr;
+                    end else begin
+                        pixel_addr = 17'd0;
+                    end
+                end
+                4'b0001:begin
+                    if(fight_state == fight_state_choosing_skill)begin
+                        pixel_addr = text_back_pixel_addr;
+                    end else begin
+                        pixel_addr = 17'd0;
+                    end
+                end
+                default:
+                    pixel_addr = 17'd0;
+            endcase
+        end  
         else begin
             pixel_addr = 17'd0 ;
         end
@@ -360,8 +559,8 @@ module display_string_at_range #
 (
     parameter cnt_WIDTH = 10,
     parameter addr_WIDTH = 17,
-    parameter image_width = 320,
-    parameter image_height = 240,
+    parameter image_width = 405,
+    parameter image_height = 30,
     parameter resize_WIDTH = 1,
     parameter resize_HEIGHT = 1
 )
@@ -388,60 +587,62 @@ module display_string_at_range #
 reg [cnt_WIDTH - 1 : 0] img_h_start;
 reg [cnt_WIDTH - 1 : 0] img_v_start;
 reg [cnt_WIDTH - 1 : 0] psuedo_h_start;
-parameter char_h_len = 20;
+parameter char_h_len = 15;
 wire [cnt_WIDTH - 1:0] h_minus;
 
 assign h_minus = h_cnt - h_start;
 
 always @(*) begin
     img_v_start = 0;
-    if(h_minus < 20)begin
+    if(h_minus < 15)begin
         psuedo_h_start = 0;
-        img_h_start = (char_1 - 1) * char_h_len; 
+        img_h_start = char_1 * char_h_len; 
     end 
-    else if(h_minus >= 20 && h_minus < 40)begin
-        psuedo_h_start = 20;
-        img_h_start = (char_2 - 1) * char_h_len;     
+    else if(h_minus >= 15 && h_minus < 30)begin
+        psuedo_h_start = char_h_len * 1;
+        img_h_start = char_2 * char_h_len;     
     end
-    else if(h_minus >= 40 && h_minus < 60)begin
-        psuedo_h_start = 40;
-        img_h_start = (char_3 - 1) * char_h_len;     
+    else if(h_minus >= 30 && h_minus < 45)begin
+        psuedo_h_start = char_h_len * 2;
+        img_h_start = char_3 * char_h_len;     
     end
-    else if(h_minus >= 60 && h_minus < 80)begin
-        psuedo_h_start = 60;
-        img_h_start = (char_4 - 1) * char_h_len;     
+    else if(h_minus >= 45 && h_minus < 60)begin
+        psuedo_h_start = char_h_len * 3;
+        img_h_start = char_4 * char_h_len;     
     end
-    else if(h_minus >= 80 && h_minus < 100)begin
-        psuedo_h_start = 80;
-        img_h_start = (char_5 - 1) * char_h_len;     
+    else if(h_minus >= 60 && h_minus < 75)begin
+        psuedo_h_start = char_h_len * 4;
+        img_h_start = char_5 * char_h_len;     
     end
-    else if(h_minus >= 100 && h_minus < 120)begin
-        psuedo_h_start = 100;
-        img_h_start = (char_6 - 1) * char_h_len;     
+    else if(h_minus >= 75 && h_minus < 90)begin
+        psuedo_h_start = char_h_len * 5;
+        img_h_start = char_6 * char_h_len;     
     end
-    else if(h_minus >= 120 && h_minus < 140)begin
-        psuedo_h_start = 120;
-        img_h_start = (char_7 - 1) * char_h_len;     
+    else if(h_minus >= 90 && h_minus < 105)begin
+        psuedo_h_start = char_h_len * 6;
+        img_h_start = char_7 * char_h_len;     
     end
-    else if(h_minus >= 140 && h_minus < 160)begin
-        psuedo_h_start = 140;
-        img_h_start = (char_8 - 1) * char_h_len;     
+    else if(h_minus >= 105 && h_minus < 120)begin
+        psuedo_h_start = char_h_len * 7;
+        img_h_start = char_8 * char_h_len;     
     end
-    else if(h_minus >= 160 && h_minus < 180)begin
-        psuedo_h_start = 160;
-        img_h_start = (char_9 - 1) * char_h_len;     
+    else if(h_minus >= 120 && h_minus < 135)begin
+        psuedo_h_start = char_h_len * 8;
+        img_h_start = char_9 * char_h_len;     
     end
-    else if(h_minus >= 180 && h_minus < 200)begin
-        psuedo_h_start = 180;
-        img_h_start = (char_10 - 1) * char_h_len;     
-    end else begin
+    else if(h_minus >= 135 && h_minus < 150)begin
+        psuedo_h_start = char_h_len * 9;
+        img_h_start = char_10 * char_h_len;     
+    end
+    else begin
         psuedo_h_start = 0;
         img_h_start = 0;
     end
 end
 
-assign pixel_addr = ((((h_minus - psuedo_h_start) >> (resize_WIDTH - 1)) + img_h_start) + 
+assign pixel_addr = h_minus > h_len ? 17'd0:  
+(((((h_minus - psuedo_h_start) >> (resize_WIDTH - 1)) + img_h_start) + 
                     image_width * (((v_cnt - v_start) >> (resize_HEIGHT - 1)) + img_v_start)) 
-                    % (image_width * image_height);
+                    % (image_width * image_height));
 
 endmodule  //display_string_at_range
