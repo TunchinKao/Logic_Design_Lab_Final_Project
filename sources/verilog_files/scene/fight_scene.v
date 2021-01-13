@@ -141,6 +141,7 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
     wire in_p1_hp_bar, in_p2_hp_bar;
     wire in_p1_img, in_p2_img;
     wire [17-1:0] p1_pixel_addr, p2_pixel_addr;
+// frames and bars checking
     display_frame p1_frame_true(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(322), .v_start(262),
@@ -185,6 +186,7 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
         .v_len(10),
         .in_true(in_p2_hp_bar)
     );
+// image range checking and displaying
     inrange if_in_p1_img_range(
         .h_cnt(h_cnt),
         .v_cnt(v_cnt),
@@ -232,6 +234,27 @@ parameter poke_img_len = 60;
         .img_h_len(poke_img_len), .img_v_len(poke_img_len),
         .pixel_addr(p2_pixel_addr)    
     );
+
+// text name display
+
+parameter [9:0] poke_name_len [1:90] = {
+    10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,
+    10'd5,10'd5,10'd22,10'd5,10'd5,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+    10'd6,10'd12,10'd1,10'd18,10'd5,10'd15,10'd14,10'd0,10'd0,10'd0 ,
+    10'd10,10'd15,10'd12,10'd20,10'd5,10'd15,10'd14,10'd0,10'd0,10'd0 ,
+    10'd22,10'd1,10'd16,10'd15,10'd18,10'd5,10'd15,10'd14,10'd0,10'd0 ,
+    10'd2,10'd21,10'd12,10'd2,10'd1,10'd19,10'd1,10'd21,10'd18,10'd0 ,
+    10'd3,10'd8,10'd1,10'd18,10'd13,10'd1,10'd14,10'd4,10'd5,10'd18 ,
+    10'd19,10'd17,10'd21,10'd9,10'd18,10'd20,10'd12,10'd5,10'd0,10'd0 ,
+    10'd16,10'd9,10'd11,10'd1,10'd3,10'd8,10'd21,10'd0,10'd0,10'd0 
+};
+
+
+
+
+
+
+
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb; 
@@ -261,3 +284,94 @@ parameter poke_img_len = 60;
         end
     end
 endmodule
+
+
+module display_string_at_range #
+(
+    parameter cnt_WIDTH = 10,
+    parameter addr_WIDTH = 17,
+    parameter image_width = 320,
+    parameter image_height = 240,
+    parameter resize_WIDTH = 1,
+    parameter resize_HEIGHT = 1
+)
+(
+    input [cnt_WIDTH - 1 : 0] h_cnt,
+    input [cnt_WIDTH - 1 : 0] v_cnt,
+    input [cnt_WIDTH - 1 : 0] h_start,
+    input [cnt_WIDTH - 1 : 0] v_start,
+    input [cnt_WIDTH - 1 : 0] h_len,
+    input [cnt_WIDTH - 1 : 0] v_len,
+    input [cnt_WIDTH - 1 : 0] char_1,
+    input [cnt_WIDTH - 1 : 0] char_2,
+    input [cnt_WIDTH - 1 : 0] char_3,
+    input [cnt_WIDTH - 1 : 0] char_4,
+    input [cnt_WIDTH - 1 : 0] char_5,
+    input [cnt_WIDTH - 1 : 0] char_6,
+    input [cnt_WIDTH - 1 : 0] char_7,
+    input [cnt_WIDTH - 1 : 0] char_8,
+    input [cnt_WIDTH - 1 : 0] char_9,
+    input [cnt_WIDTH - 1 : 0] char_10,
+    output [addr_WIDTH - 1 : 0] pixel_addr
+);
+
+reg [cnt_WIDTH - 1 : 0] img_h_start;
+reg [cnt_WIDTH - 1 : 0] img_v_start;
+reg [cnt_WIDTH - 1 : 0] psuedo_h_start;
+parameter char_h_len = 20;
+wire [cnt_WIDTH - 1:0] h_minus;
+
+assign h_minus = h_cnt - h_start;
+
+always @(*) begin
+    img_v_start = 0;
+    if(h_minus < 20)begin
+        psuedo_h_start = 0;
+        img_h_start = (char_1 - 1) * char_h_len; 
+    end 
+    else if(h_minus >= 20 && h_minus < 40)begin
+        psuedo_h_start = 20;
+        img_h_start = (char_2 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 40 && h_minus < 60)begin
+        psuedo_h_start = 40;
+        img_h_start = (char_3 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 60 && h_minus < 80)begin
+        psuedo_h_start = 60;
+        img_h_start = (char_4 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 80 && h_minus < 100)begin
+        psuedo_h_start = 80;
+        img_h_start = (char_5 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 100 && h_minus < 120)begin
+        psuedo_h_start = 100;
+        img_h_start = (char_6 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 120 && h_minus < 140)begin
+        psuedo_h_start = 120;
+        img_h_start = (char_7 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 140 && h_minus < 160)begin
+        psuedo_h_start = 140;
+        img_h_start = (char_8 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 160 && h_minus < 180)begin
+        psuedo_h_start = 160;
+        img_h_start = (char_9 - 1) * char_h_len;     
+    end
+    else if(h_minus >= 180 && h_minus < 200)begin
+        psuedo_h_start = 180;
+        img_h_start = (char_10 - 1) * char_h_len;     
+    end else begin
+        psuedo_h_start = 0;
+        img_h_start = 0;
+    end
+end
+
+assign pixel_addr = ((((h_minus - psuedo_h_start) >> (resize_WIDTH - 1)) + img_h_start) + 
+                    image_width * (((v_cnt - v_start) >> (resize_HEIGHT - 1)) + img_v_start)) 
+                    % (image_width * image_height);
+
+endmodule  //display_string_at_range

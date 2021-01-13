@@ -1,0 +1,9 @@
+8
+eevee
+flareon
+jolteon
+vaporeon
+bulbasaur
+charmander
+squirtle
+pikachu

@@ -241,6 +241,7 @@ module top(
         .h_cnt(h_cnt),
         .vga_data(win_RGB),
         .mem_title_vga_data(title_mem_vga_data),
+        .alpha_mem_vga_data(alpha_mem_vga_data),
         .pixel_addr(win_scene_pixel_addr)
     );
     pixel_gen_scene pgs(

@@ -343,8 +343,12 @@ parameter [4-1:0] option_state_4 = 4'd4;
     end
     // option_state --------------------------------------------------------------------------
     always @(*) begin
-        if(cur_fight_state != next_fight_state)
-            next_option_state = option_state_1;
+        if(cur_fight_state != next_fight_state)begin
+            if(next_fight_state == fight_state_menu)
+                next_option_state = option_state_1;
+            else if(next_fight_state == fight_state_choosing_skill)
+                next_option_state = option_state_1;    
+        end
         else begin
             
             if(cur_fight_state == fight_state_menu)begin
