@@ -36,7 +36,7 @@ module top(
     output [3:0] vgaBlue,
     output hsync,
     output vsync,
-    output [15:0] lights
+    output [15:0] lights,
     output pmod_1_high,
     output pmod_1_mid,
     output pmod_1_low,
@@ -311,7 +311,7 @@ parameter low = 2'd2;
         .pitch(high),
         .pmod_1(pmod_1_high),
         .pmod_2(pmod_2_high),
-        .pmod_4(pmod_4_high),
+        .pmod_4(pmod_4_high)
     );
     gene_music gm_mid(
         .clk(clk),
@@ -320,7 +320,7 @@ parameter low = 2'd2;
         .pitch(mid),
         .pmod_1(pmod_1_mid),
         .pmod_2(pmod_2_mid),
-        .pmod_4(pmod_4_mid),
+        .pmod_4(pmod_4_mid)
     );
     gene_music gm_low(
         .clk(clk),
@@ -329,7 +329,7 @@ parameter low = 2'd2;
         .pitch(low),
         .pmod_1(pmod_1_low),
         .pmod_2(pmod_2_low),
-        .pmod_4(pmod_4_low),
+        .pmod_4(pmod_4_low)
     );
 
 
