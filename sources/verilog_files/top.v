@@ -37,6 +37,15 @@ module top(
     output hsync,
     output vsync,
     output [15:0] lights
+    output pmod_1_high,
+    output pmod_1_mid,
+    output pmod_1_low,
+    output pmod_2_high,
+    output pmod_2_mid,
+    output pmod_2_low,
+    output pmod_4_high,
+    output pmod_4_mid,
+    output pmod_4_low 
     );
     wire testSignal;
     wire clk_25MHz;
@@ -282,6 +291,39 @@ module top(
         .fight_scene_pixel_addr(fight_scene_pixel_addr),
         .win_scene_pixel_addr(win_scene_pixel_addr),
         .pixel_addr_out(pixel_addr)
+    );
+
+/////music part
+parameter high = 2'd0;
+parameter mid = 2'd1;
+parameter low = 2'd2;
+
+    gene_music gm_high(
+        .clk(clk),
+        .reset(rst),
+        .state(scene_state),
+        .pitch(high),
+        .pmod_1(pmod_1_high),
+        .pmod_2(pmod_2_high),
+        .pmod_4(pmod_4_high),
+    );
+    gene_music gm_mid(
+        .clk(clk),
+        .reset(rst),
+        .state(scene_state),
+        .pitch(mid),
+        .pmod_1(pmod_1_mid),
+        .pmod_2(pmod_2_mid),
+        .pmod_4(pmod_4_mid),
+    );
+    gene_music gm_low(
+        .clk(clk),
+        .reset(rst),
+        .state(scene_state),
+        .pitch(low),
+        .pmod_1(pmod_1_low),
+        .pmod_2(pmod_2_low),
+        .pmod_4(pmod_4_low),
     );
 
 
