@@ -51,14 +51,14 @@ parameter poke_resize = 2;
     end
 parameter [10-1:0] poke_h_posi [0:8] = {
     10'd0, // no poke 0
-    10'd40,
-    10'd200,
-    10'd360,
-    10'd520,
-    10'd40,
-    10'd200,
-    10'd360,
-    10'd520
+    10'd20,
+    10'd180,
+    10'd340,
+    10'd500,
+    10'd20,
+    10'd180,
+    10'd340,
+    10'd500
 };
 parameter [10-1:0] poke_v_posi [0:8] = {
     10'd0, // no poke 0
@@ -248,48 +248,62 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
         .img_h_len(poke_img_len), .img_v_len(poke_img_len),
         .pixel_addr(poke_pixel_addr[poke_8])    
     );
+    display_frame choose_frame_true(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(poke_h_posi[pokemon_id]), .v_start(poke_v_posi[pokemon_id]),
+        .h_len(120), .v_len(120),
+        .in_frame(in_choose_frame)
+    );
+    wire in_choose_frame;
     always @(*) begin
-        if(in_poke_range[poke_1])begin
-            vga_data = poke_mem_vga_data; 
-            pixel_addr = poke_pixel_addr[poke_1];  
-        end 
-        else if(in_poke_range[poke_2])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_2];
-        end
-        else if(in_poke_range[poke_3])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_3];
-        end
-        else if(in_poke_range[poke_4])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_4];
-        end
-        else if(in_poke_range[poke_5])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_5];
-        end
-        else if(in_poke_range[poke_6])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_6];
-        end
-        else if(in_poke_range[poke_7])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_7];
-        end
-        else if(in_poke_range[poke_8])begin
-            vga_data = poke_mem_vga_data;   
-            pixel_addr = poke_pixel_addr[poke_8];
-        end 
-        else begin
-            pixel_addr = 17'd0;
+        if(in_choose_frame == 1'b1)begin
             vga_data = 12'h000;
+            pixel_addr = 17'd0;
+        end else 
+        begin
+            if(in_poke_range[poke_1])begin
+                vga_data = poke_mem_vga_data; 
+                pixel_addr = poke_pixel_addr[poke_1];  
+            end 
+            else if(in_poke_range[poke_2])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_2];
+            end
+            else if(in_poke_range[poke_3])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_3];
+            end
+            else if(in_poke_range[poke_4])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_4];
+            end
+            else if(in_poke_range[poke_5])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_5];
+            end
+            else if(in_poke_range[poke_6])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_6];
+            end
+            else if(in_poke_range[poke_7])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_7];
+            end
+            else if(in_poke_range[poke_8])begin
+                vga_data = poke_mem_vga_data;   
+                pixel_addr = poke_pixel_addr[poke_8];
+            end 
+            else begin
+                pixel_addr = 17'd0;
+                vga_data = 12'hfff;
+            end
         end
 
     end
 endmodule
 module display_frame #(
-    parameter cnt_WIDTH = 10
+    parameter cnt_WIDTH = 10,
+    parameter thickness = 2
 )(
     input [cnt_WIDTH - 1 : 0] h_cnt,
     input [cnt_WIDTH - 1 : 0] v_cnt,
@@ -301,17 +315,17 @@ module display_frame #(
 );
 
 always @ (*) begin
-    if(h_cnt >= (h_start - 2) && h_cnt < h_start) begin
-        if(v_cnt > (v_start - 2) && v_cnt <= (v_start + 62)) in_frame = 1;
+    if(h_cnt >= (h_start - thickness) && h_cnt < h_start) begin
+        if(v_cnt >= (v_start - thickness) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
         else in_frame = 0;
     end
-    else if(h_cnt >= h_start && h_cnt < (h_start + 60)) begin
-        if(v_cnt > (v_start - 2) && v_cnt <= v_start) in_frame = 1;
-        else if(v_cnt > (v_start + 60) && v_cnt <= (v_start + 62)) in_frame = 1;
+    else if(h_cnt >= h_start && h_cnt < (h_start + h_len)) begin
+        if(v_cnt >= (v_start - thickness) && v_cnt < v_start) in_frame = 1;
+        else if(v_cnt >= (v_start + v_len) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
         else in_frame = 0;
     end
-    else if(h_cnt >= (h_start + 60) && h_cnt < (h_start + 62)) begin
-        if(v_cnt > (v_start + 60) && v_cnt <= (v_start + 62)) in_frame = 1;
+    else if(h_cnt >= (h_start + h_len) && h_cnt < (h_start + h_len + thickness)) begin
+        if(v_cnt >= (v_start - thickness) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
         else in_frame = 0;
     end
     else in_frame = 0;
@@ -337,7 +351,6 @@ always @(*) begin
     end else begin
         in_true = 1'b0;
     end
-    
 end
 
 

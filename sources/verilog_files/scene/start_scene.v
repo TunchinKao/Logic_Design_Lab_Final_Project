@@ -46,7 +46,7 @@ parameter title_height = 240;
             vga_data = mem_title_vga_data;
             pixel_addr = title_pixel_addr; 
         end else begin
-            vga_data = 12'h000;
+            vga_data = 12'hfff;
             pixel_addr = 17'd0;
         end
     end
