@@ -137,6 +137,16 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
     10'd0,
     10'd0
 };
+parameter [10-1:0] player_frame_h_posi [0:1] = {
+    322,
+    82
+};
+parameter [10-1:0] player_frame_v_posi [0:1] = {
+    262,
+    2
+};
+parameter [10-1:0] player_frame_h_len = 236;
+parameter [10-1:0] player_frame_v_len = 56;
     wire in_p1_frame, in_p2_frame, in_text_frame, in_choose_frame;
     wire in_p1_hp_bar, in_p2_hp_bar;
     wire in_p1_img, in_p2_img;
@@ -144,14 +154,14 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
 // frames and bars checking
     display_frame p1_frame_true(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
-        .h_start(322), .v_start(262),
-        .h_len(236), .v_len(56),
+        .h_start(player_frame_h_posi[0]), .v_start(player_frame_v_posi[0]),
+        .h_len(player_frame_h_len), .v_len(player_frame_v_len),
         .in_frame(in_p1_frame)
     );
     display_frame p2_frame_true(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
-        .h_start(82), .v_start(2),
-        .h_len(236), .v_len(56),
+        .h_start(player_frame_h_posi[1]), .v_start(player_frame_v_posi[1]),
+        .h_len(player_frame_h_len), .v_len(player_frame_v_len),
         .in_frame(in_p2_frame)
     );
     display_frame in_choose_true(
@@ -237,7 +247,7 @@ parameter poke_img_len = 60;
 
 // text name display
 
-parameter [9:0] poke_name_len [1:90] = {
+parameter [9:0] poke_name_char [1:90] = {
     10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0,
     10'd5,10'd5,10'd22,10'd5,10'd5,10'd0,10'd0,10'd0,10'd0,10'd0 ,
     10'd6,10'd12,10'd1,10'd18,10'd5,10'd15,10'd14,10'd0,10'd0,10'd0 ,
@@ -248,12 +258,63 @@ parameter [9:0] poke_name_len [1:90] = {
     10'd19,10'd17,10'd21,10'd9,10'd18,10'd20,10'd12,10'd5,10'd0,10'd0 ,
     10'd16,10'd9,10'd11,10'd1,10'd3,10'd8,10'd21,10'd0,10'd0,10'd0 
 };
-
-
-
-
-
-
+parameter [9:0] poke_name_len [1:8] = {
+    5, 7, 7, 8, 9, 10, 8, 7
+};
+    wire in_p1_name, in_p2_name;
+    wire [16:0] p1_name_pixel_addr, p2_name_pixel_addr;
+    parameter char_v_len = 20;
+    inrange if_in_p1_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(player_frame_h_posi[0] + 5), .v_start(player_frame_v_posi[0] + 5),
+        
+        .h_len(200), .v_len(char_v_len),
+        // .h_len(char_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
+        .in_true(in_p1_name)
+    );
+    
+    inrange if_in_p2_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(player_frame_h_posi[1] + 5), .v_start(player_frame_v_posi[1] + 5),
+        
+        .h_len(200), .v_len(char_v_len),
+        // .h_len(char_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
+        .in_true(in_p2_name)
+    );
+    display_string_at_range #(.image_width(520), .image_height(20))
+    display_p1_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(player_frame_h_posi[0] + 5), .v_start(player_frame_v_posi[0] + 5),
+        .h_len(char_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
+        .char_1(poke_name_char[p1_pokemon_id * 10 + 1]),
+        .char_2(poke_name_char[p1_pokemon_id * 10 + 2]),
+        .char_3(poke_name_char[p1_pokemon_id * 10 + 3]),
+        .char_4(poke_name_char[p1_pokemon_id * 10 + 4]),
+        .char_5(poke_name_char[p1_pokemon_id * 10 + 5]),
+        .char_6(poke_name_char[p1_pokemon_id * 10 + 6]),
+        .char_7(poke_name_char[p1_pokemon_id * 10 + 7]),
+        .char_8(poke_name_char[p1_pokemon_id * 10 + 8]),
+        .char_9(poke_name_char[p1_pokemon_id * 10 + 9]),
+        .char_10(poke_name_char[p1_pokemon_id * 10 + 10]),
+        .pixel_addr(p1_name_pixel_addr)
+    );
+    display_string_at_range #(.image_width(520), .image_height(20))
+    display_p2_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(player_frame_h_posi[1] + 5), .v_start(player_frame_v_posi[1] + 5),
+        .h_len(char_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
+        .char_1(poke_name_char[p2_pokemon_id * 10 + 1]),
+        .char_2(poke_name_char[p2_pokemon_id * 10 + 2]),
+        .char_3(poke_name_char[p2_pokemon_id * 10 + 3]),
+        .char_4(poke_name_char[p2_pokemon_id * 10 + 4]),
+        .char_5(poke_name_char[p2_pokemon_id * 10 + 5]),
+        .char_6(poke_name_char[p2_pokemon_id * 10 + 6]),
+        .char_7(poke_name_char[p2_pokemon_id * 10 + 7]),
+        .char_8(poke_name_char[p2_pokemon_id * 10 + 8]),
+        .char_9(poke_name_char[p2_pokemon_id * 10 + 9]),
+        .char_10(poke_name_char[p2_pokemon_id * 10 + 10]),
+        .pixel_addr(p2_name_pixel_addr)
+    );
 
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
@@ -267,6 +328,8 @@ parameter [9:0] poke_name_len [1:90] = {
             end
             else if(in_p1_img || in_p2_img)begin
                 vga_data = poke_mem_vga_data;
+            end else if(in_p1_name || in_p2_name)begin
+                vga_data = alpha_mem_vga_data;
             end
             else begin
                 vga_data = 12'hfff;
@@ -279,7 +342,14 @@ parameter [9:0] poke_name_len [1:90] = {
         end
         else if(in_p2_img)begin
             pixel_addr = p2_pixel_addr;
-        end else begin
+        end
+        else if(in_p1_name) begin
+            pixel_addr = p1_name_pixel_addr;
+        end    
+        else if(in_p2_name) begin
+            pixel_addr = p2_name_pixel_addr;
+        end    
+        else begin
             pixel_addr = 17'd0 ;
         end
     end
