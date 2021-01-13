@@ -252,14 +252,15 @@ module top(
 // log image block memory
     
     wire [11:0] data_for_title, data_for_poke, data_for_alpha;
-    title_320_240_mem load_title_inst(
+    
+    title_240_240_mem load_title_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),
       .dina(data_for_title[11:0]),
       .douta(title_mem_vga_data)
     ); 
-    poke_mem_320_80 load_pokemon_inst(
+    poke_480_120_mem load_pokemon_inst(
       .clka(clk_25MHz),
       .wea(0),
       .addra(pixel_addr),
