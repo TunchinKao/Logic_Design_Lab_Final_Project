@@ -30,28 +30,8 @@ module start_scene(
     );
 parameter title_width = 320;
 parameter title_height = 240;
-    // wire [16:0] pixel_addr;
-    wire clk_25MHz;
-    // wire [11:0] data;
     assign pixel_addr = ((h_cnt>>1) + title_width * (v_cnt >> 1)) % (title_width * title_height);
-    // always @(*) begin
-    //     vga_data = 12'h00d;
-    // end
+   
+    assign vga_data = mem_title_vga_data;
     
 endmodule
-
-// module clock_divisor(clk1, clk, clk22);
-// input clk;
-// output clk1;
-// output clk22;
-// reg [21:0] num;
-// wire [21:0] next_num;
-
-// always @(posedge clk) begin
-//   num <= next_num;
-// end
-
-// assign next_num = num + 1'b1;
-// assign clk1 = num[1];
-// assign clk22 = num[21];
-// endmodule
