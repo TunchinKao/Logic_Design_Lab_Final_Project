@@ -69,7 +69,7 @@ module win_scene(
     display_string_at_range #(.image_width(405), .image_height(30))
     display_text_for(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
-        .h_start(100), .v_start(100),
+        .h_start(180), .v_start(200),
         .h_len(15 * 3), .v_len(30),
         .char_1(6),
         .char_2(15),
@@ -86,7 +86,7 @@ module win_scene(
     display_string_at_range #(.image_width(405), .image_height(30))
     display_text_playing(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
-        .h_start(100), .v_start(100),
+        .h_start(260), .v_start(300),
         .h_len(15 * 7), .v_len(30),
         .char_1(16),
         .char_2(12),
