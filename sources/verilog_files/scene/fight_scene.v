@@ -474,10 +474,22 @@ parameter [9:0] poke_skill_name_len [1:24] ={
         else if(h_cnt > 559) vga_data = 12'hfeb; 
         else begin
             if(in_p1_frame || in_p2_frame || in_text_frame || in_choose_frame)begin
-                vga_data = 12'h000;
+                if(fight_state == fight_state_menu || fight_state == fight_state_choosing_skill)
+                    vga_data = 12'h000;
+                else
+                    vga_data = 12'hfff;
             end 
-            else if(in_p1_hp_bar || in_p2_hp_bar)begin
-                vga_data = 12'h0f0;
+            else if(in_p1_hp_bar)begin
+                if(p1_cur_hp < 30)
+                    vga_data = 12'hf00;
+                else
+                    vga_data = 12'h0f0;
+            end
+            else if(in_p2_hp_bar)begin
+                if(p2_cur_hp < 30)
+                    vga_data = 12'hf00;
+                else
+                    vga_data = 12'h0f0;
             end
             else if(in_p1_img || in_p2_img)begin
                 vga_data = poke_mem_vga_data;
