@@ -161,11 +161,16 @@ reg [8-1:0] skill_3_damage[0:8-1];
         ------------------------------------------------------------
     */
     // p2_next_id
+    reg [2:0] p2_id_cnt;
+    always @(posedge clk) begin
+        if(reset)begin
+            p2_id_cnt <= 3'd0;
+        end else begin
+            p2_id_cnt <= p2_id_cnt + 3'd1 ;
+        end
+    end
     always @(*) begin
-        if(p1_next_id > 1)
-            p2_next_id = p1_next_id - 1;
-        else 
-            p2_next_id = 8'd8;
+        p2_next_id = p2_id_cnt + 1;
         case (p1_pokemon_id)
             poke_1:begin
                 case (buttons)
