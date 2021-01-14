@@ -147,7 +147,7 @@ parameter [10-1:0] player_frame_v_posi [0:1] = {
 };
 parameter [10-1:0] player_frame_h_len = 236;
 parameter [10-1:0] player_frame_v_len = 56;
-    wire in_p1_frame, in_p2_frame, in_text_frame, in_choose_frame;
+    wire in_p1_frame, in_p2_frame, in_text_frame, in_choose_frame; // in_text_frame is the botton big rectangle
     wire in_p1_hp_bar, in_p2_hp_bar;
     wire in_p1_img, in_p2_img;
     wire [17-1:0] p1_pixel_addr, p2_pixel_addr;
@@ -262,30 +262,30 @@ parameter [9:0] poke_name_len [1:8] = {
     5, 7, 7, 8, 9, 10, 8, 7
 };
 parameter [9:0] poke_skill_name_char[1:240] = {
-10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd2,10'd9,10'd20,10'd5,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
-10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
-10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd6,10'd9,10'd18,10'd5,10'd0,10'd6,10'd1,10'd14,10'd7,10'd0 ,
-10'd6,10'd9,10'd18,10'd5,10'd0,10'd19,10'd16,10'd9,10'd14,10'd0 ,
-10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
-10'd1,10'd7,10'd9,10'd12,10'd9,10'd20,10'd25,10'd0,10'd0,10'd0 ,
-10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd23,10'd1,10'd20,10'd5,10'd18,10'd0,10'd7,10'd21,10'd14,10'd0 ,
-10'd1,10'd17,10'd21,10'd1,10'd0,10'd18,10'd9,10'd14,10'd7,10'd0 ,
-10'd20,10'd1,10'd11,10'd5,10'd0,10'd4,10'd15,10'd23,10'd14,10'd0 ,
-10'd22,10'd9,10'd14,10'd5,10'd0,10'd23,10'd8,10'd9,10'd16,10'd0 ,
-10'd7,10'd18,10'd15,10'd23,10'd20,10'd8,10'd0,10'd0,10'd0,10'd0 ,
-10'd19,10'd3,10'd18,10'd1,10'd20,10'd3,10'd8,10'd0,10'd0,10'd0 ,
-10'd9,10'd14,10'd6,10'd5,10'd18,10'd14,10'd15,10'd0,10'd0,10'd0 ,
-10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
-10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd2,10'd21,10'd2,10'd2,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
-10'd16,10'd18,10'd15,10'd20,10'd5,10'd3,10'd20,10'd0,10'd0,10'd0 ,
-10'd19,10'd12,10'd1,10'd13,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
-10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
-10'd19,10'd16,10'd1,10'd18,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0
+    10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd2,10'd9,10'd20,10'd5,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+    10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+    10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd6,10'd9,10'd18,10'd5,10'd0,10'd6,10'd1,10'd14,10'd7,10'd0 ,
+    10'd6,10'd9,10'd18,10'd5,10'd0,10'd19,10'd16,10'd9,10'd14,10'd0 ,
+    10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
+    10'd1,10'd7,10'd9,10'd12,10'd9,10'd20,10'd25,10'd0,10'd0,10'd0 ,
+    10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd23,10'd1,10'd20,10'd5,10'd18,10'd0,10'd7,10'd21,10'd14,10'd0 ,
+    10'd1,10'd17,10'd21,10'd1,10'd0,10'd18,10'd9,10'd14,10'd7,10'd0 ,
+    10'd20,10'd1,10'd11,10'd5,10'd0,10'd4,10'd15,10'd23,10'd14,10'd0 ,
+    10'd22,10'd9,10'd14,10'd5,10'd0,10'd23,10'd8,10'd9,10'd16,10'd0 ,
+    10'd7,10'd18,10'd15,10'd23,10'd20,10'd8,10'd0,10'd0,10'd0,10'd0 ,
+    10'd19,10'd3,10'd18,10'd1,10'd20,10'd3,10'd8,10'd0,10'd0,10'd0 ,
+    10'd9,10'd14,10'd6,10'd5,10'd18,10'd14,10'd15,10'd0,10'd0,10'd0 ,
+    10'd7,10'd18,10'd15,10'd23,10'd12,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+    10'd20,10'd1,10'd3,10'd11,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd2,10'd21,10'd2,10'd2,10'd12,10'd5,10'd0,10'd0,10'd0,10'd0 ,
+    10'd16,10'd18,10'd15,10'd20,10'd5,10'd3,10'd20,10'd0,10'd0,10'd0 ,
+    10'd19,10'd12,10'd1,10'd13,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0 ,
+    10'd20,10'd8,10'd21,10'd14,10'd4,10'd5,10'd18,10'd0,10'd0,10'd0 ,
+    10'd19,10'd16,10'd1,10'd18,10'd0,10'd0,10'd0,10'd0,10'd0,10'd0
 };
 parameter [9:0] poke_skill_name_len [1:24] ={
     6,4,5,6,9,9,6,7,7,6,9,9,9,9,6,7,7,5,6,6,7,4,7,4
@@ -468,48 +468,110 @@ parameter [9:0] poke_skill_name_len [1:24] ={
         .char_10(0),
         .pixel_addr(text_run_pixel_addr)
     );
-
+// should be fight_state dominate and then range decide to put what
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb; 
         else begin
-            if(in_p1_frame || in_p2_frame || in_text_frame || in_choose_frame)begin
-                if(fight_state == fight_state_menu || fight_state == fight_state_choosing_skill)
+            if(in_p1_frame || in_p2_frame || in_text_frame)begin // here are the must render part
                     vga_data = 12'h000;
-                else
-                    vga_data = 12'hfff;
             end 
             else if(in_p1_hp_bar)begin
-                if(p1_cur_hp < 30)
+                if(p1_cur_hp < 40)
                     vga_data = 12'hf00;
                 else
                     vga_data = 12'h0f0;
             end
             else if(in_p2_hp_bar)begin
-                if(p2_cur_hp < 30)
+                if(p2_cur_hp < 40)
                     vga_data = 12'hf00;
                 else
                     vga_data = 12'h0f0;
             end
             else if(in_p1_img || in_p2_img)begin
                 vga_data = poke_mem_vga_data;
-            end else if(in_p1_name || in_p2_name)begin
+            end 
+            else if(in_p1_name || in_p2_name)begin
                 vga_data = alpha_mem_vga_data;
-            end
-            else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
-                if(fight_state == fight_state_choosing_skill || fight_state ==  fight_state_menu)
-                    vga_data = alpha_mem_vga_data;
-                else begin
-                    vga_data = 12'hfff;
+            end else begin                          // here are the data that depends on fight_state to determine whether render or not
+                case (fight_state)
+                fight_state_menu:begin
+                    if(in_choose_frame)begin
+                        vga_data = 12'h000;
+                    end
+                    else if(in_option[1]|| in_option[2])begin
+                        vga_data = alpha_mem_vga_data;
+                    end
+                    else begin
+                        vga_data = 12'hfff;
+                    end
+                end 
+                fight_state_choosing_skill:begin
+                    if(in_choose_frame)begin
+                        vga_data = 12'h000;
+                    end
+                    else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
+                        vga_data = alpha_mem_vga_data;
+                    end
+                    else begin
+                        vga_data = 12'hfff;
+                    end
                 end
+                // fight_state_animation_p1 :begin
+                    
+                // end
+                // fight_state_animation_p2 : begin
+                    
+                // end
+                // fight_state_hpReducing_p1 :begin
+                    
+                // end
+                // fight_state_hpReducing_p2 : begin
+                    
+                // end
+                default:
+                    vga_data = 12'hfff;
+            endcase
             end
-            else begin
-                vga_data = 12'hfff;
-            end
+            
+            // original 
+            // if(in_p1_frame || in_p2_frame || in_text_frame || in_choose_frame)begin
+            //     if(fight_state == fight_state_menu || fight_state == fight_state_choosing_skill)
+            //         vga_data = 12'h000;
+            //     else
+            //         vga_data = 12'hfff;
+            // end 
+            // else if(in_p1_hp_bar)begin
+            //     if(p1_cur_hp < 30)
+            //         vga_data = 12'hf00;
+            //     else
+            //         vga_data = 12'h0f0;
+            // end
+            // else if(in_p2_hp_bar)begin
+            //     if(p2_cur_hp < 30)
+            //         vga_data = 12'hf00;
+            //     else
+            //         vga_data = 12'h0f0;
+            // end
+            // else if(in_p1_img || in_p2_img)begin
+            //     vga_data = poke_mem_vga_data;
+            // end else if(in_p1_name || in_p2_name)begin
+            //     vga_data = alpha_mem_vga_data;
+            // end
+            // else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
+            //     if(fight_state == fight_state_choosing_skill || fight_state ==  fight_state_menu)
+            //         vga_data = alpha_mem_vga_data;
+            //     else begin
+            //         vga_data = 12'hfff;
+            //     end
+            // end
+            // else begin
+            //     vga_data = 12'hfff;
+            // end
         end
     end
     always @(*) begin
-        if(in_p1_img)begin
+        if(in_p1_img)begin                  // here are the pixel_addr of the must render part
             pixel_addr = p1_pixel_addr;
         end
         else if(in_p2_img)begin
@@ -521,47 +583,41 @@ parameter [9:0] poke_skill_name_len [1:24] ={
         else if(in_p2_name) begin
             pixel_addr = p2_name_pixel_addr;
         end  
-        else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
-            case ({in_option[1],in_option[2],in_option[3],in_option[4]})
-                4'b1000:begin
-                    if(fight_state == fight_state_menu)begin
+        else begin                     // here are the part depends on the fight_state to determine whether load address or not
+            case(fight_state)
+            fight_state_menu:begin
+                case ({in_option[1], in_option[2]})
+                    2'b10:
                         pixel_addr = text_attack_pixel_addr;
-                    end else if(fight_state == fight_state_choosing_skill)begin
+                    2'b01:
+                        pixel_addr = text_run_pixel_addr; 
+                    default: 
+                        pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_choosing_skill:begin
+                case ({in_option[1],in_option[2],in_option[3],in_option[4]})
+                    4'b1000:begin
                         pixel_addr = p1_skill_1_pixel_addr;
-                    end else begin
-                        pixel_addr = 17'd0;
                     end
-                end
-                    
-                4'b0100:begin
-                    if(fight_state == fight_state_menu)begin
-                        pixel_addr = text_run_pixel_addr;
-                    end else if(fight_state == fight_state_choosing_skill)begin
+                        
+                    4'b0100:begin
                         pixel_addr = p1_skill_2_pixel_addr;
-                    end else begin
-                        pixel_addr = 17'd0;
                     end
-                end
-                4'b0010:begin
-                    if(fight_state == fight_state_choosing_skill)begin
+                    4'b0010:begin
                         pixel_addr = p1_skill_3_pixel_addr;
-                    end else begin
-                        pixel_addr = 17'd0;
                     end
-                end
-                4'b0001:begin
-                    if(fight_state == fight_state_choosing_skill)begin
+                    4'b0001:begin
                         pixel_addr = text_back_pixel_addr;
-                    end else begin
-                        pixel_addr = 17'd0;
                     end
-                end
-                default:
-                    pixel_addr = 17'd0;
+                    default:
+                        pixel_addr = 17'd0;
+                endcase
+            end
+            default :begin
+                pixel_addr = 17'd0;
+            end
             endcase
-        end  
-        else begin
-            pixel_addr = 17'd0 ;
         end
     end
 endmodule
