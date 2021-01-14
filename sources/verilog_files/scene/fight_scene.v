@@ -21,8 +21,12 @@
 
 
 module fight_scene(
+        input clk,
+        input reset,
         input [8-1:0] p1_pokemon_id,
         input [8-1:0] p2_pokemon_id,
+        input [4-1:0] p1_using_skill_id,
+        input [4-1:0] p2_using_skill_id,
         input [7:0]p1_cur_hp,
         input [7:0]p2_cur_hp,
         input [9:0]v_cnt,
@@ -468,7 +472,110 @@ parameter [9:0] poke_skill_name_len [1:24] ={
         .char_10(0),
         .pixel_addr(text_run_pixel_addr)
     );
+// the string "pokemon used skill" part
+
+    wire in_text_usingskill_name, in_text_usingskill_used, in_text_usingskill_skill;
+    wire [16:0]p1_text_usingskill_name_addr, p2_text_usingskill_name_addr,p1_text_usingskill_skill_addr, p2_text_usingskill_skill_addr,text_usingskill_used_addr;
+    parameter [9:0] text_usingskill_h_posi [1:3] = {
+        101,
+        300,
+        400
+    };
+    parameter text_usingskill_v_posi = 360;
+    
+    inrange if_in_text_usingskill_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[1]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * 10) , .v_len(char_v_len),
+        .in_true(in_text_usingskill_name)
+    );
+    inrange if_in_text_usingskill_used(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[2]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * 4) , .v_len(char_v_len),
+        .in_true(in_text_usingskill_used)
+    );
+    inrange if_in_text_usingskill_skill(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[3]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * 10) , .v_len(char_v_len),
+        .in_true(in_text_usingskill_skill)
+    );
+    display_string_at_range display_usingskill_p1_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[1]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * poke_name_len[p1_pokemon_id]), .v_len(char_v_len),
+        .char_1(poke_name_char[p1_pokemon_id * 10 + 1]),
+        .char_2(poke_name_char[p1_pokemon_id * 10 + 2]),
+        .char_3(poke_name_char[p1_pokemon_id * 10 + 3]),
+        .char_4(poke_name_char[p1_pokemon_id * 10 + 4]),
+        .char_5(poke_name_char[p1_pokemon_id * 10 + 5]),
+        .char_6(poke_name_char[p1_pokemon_id * 10 + 6]),
+        .char_7(poke_name_char[p1_pokemon_id * 10 + 7]),
+        .char_8(poke_name_char[p1_pokemon_id * 10 + 8]),
+        .char_9(poke_name_char[p1_pokemon_id * 10 + 9]),
+        .char_10(poke_name_char[p1_pokemon_id * 10 + 10]),
+        .pixel_addr(p1_text_usingskill_name_addr)
+    );
+    display_string_at_range display_usingskill_p2_name(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[1]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * poke_name_len[p2_pokemon_id]), .v_len(char_v_len),
+        .char_1(poke_name_char[p2_pokemon_id * 10 + 1]),
+        .char_2(poke_name_char[p2_pokemon_id * 10 + 2]),
+        .char_3(poke_name_char[p2_pokemon_id * 10 + 3]),
+        .char_4(poke_name_char[p2_pokemon_id * 10 + 4]),
+        .char_5(poke_name_char[p2_pokemon_id * 10 + 5]),
+        .char_6(poke_name_char[p2_pokemon_id * 10 + 6]),
+        .char_7(poke_name_char[p2_pokemon_id * 10 + 7]),
+        .char_8(poke_name_char[p2_pokemon_id * 10 + 8]),
+        .char_9(poke_name_char[p2_pokemon_id * 10 + 9]),
+        .char_10(poke_name_char[p2_pokemon_id * 10 + 10]),
+        .pixel_addr(p2_text_usingskill_name_addr)
+    );
+    display_string_at_range display_usingskill_used(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[2]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * 4), .v_len(char_v_len),
+        .char_1(21), .char_2(19), .char_3(5), .char_4(4),
+        .char_5(0), .char_6(0), .char_7(0), .char_8(0), .char_9(0), .char_10(0),
+        .pixel_addr(text_usingskill_used_addr)
+    );
+    display_string_at_range display_usingskill_p1_skill(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[3]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * poke_skill_name_len[(p1_pokemon_id - 1) * 3 + p1_using_skill_id]), .v_len(char_v_len),
+        .char_1(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 1]),
+        .char_2(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 2]),
+        .char_3(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 3]),
+        .char_4(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 4]),
+        .char_5(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 5]),
+        .char_6(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 6]),
+        .char_7(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 7]),
+        .char_8(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 8]),
+        .char_9(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 9]),
+        .char_10(poke_skill_name_char[((p1_pokemon_id - 1) * 3 + p1_using_skill_id - 1) * 10 + 10]),
+        .pixel_addr(p1_text_usingskill_skill_addr)
+    );
+    display_string_at_range display_usingskill_p2_skill(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[3]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * poke_skill_name_len[(p2_pokemon_id - 1) * 3 + p2_using_skill_id]), .v_len(char_v_len),
+        .char_1(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 1]),
+        .char_2(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 2]),
+        .char_3(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 3]),
+        .char_4(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 4]),
+        .char_5(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 5]),
+        .char_6(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 6]),
+        .char_7(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 7]),
+        .char_8(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 8]),
+        .char_9(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 9]),
+        .char_10(poke_skill_name_char[((p2_pokemon_id - 1) * 3 + p2_using_skill_id - 1) * 10 + 10]),
+        .pixel_addr(p2_text_usingskill_skill_addr)
+    );
 // should be fight_state dominate and then range decide to put what
+    wire white_clk;
+    counter_nostop #(.SECOND(20000000)) gene_damageclk(.clk(clk), .rst(reset), .pclk(white_clk));
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
         else if(h_cnt > 559) vga_data = 12'hfeb; 
@@ -488,8 +595,27 @@ parameter [9:0] poke_skill_name_len [1:24] ={
                 else
                     vga_data = 12'h0f0;
             end
-            else if(in_p1_img || in_p2_img)begin
-                vga_data = poke_mem_vga_data;
+            else if(in_p1_img)begin
+                if(fight_state == fight_state_animation_p2)begin
+                    if(white_clk == 1)
+                        vga_data = 12'hfff;
+                    else begin
+                        vga_data = poke_mem_vga_data;
+                    end
+                end else begin
+                    vga_data = poke_mem_vga_data;
+                end
+            end 
+            else if(in_p2_img)begin
+                if(fight_state == fight_state_animation_p1)begin
+                    if(white_clk == 1)
+                        vga_data = 12'hfff;
+                    else begin
+                        vga_data = poke_mem_vga_data;
+                    end
+                end else begin
+                    vga_data = poke_mem_vga_data;
+                end
             end 
             else if(in_p1_name || in_p2_name)begin
                 vga_data = alpha_mem_vga_data;
@@ -517,57 +643,38 @@ parameter [9:0] poke_skill_name_len [1:24] ={
                         vga_data = 12'hfff;
                     end
                 end
-                // fight_state_animation_p1 :begin
-                    
-                // end
-                // fight_state_animation_p2 : begin
-                    
-                // end
-                // fight_state_hpReducing_p1 :begin
-                    
-                // end
-                // fight_state_hpReducing_p2 : begin
-                    
-                // end
+                fight_state_animation_p1 :begin
+                    if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
+                        vga_data = alpha_mem_vga_data;
+                    end else begin
+                        vga_data <= 12'hfff;
+                    end
+                end
+                fight_state_animation_p2 : begin
+                    if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
+                        vga_data = alpha_mem_vga_data;
+                    end else begin
+                        vga_data <= 12'hfff;
+                    end
+                end
+                fight_state_hpReducing_p1 :begin
+                    if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
+                        vga_data = alpha_mem_vga_data;
+                    end else begin
+                        vga_data <= 12'hfff;
+                    end
+                end
+                fight_state_hpReducing_p2 : begin
+                    if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
+                        vga_data = alpha_mem_vga_data;
+                    end else begin
+                        vga_data <= 12'hfff;
+                    end
+                end
                 default:
                     vga_data = 12'hfff;
             endcase
             end
-            
-            // original 
-            // if(in_p1_frame || in_p2_frame || in_text_frame || in_choose_frame)begin
-            //     if(fight_state == fight_state_menu || fight_state == fight_state_choosing_skill)
-            //         vga_data = 12'h000;
-            //     else
-            //         vga_data = 12'hfff;
-            // end 
-            // else if(in_p1_hp_bar)begin
-            //     if(p1_cur_hp < 30)
-            //         vga_data = 12'hf00;
-            //     else
-            //         vga_data = 12'h0f0;
-            // end
-            // else if(in_p2_hp_bar)begin
-            //     if(p2_cur_hp < 30)
-            //         vga_data = 12'hf00;
-            //     else
-            //         vga_data = 12'h0f0;
-            // end
-            // else if(in_p1_img || in_p2_img)begin
-            //     vga_data = poke_mem_vga_data;
-            // end else if(in_p1_name || in_p2_name)begin
-            //     vga_data = alpha_mem_vga_data;
-            // end
-            // else if(in_option[1]|| in_option[2]|| in_option[3]|| in_option[4])begin
-            //     if(fight_state == fight_state_choosing_skill || fight_state ==  fight_state_menu)
-            //         vga_data = alpha_mem_vga_data;
-            //     else begin
-            //         vga_data = 12'hfff;
-            //     end
-            // end
-            // else begin
-            //     vga_data = 12'hfff;
-            // end
         end
     end
     always @(*) begin
@@ -612,6 +719,66 @@ parameter [9:0] poke_skill_name_len [1:24] ={
                     end
                     default:
                         pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_animation_p1 :begin
+                case({in_text_usingskill_name, in_text_usingskill_skill, in_text_usingskill_used})
+                3'b100:begin
+                    pixel_addr = p1_text_usingskill_name_addr;
+                end
+                3'b010:begin
+                    pixel_addr = p1_text_usingskill_skill_addr;
+                end
+                3'b001:begin
+                    pixel_addr = text_usingskill_used_addr;
+                end
+                default:
+                    pixel_addr = 17'd0;
+                endcase 
+            end
+            fight_state_animation_p2 : begin
+                case({in_text_usingskill_name, in_text_usingskill_skill, in_text_usingskill_used})
+                3'b100:begin
+                    pixel_addr = p2_text_usingskill_name_addr;
+                end
+                3'b010:begin
+                    pixel_addr = p2_text_usingskill_skill_addr;
+                end
+                3'b001:begin
+                    pixel_addr = text_usingskill_used_addr;
+                end
+                default:
+                    pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_hpReducing_p1 :begin
+                case({in_text_usingskill_name, in_text_usingskill_skill, in_text_usingskill_used})
+                3'b100:begin
+                    pixel_addr = p2_text_usingskill_name_addr;
+                end
+                3'b010:begin
+                    pixel_addr = p2_text_usingskill_skill_addr;
+                end
+                3'b001:begin
+                    pixel_addr = text_usingskill_used_addr;
+                end
+                default:
+                    pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_hpReducing_p2 : begin
+                case({in_text_usingskill_name, in_text_usingskill_skill, in_text_usingskill_used})
+                3'b100:begin
+                    pixel_addr = p1_text_usingskill_name_addr;
+                end
+                3'b010:begin
+                    pixel_addr = p1_text_usingskill_skill_addr;
+                end
+                3'b001:begin
+                    pixel_addr = text_usingskill_used_addr;
+                end
+                default:
+                    pixel_addr = 17'd0;
                 endcase
             end
             default :begin

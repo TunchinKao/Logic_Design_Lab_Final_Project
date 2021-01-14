@@ -44,6 +44,8 @@ module fight_data_control(
         
         output reg [8-1:0] p1_pokemon_cur_hp,
         output reg [8-1:0] p2_pokemon_cur_hp,
+        output reg [3:0]    p1_using_skill_id,
+        output reg [3:0]    p2_using_skill_id,
         // output []
         output testSignal,
         output reg to_end_scene,
@@ -291,8 +293,38 @@ parameter [4-1:0] option_state_4 = 4'd4;
             end
         endcase
     end
+    // skill_id choosing
+    reg [1:0] p2_random_skill_counter;
+    always @(posedge clk) begin
+        if(reset)begin
+            p2_random_skill_counter <= 2'd1;
+        end else begin
+            if(p2_random_skill_counter < 3)
+                p2_random_skill_counter <= p2_random_skill_counter + 2'd1;
+            else begin
+                p2_random_skill_counter <= 2'd1;
+            end
+        end
+    end
+    always @(posedge clk) begin
+        if(reset)begin
+            p1_using_skill_id <= option_state_1;
+            p2_using_skill_id <= option_state_1;
+        end else begin
+            if(cur_fight_state == fight_state_choosing_skill)begin
+                if(buttons == press_C)begin
+                    p1_using_skill_id <= cur_option_state;
+                    p2_using_skill_id <= p2_random_skill_counter; 
+                end
+            end else begin
+                p1_using_skill_id <= p1_using_skill_id;
+                p2_using_skill_id <= p2_using_skill_id;
+            end
+        end
+    end
     /// target p1, p2 hp control ------------------------------------------------------------------
     //  p2 skill use stupid choose
+
     always @(posedge clk) begin
         case(cur_fight_state)
             fight_state_choosing_skill:begin

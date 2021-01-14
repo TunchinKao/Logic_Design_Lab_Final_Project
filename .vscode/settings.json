@@ -3,12 +3,16 @@
         "endcase",
         "endmodule",
         "hsync",
+        "in",
         "inout",
         "inrange",
+        "name",
         "pclk",
         "poke",
         "posedge",
         "posi",
+        "text",
+        "usingskill",
         "v",
         "vsync"
     ]

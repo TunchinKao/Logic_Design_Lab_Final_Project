@@ -61,12 +61,14 @@ module top(
     wire [8-1:0] p1_pokemon_id;
     wire [8-1:0] p1_pokemon_hp;
     wire [8-1:0] p1_pokemon_cur_hp;
+    wire [4-1:0] p1_using_skill_id;
     wire [8-1:0] p1_pokemon_speed;
     wire [8-1:0] p1_skill_1_damage, p1_skill_2_damage, p1_skill_3_damage;
         // ----- p2
     wire [8-1:0] p2_pokemon_id;
     wire [8-1:0] p2_pokemon_hp;
     wire [8-1:0] p2_pokemon_cur_hp;
+    wire [4-1:0] p2_using_skill_id;
     wire [8-1:0] p2_pokemon_speed;
     wire [8-1:0] p2_skill_1_damage, p2_skill_2_damage, p2_skill_3_damage;
     // fight scene control
@@ -227,12 +229,18 @@ module top(
         .testSignal(lights[6]),
         .fight_state(fight_state),
         .option_state(option_state),
-        .to_end_scene(fight_to_end_scene_Signal)
+        .to_end_scene(fight_to_end_scene_Signal),
+        .p1_using_skill_id(p1_using_skill_id),
+        .p2_using_skill_id(p2_using_skill_id)
     );
     
     fight_scene fs(
+        .clk(clk),
+        .reset(rst),
         .p1_pokemon_id(p1_pokemon_id),
         .p2_pokemon_id(p2_pokemon_id),
+        .p1_using_skill_id(p1_using_skill_id),
+        .p2_using_skill_id(p2_using_skill_id),
         .p1_cur_hp(p1_pokemon_cur_hp),
         .p2_cur_hp(p2_pokemon_cur_hp),
         .v_cnt(v_cnt),

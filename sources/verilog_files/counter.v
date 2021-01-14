@@ -50,3 +50,34 @@ module counter
         end
     end
 endmodule
+
+module counter_nostop
+(       input clk,  
+        input rst,
+        output reg pclk);
+parameter SECOND = 300000000;
+    reg [40-1:0] count, next_count;
+    // reg next_done;
+    always@(posedge clk) begin
+        if (rst == 1) begin
+            count <= 0;
+            pclk <= 0;
+        end
+        else begin
+            count <= next_count;
+            if(count == SECOND)
+                pclk <= !pclk;
+            else begin
+                pclk <= pclk;
+            end 
+        end
+    end
+
+    always@(*) begin
+        if(count < SECOND)begin
+            next_count = count + 1;
+        end else begin
+            next_count = 1;
+        end
+    end
+endmodule
