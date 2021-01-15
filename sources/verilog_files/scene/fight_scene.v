@@ -45,6 +45,8 @@ parameter [6-1:0] fight_state_animation_p1 = 6'd3; // p1 attack
 parameter [6-1:0] fight_state_animation_p2 = 6'd4; // p2 attack
 parameter [6-1:0] fight_state_hpReducing_p1 = 6'd5; // p1 reducing hp
 parameter [6-1:0] fight_state_hpReducing_p2 = 6'd6; // p2 reducing hp
+parameter [6-1:0] fight_state_p1_win = 6'd7;        // one of the player die
+parameter [6-1:0] fight_state_p2_win = 6'd8;
 
 parameter [4-1:0] option_state_1 = 4'd1;
 parameter [4-1:0] option_state_2 = 4'd2;
@@ -476,6 +478,7 @@ parameter [9:0] poke_skill_name_len [1:24] ={
 
     wire in_text_usingskill_name, in_text_usingskill_used, in_text_usingskill_skill;
     wire [16:0]p1_text_usingskill_name_addr, p2_text_usingskill_name_addr,p1_text_usingskill_skill_addr, p2_text_usingskill_skill_addr,text_usingskill_used_addr;
+    wire [16:0]text_win_addr;    
     parameter [9:0] text_usingskill_h_posi [1:3] = {
         101,
         300,
@@ -541,6 +544,14 @@ parameter [9:0] poke_skill_name_len [1:24] ={
         .char_5(0), .char_6(0), .char_7(0), .char_8(0), .char_9(0), .char_10(0),
         .pixel_addr(text_usingskill_used_addr)
     );
+    display_string_at_range display_text_win(
+        .h_cnt(h_cnt), .v_cnt(v_cnt),
+        .h_start(text_usingskill_h_posi[2]), .v_start(text_usingskill_v_posi),
+        .h_len(char_h_len * 3), .v_len(char_v_len),
+        .char_1(23), .char_2(9), .char_3(14), .char_4(0),
+        .char_5(0), .char_6(0), .char_7(0), .char_8(0), .char_9(0), .char_10(0),
+        .pixel_addr(text_win_addr)
+    );
     display_string_at_range display_usingskill_p1_skill(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(text_usingskill_h_posi[3]), .v_start(text_usingskill_v_posi),
@@ -575,6 +586,7 @@ parameter [9:0] poke_skill_name_len [1:24] ={
     );
 // should be fight_state dominate and then range decide to put what
     wire white_clk;
+    // assign white_clk = 0;
     counter_nostop #(.SECOND(20000000)) gene_damageclk(.clk(clk), .rst(reset), .pclk(white_clk));
     always @(*) begin
         if(h_cnt < 80) vga_data = 12'hfeb;
@@ -647,28 +659,42 @@ parameter [9:0] poke_skill_name_len [1:24] ={
                     if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
                         vga_data = alpha_mem_vga_data;
                     end else begin
-                        vga_data <= 12'hfff;
+                        vga_data = 12'hfff;
                     end
                 end
                 fight_state_animation_p2 : begin
                     if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
                         vga_data = alpha_mem_vga_data;
                     end else begin
-                        vga_data <= 12'hfff;
+                        vga_data = 12'hfff;
                     end
                 end
                 fight_state_hpReducing_p1 :begin
                     if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
                         vga_data = alpha_mem_vga_data;
                     end else begin
-                        vga_data <= 12'hfff;
+                        vga_data = 12'hfff;
                     end
                 end
                 fight_state_hpReducing_p2 : begin
                     if(in_text_usingskill_name || in_text_usingskill_skill || in_text_usingskill_used)begin
                         vga_data = alpha_mem_vga_data;
                     end else begin
-                        vga_data <= 12'hfff;
+                        vga_data = 12'hfff;
+                    end
+                end
+                fight_state_p1_win :begin
+                    if(in_text_usingskill_name || in_text_usingskill_used)
+                        vga_data = alpha_mem_vga_data;
+                    else begin
+                        vga_data = 12'hfff;
+                    end
+                end
+                fight_state_p2_win:begin
+                    if(in_text_usingskill_name || in_text_usingskill_used)
+                        vga_data = alpha_mem_vga_data;
+                    else begin
+                        vga_data = 12'hfff;
                     end
                 end
                 default:
@@ -777,6 +803,26 @@ parameter [9:0] poke_skill_name_len [1:24] ={
                 3'b001:begin
                     pixel_addr = text_usingskill_used_addr;
                 end
+                default:
+                    pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_p1_win:begin
+                case({in_text_usingskill_name, in_text_usingskill_used})
+                3'b10:
+                    pixel_addr = p1_text_usingskill_name_addr;
+                3'b01:
+                    pixel_addr = text_win_addr;
+                default:
+                    pixel_addr = 17'd0;
+                endcase
+            end
+            fight_state_p2_win:begin
+                case({in_text_usingskill_name, in_text_usingskill_used})
+                3'b10:
+                    pixel_addr = p2_text_usingskill_name_addr;
+                3'b01:
+                    pixel_addr = text_win_addr;
                 default:
                     pixel_addr = 17'd0;
                 endcase
