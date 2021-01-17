@@ -25,11 +25,6 @@ module top(
     input rst,
     inout PS2_CLK,
     inout PS2_DATA,
-    // input upBt,     // up button
-    // input dwBt,     // down button
-    // input rtBt,     // right button
-    // input ltBt,     // left button
-    // input ctBt,     // center button
     input hp,       //hp_test_flip
     output [3:0] vgaRed,
     output [3:0] vgaGreen,
@@ -55,14 +50,15 @@ module top(
     wire up_Signal, dw_Signal, rt_Signal, lt_Signal, ct_Signal;
     wire [3:0] scene_state;
     wire fight_to_end_scene_Signal;
-    wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;
-    // for pokemon data
+    wire [11:0] start_RGB, choose_RGB, fight_RGB, win_RGB, output_RGB;  // RGB for each scene_state
+                                                                        // output to catch to true RGB
+    // for pokemon data, the transfer between fight_data_control, fight_scene, choose_data_control, choose_scene
         // ----- p1
-    wire [8-1:0] p1_pokemon_id;
-    wire [8-1:0] p1_pokemon_hp;
-    wire [8-1:0] p1_pokemon_cur_hp;
-    wire [4-1:0] p1_using_skill_id;
-    wire [8-1:0] p1_pokemon_speed;
+    wire [8-1:0] p1_pokemon_id;         // the chosen pokemon   
+    wire [8-1:0] p1_pokemon_hp;         // the initial hp
+    wire [8-1:0] p1_pokemon_cur_hp;     // the current hp, for fight scene display
+    wire [4-1:0] p1_using_skill_id;     // the current using skill, for fight scene display
+    wire [8-1:0] p1_pokemon_speed;      // the need of speed
     wire [8-1:0] p1_skill_1_damage, p1_skill_2_damage, p1_skill_3_damage;
         // ----- p2
     wire [8-1:0] p2_pokemon_id;
@@ -141,7 +137,7 @@ module top(
     assign ctBt = (been_ready && key_down[ENTER_CODES]) ? 1'b1 : 1'b0;
     assign {up_Signal, dw_Signal, lt_Signal, rt_Signal, ct_Signal} = {upBt, dwBt, ltBt, rtBt, ctBt};
     // game part
-    state_control sc(
+    state_control state_control_part(
         .key_C(ct_Signal),
         .key_U(up_Signal),
         .key_D(dw_Signal),
@@ -152,7 +148,7 @@ module top(
         .scene_state(scene_state),
         .fight_to_end_scene(fight_to_end_scene_Signal)
     );
-    vga_controller   vga_test(
+    vga_controller   vga_init(
       .pclk(clk_25MHz),
       .reset(rst),
       .hsync(hsync),
@@ -161,7 +157,7 @@ module top(
       .h_cnt(h_cnt),
       .v_cnt(v_cnt)
     );
-    start_scene ss(
+    start_scene start_scene_part(
         .clk(clk),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
@@ -170,7 +166,7 @@ module top(
         .pixel_addr(start_scene_pixel_addr)
     );
     
-    choose_data_control cdc(
+    choose_data_control choose_data_control_part(
         .clk(clk),
         .reset(rst),
         .scene_state(scene_state),
@@ -192,7 +188,7 @@ module top(
         .p1_pokemon_speed(p1_pokemon_speed),
         .p2_pokemon_speed(p2_pokemon_speed)
     );
-    choose_scene cs(
+    choose_scene choose_scene_part(
         .pokemon_id(p1_pokemon_id),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
@@ -202,7 +198,7 @@ module top(
         .pixel_addr(choose_scene_pixel_addr)
     );
     // fight_part
-    fight_data_control fdc(
+    fight_data_control fight_data_control_part(
         
         .clk(clk),
         .reset(rst),
@@ -234,7 +230,7 @@ module top(
         .p2_using_skill_id(p2_using_skill_id)
     );
     
-    fight_scene fs(
+    fight_scene fight_scene_control(
         .clk(clk),
         .reset(rst),
         .p1_pokemon_id(p1_pokemon_id),
@@ -252,7 +248,7 @@ module top(
         .alpha_mem_vga_data(alpha_mem_vga_data),
         .pixel_addr(fight_scene_pixel_addr)
     );
-    win_scene ws(
+    win_scene end_scene_control(
         .clk(clk),
         .v_cnt(v_cnt),
         .h_cnt(h_cnt),
@@ -261,7 +257,7 @@ module top(
         .alpha_mem_vga_data(alpha_mem_vga_data),
         .pixel_addr(win_scene_pixel_addr)
     );
-    pixel_gen_scene pgs(
+    pixel_gen_scene pixel_choose_mux(
         .valid(valid),
         .scene_state(scene_state),
         .start_scene_RGB(start_RGB),

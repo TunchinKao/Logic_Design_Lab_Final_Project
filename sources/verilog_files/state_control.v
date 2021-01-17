@@ -28,7 +28,7 @@ module state_control(
     input key_R,
     input clk,
     input reset,
-    input fight_to_end_scene,
+    input fight_to_end_scene,   // from fight_scene there told the control that it can switch scene_state to next 
     output reg [3:0] scene_state
     );
 
@@ -44,7 +44,7 @@ always @(posedge clk) begin
         scene_state <= next_scene_state;
     end
 end
-
+// start -> choose -> fight -> win
 always @(*) begin
     case (scene_state)
         start_scene:begin

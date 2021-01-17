@@ -81,7 +81,7 @@ reg [8-1:0] skill_3_damage[0:8-1];
         if(reset)begin
             p1_pokemon_id <= poke_1;
         end else begin
-            case (scene_state)
+            case (scene_state)  // only when choose_scene that p1 pokemon can be modify
                 start_scene:begin
                     p1_pokemon_id <= poke_1;
                 end 
@@ -105,47 +105,48 @@ reg [8-1:0] skill_3_damage[0:8-1];
             endcase
         end 
     end
+    // pokemons' basic data
     always @(*) begin
         pokemon_hp[0] = 50;
         pokemon_speed[0] = 500;
-        skill_1_damage[0] = 8'd30;
-        skill_2_damage[0] = 8'd40;
-        skill_3_damage[0] = 8'd50;
+        skill_1_damage[0] = 8'd31;
+        skill_2_damage[0] = 8'd25;
+        skill_3_damage[0] = 8'd34;
         pokemon_hp[1] = 60;
         pokemon_speed[1] = 450;
-        skill_1_damage[1] = 8'd30;
-        skill_2_damage[1] = 8'd40;
-        skill_3_damage[1] = 8'd50;
+        skill_1_damage[1] = 8'd35;
+        skill_2_damage[1] = 8'd31;
+        skill_3_damage[1] = 8'd47;
         pokemon_hp[2] = 70;
         pokemon_speed[2] = 400;
-        skill_1_damage[2] = 8'd30;
-        skill_2_damage[2] = 8'd40;
-        skill_3_damage[2] = 8'd50;
+        skill_1_damage[2] = 8'd37;
+        skill_2_damage[2] = 8'd29;
+        skill_3_damage[2] = 8'd45;
         pokemon_hp[3] = 90;
         pokemon_speed[3] = 350;
-        skill_1_damage[3] = 8'd30;
-        skill_2_damage[3] = 8'd40;
-        skill_3_damage[3] = 8'd50;
+        skill_1_damage[3] = 8'd17;
+        skill_2_damage[3] = 8'd89;
+        skill_3_damage[3] = 8'd23;
         pokemon_hp[4] = 100;
         pokemon_speed[4] = 300;
-        skill_1_damage[4] = 8'd30;
-        skill_2_damage[4] = 8'd40;
-        skill_3_damage[4] = 8'd50;
+        skill_1_damage[4] = 8'd44;
+        skill_2_damage[4] = 8'd55;
+        skill_3_damage[4] = 8'd65;
         pokemon_hp[5] = 120;
         pokemon_speed[5] = 250;
-        skill_1_damage[5] = 8'd30;
-        skill_2_damage[5] = 8'd40;
-        skill_3_damage[5] = 8'd50;
+        skill_1_damage[5] = 8'd40;
+        skill_2_damage[5] = 8'd17;
+        skill_3_damage[5] = 8'd67;
         pokemon_hp[6] = 150;
         pokemon_speed[6] = 200;
-        skill_1_damage[6] = 8'd30;
+        skill_1_damage[6] = 8'd45;
         skill_2_damage[6] = 8'd40;
-        skill_3_damage[6] = 8'd50;
+        skill_3_damage[6] = 8'd54;
         pokemon_hp[7] = 160;
         pokemon_speed[7] = 150;
-        skill_1_damage[7] = 8'd30;
-        skill_2_damage[7] = 8'd40;
-        skill_3_damage[7] = 8'd50;
+        skill_1_damage[7] = 8'd64;
+        skill_2_damage[7] = 8'd64;
+        skill_3_damage[7] = 8'd64;
     end
     /*
         screen:
@@ -160,7 +161,7 @@ reg [8-1:0] skill_3_damage[0:8-1];
 
         ------------------------------------------------------------
     */
-    // p2_next_id
+    // use a counter to randomly choose p2's pokemon
     reg [2:0] p2_id_cnt;
     always @(posedge clk) begin
         if(reset)begin
@@ -169,6 +170,8 @@ reg [8-1:0] skill_3_damage[0:8-1];
             p2_id_cnt <= p2_id_cnt + 3'd1 ;
         end
     end
+    // the mux that use to choose p1 id by the button 
+    // p2 by random
     always @(*) begin
         p2_next_id = p2_id_cnt + 1;
         case (p1_pokemon_id)

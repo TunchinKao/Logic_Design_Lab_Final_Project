@@ -49,6 +49,7 @@ parameter poke_resize = 2;
     //     h_len = 10'd40;
     //     v_len = 10'd40;
     // end
+// up-left point of the pokemon image
 parameter [10-1:0] poke_h_posi [0:8] = {
     10'd0, // no poke 0
     10'd20,
@@ -71,6 +72,7 @@ parameter [10-1:0] poke_v_posi [0:8] = {
     10'd240,
     10'd240
 };
+// the original image data's right-left position
 parameter [10-1:0] poke_img_h_posi [0:8] = {
     10'd0,
     10'd0,
@@ -93,6 +95,8 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
     10'd0,
     10'd0
 };
+
+// detection of the h_cnt, v_cnt if the point is in the range that need to load image
     wire in_poke_range[0:8];
     wire [17-1:0] poke_pixel_addr[0:8];
     inrange if_in_poke1(
@@ -143,7 +147,7 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
         .h_len(poke_len), .v_len(poke_len),
         .in_true(in_poke_range[poke_8])
     );
-    
+// calculate the corresponding pixel address depends on the resize, image size and the range of display area 
     display_image_inrange #(
         .resize_HEIGHT(2),
         .resize_WIDTH(poke_resize),
@@ -248,6 +252,7 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
         .img_h_len(poke_img_len), .img_v_len(poke_img_len),
         .pixel_addr(poke_pixel_addr[poke_8])    
     );
+    // detect the frame image area
     display_frame choose_frame_true(
         .h_cnt(h_cnt), .v_cnt(v_cnt),
         .h_start(poke_h_posi[pokemon_id]), .v_start(poke_v_posi[pokemon_id]),
@@ -332,57 +337,5 @@ always @ (*) begin
 end
 
 endmodule
-module inrange #(
-    parameter cnt_WIDTH = 10
-)
-(
-    input [cnt_WIDTH - 1 : 0] h_cnt,
-    input [cnt_WIDTH - 1 : 0] v_cnt,
-    input [cnt_WIDTH - 1 : 0] h_start,
-    input [cnt_WIDTH - 1 : 0] v_start,
-    input [cnt_WIDTH - 1 : 0] h_len,
-    input [cnt_WIDTH - 1 : 0] v_len,
-    output reg in_true
-);
-always @(*) begin
-    if(h_cnt >= h_start && h_cnt < h_start + h_len 
-    && v_cnt >= v_start && v_cnt < v_start + v_len)begin
-        in_true = 1'b1;   
-    end else begin
-        in_true = 1'b0;
-    end
-end
 
 
-
-endmodule
-
-module display_image_inrange #(
-    parameter cnt_WIDTH = 10,
-    parameter addr_WIDTH = 17,
-    parameter image_width = 320,
-    parameter image_height = 240,
-    parameter resize_WIDTH = 1,
-    parameter resize_HEIGHT = 1
-)
-(
-    input [cnt_WIDTH - 1 : 0] h_cnt,
-    input [cnt_WIDTH - 1 : 0] v_cnt,
-    input [cnt_WIDTH - 1 : 0] h_start,
-    input [cnt_WIDTH - 1 : 0] v_start,
-    input [cnt_WIDTH - 1 : 0] h_len,
-    input [cnt_WIDTH - 1 : 0] v_len,
-    input [cnt_WIDTH - 1 : 0] img_h_start,
-    input [cnt_WIDTH - 1 : 0] img_v_start,
-    input [cnt_WIDTH - 1 : 0] img_h_len,
-    input [cnt_WIDTH - 1 : 0] img_v_len,
-    
-    output [addr_WIDTH - 1 : 0] pixel_addr
-);
-
-assign pixel_addr = ((((h_cnt - h_start) >> (resize_WIDTH - 1)) + img_h_start) + 
-                    image_width * (((v_cnt - v_start) >> (resize_HEIGHT - 1)) + img_v_start)) 
-                    % (image_width * image_height);
-
-
-endmodule

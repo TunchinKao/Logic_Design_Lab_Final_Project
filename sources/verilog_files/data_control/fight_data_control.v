@@ -72,7 +72,7 @@ parameter press_L = 5'b00100;
 parameter press_R = 5'b00010;
 parameter press_C = 5'b00001;
     wire[4:0] buttons;
-    // assign p1_pokemon_cur_hp = p1_pokemon_hp;
+    
     assign buttons[4:0] = {key_U, key_D, key_L, key_R, key_C};
 parameter [6-1:0] fight_state_menu = 6'd1;
 parameter [6-1:0] fight_state_choosing_skill = 6'd2;
@@ -97,12 +97,15 @@ parameter [4-1:0] option_state_4 = 4'd4;
     reg [8-1:0] target_p1_pokemon_hp, target_p2_pokemon_hp;
     wire next_to_end_scene;
     // counter 
+    // use for counter the animation time
     reg counter_animate_start, next_counter_animate_start;
     wire counter_animate_done;
-    counter state_last(.clk(clk), .rst(reset), .start(counter_animate_start), .done(counter_animate_done));
+    counter #(.SECOND(300000000))state_last(.clk(clk), .rst(reset), .start(counter_animate_start), .done(counter_animate_done));
+    // use to count how long hp take to reduce 1 hp
     reg counter_hpReducing_start, next_counter_hpReducing_start;
     wire counter_hpReducing_done;
     counter #(.SECOND(5000000)) hpReduceTime(.clk(clk), .rst(reset), .start(counter_hpReducing_start), .done(counter_hpReducing_done));
+    // use to counter end time
     reg counter_ending_start, next_counter_ending_start;
     wire counter_ending_done;
     counter #(.SECOND(300000000)) endingTime(.clk(clk), .rst(reset), .start(counter_ending_start), .done(counter_ending_done));
@@ -293,7 +296,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
             end
         endcase
     end
-    // skill_id choosing
+    // skill_id choosing for p2's random 
     reg [1:0] p2_random_skill_counter;
     always @(posedge clk) begin
         if(reset)begin
@@ -306,6 +309,8 @@ parameter [4-1:0] option_state_4 = 4'd4;
             end
         end
     end
+    // connect p1 & p2 's skill id that they choose to use to the 
+    // "using" signal which tell the fight_scene to show which skill name
     always @(posedge clk) begin
         if(reset)begin
             p1_using_skill_id <= option_state_1;
@@ -345,7 +350,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                         // option_state_4 :begin
                         //     target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_4_damage;
                         // end 
-                        /// todo : choose run option
+                        /// todo : choose run option / done
                         default: begin
                             target_p1_pokemon_hp <= target_p1_pokemon_hp;
                             target_p2_pokemon_hp <= target_p2_pokemon_hp;
