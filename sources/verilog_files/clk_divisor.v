@@ -53,7 +53,6 @@ always @(posedge clk) begin
   end
 end
 
-
 assign next_num = num + 1'b1;
 
 endmodule

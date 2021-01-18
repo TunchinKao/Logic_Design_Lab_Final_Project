@@ -102,7 +102,8 @@ module top(
     // assign lights[15:8] = p2_pokemon。_cur_hp;
     assign lights[5:0] = fight_state;
     assign lights[15:8] = p2_pokemon_cur_hp;
-    /// generate clock
+
+    /// generate clock for display
     clock_divisor clk_wiz_0_inst(
       .clk(clk),
       .clk1(clk_25MHz)
@@ -136,6 +137,7 @@ module top(
     assign rtBt = (been_ready && key_down[KEY_CODES[3]]) ? 1'b1 : 1'b0;
     assign ctBt = (been_ready && key_down[ENTER_CODES]) ? 1'b1 : 1'b0;
     assign {up_Signal, dw_Signal, lt_Signal, rt_Signal, ct_Signal} = {upBt, dwBt, ltBt, rtBt, ctBt};
+    
     // game part
     state_control state_control_part(
         .key_C(ct_Signal),
@@ -157,6 +159,8 @@ module top(
       .h_cnt(h_cnt),
       .v_cnt(v_cnt)
     );
+
+// data control and scene part
     start_scene start_scene_part(
         .clk(clk),
         .v_cnt(v_cnt),
@@ -257,6 +261,7 @@ module top(
         .alpha_mem_vga_data(alpha_mem_vga_data),
         .pixel_addr(win_scene_pixel_addr)
     );
+// pixel mux choosing
     pixel_gen_scene pixel_choose_mux(
         .valid(valid),
         .scene_state(scene_state),
@@ -268,7 +273,7 @@ module top(
     );
     assign {vgaRed, vgaGreen, vgaBlue} = output_RGB;
 
-// log image block memory
+// load image block memory
     
     wire [11:0] data_for_title, data_for_poke, data_for_alpha;
     
