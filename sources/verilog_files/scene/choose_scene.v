@@ -306,36 +306,6 @@ parameter [10-1:0] poke_img_v_posi [0:8] = {
 
     end
 endmodule
-module display_frame #(
-    parameter cnt_WIDTH = 10,
-    parameter thickness = 2
-)(
-    input [cnt_WIDTH - 1 : 0] h_cnt,
-    input [cnt_WIDTH - 1 : 0] v_cnt,
-    input [cnt_WIDTH - 1 : 0] h_start,
-    input [cnt_WIDTH - 1 : 0] v_start,
-    input [cnt_WIDTH - 1 : 0] h_len,
-    input [cnt_WIDTH - 1 : 0] v_len,
-    output reg in_frame
-);
 
-always @ (*) begin
-    if(h_cnt >= (h_start - thickness) && h_cnt < h_start) begin
-        if(v_cnt >= (v_start - thickness) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
-        else in_frame = 0;
-    end
-    else if(h_cnt >= h_start && h_cnt < (h_start + h_len)) begin
-        if(v_cnt >= (v_start - thickness) && v_cnt < v_start) in_frame = 1;
-        else if(v_cnt >= (v_start + v_len) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
-        else in_frame = 0;
-    end
-    else if(h_cnt >= (h_start + h_len) && h_cnt < (h_start + h_len + thickness)) begin
-        if(v_cnt >= (v_start - thickness) && v_cnt < (v_start + v_len + thickness)) in_frame = 1;
-        else in_frame = 0;
-    end
-    else in_frame = 0;
-end
-
-endmodule
 
 

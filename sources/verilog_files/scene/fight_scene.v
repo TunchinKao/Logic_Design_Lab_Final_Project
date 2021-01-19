@@ -99,28 +99,6 @@ parameter [10-1:0] poke_load_img_v_len [0:1] = {
     10'd120,
     10'd120
 };
-parameter [10-1:0] poke_h_posi [0:8] = {
-    10'd0, // no poke 0
-    10'd20,
-    10'd180,
-    10'd340,
-    10'd500,
-    10'd20,
-    10'd180,
-    10'd340,
-    10'd500
-};
-parameter [10-1:0] poke_v_posi [0:8] = {
-    10'd0, // no poke 0
-    10'd80,
-    10'd80,
-    10'd80,
-    10'd80,
-    10'd240,
-    10'd240,
-    10'd240,
-    10'd240
-};
 parameter [10-1:0] poke_img_h_posi [0:8] = {
     10'd0,
     10'd0,

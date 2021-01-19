@@ -160,7 +160,7 @@ parameter [4-1:0] option_state_4 = 4'd4;
                         option_state_1 :begin
                             next_fight_state = fight_state_choosing_skill;
                         end 
-                        /// todo : choose run option
+                        /// todo : choose run option, done
                         option_state_2 : begin
                             next_fight_state = fight_state_p2_win;
                         end
@@ -271,6 +271,17 @@ parameter [4-1:0] option_state_4 = 4'd4;
                 next_counter_animate_start = 1'b0; 
         endcase
     end
+    // hp reducing counter counting part -----------------------------------------------
+    always @(*) begin
+        case(cur_fight_state)
+            fight_state_hpReducing_p1 :
+                next_counter_hpReducing_start = 1'b1;
+            fight_state_hpReducing_p2 :
+                next_counter_hpReducing_start = 1'b1;
+            default:
+                next_counter_hpReducing_start = 1'b0;
+        endcase
+    end
     // p1 & p2 hp control ---------------------------------------------------------------
     always @(*) begin
         case(cur_fight_state)
@@ -327,33 +338,40 @@ parameter [4-1:0] option_state_4 = 4'd4;
             end
         end
     end
-    /// target p1, p2 hp control ------------------------------------------------------------------
-    //  p2 skill use stupid choose
-
+    // target p1, p2 hp control ------------------------------------------------------------------
+    
     always @(posedge clk) begin
         case(cur_fight_state)
             fight_state_choosing_skill:begin
                 if(buttons == press_C)begin
+                    // for p1's attack
                     case (cur_option_state)
                         option_state_1 :begin
-                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_1_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_1_damage;
                         end 
                         option_state_2 :begin
-                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_2_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_2_damage;
                         end 
                         option_state_3 :begin
-                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_3_damage;
                             target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_3_damage;
                         end 
-                        // option_state_4 :begin
-                        //     target_p2_pokemon_hp <= p2_pokemon_cur_hp - p1_skill_4_damage;
-                        // end 
-                        /// todo : choose run option / done
+                        default: begin
+                            target_p2_pokemon_hp <= target_p2_pokemon_hp;
+                        end
+                    endcase
+                    // for p2's attack
+                    case(p2_random_skill_counter)
+                        option_state_1 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_1_damage;
+                        end 
+                        option_state_2 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_2_damage;
+                        end 
+                        option_state_3 :begin
+                            target_p1_pokemon_hp <= p1_pokemon_cur_hp - p2_skill_3_damage;
+                        end 
                         default: begin
                             target_p1_pokemon_hp <= target_p1_pokemon_hp;
-                            target_p2_pokemon_hp <= target_p2_pokemon_hp;
                         end
                     endcase
                 end else begin
@@ -365,17 +383,6 @@ parameter [4-1:0] option_state_4 = 4'd4;
                 target_p1_pokemon_hp <= target_p1_pokemon_hp;    
                 target_p2_pokemon_hp <= target_p2_pokemon_hp;
             end
-        endcase
-    end
-    // hp reducing counter counting part -----------------------------------------------
-    always @(*) begin
-        case(cur_fight_state)
-            fight_state_hpReducing_p1 :
-                next_counter_hpReducing_start = 1'b1;
-            fight_state_hpReducing_p2 :
-                next_counter_hpReducing_start = 1'b1;
-            default:
-                next_counter_hpReducing_start = 1'b0;
         endcase
     end
     // option_state --------------------------------------------------------------------------
